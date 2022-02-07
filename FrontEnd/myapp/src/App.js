@@ -9,7 +9,8 @@ function App() {
       <h1>Welcome to Nottingham!</h1>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
+        <Route path="portfolio" element={<Portfolio />} />
+        <Route path="watchlist" element={<Watchlist />} />
       </Routes>
     </div>
   );
@@ -23,19 +24,36 @@ function Home() {
         <p>The leader in stock portfolio</p>
       </main>
       <nav>
-        <Link to="/about">About</Link>
+        <Link to="/portfolio">Portfolio   </Link>
+        <Link to="/watchlist">Watchlist</Link>
       </nav>
     </div>
   );
 }
 
-function About() {
+function Portfolio() {
   return (
     <>
       <main>
-        <h2>Who are we?</h2>
+        <h2>Portfolio</h2>
         <p>
-          Here to help your portfolio grow!
+          Here all your stocks are listed out
+        </p>
+      </main>
+      <nav>
+        <Link to="/">Home</Link>
+      </nav>
+    </>
+  );
+}
+
+function Watchlist() {
+  return (
+    <>
+      <main>
+        <h2>Watchlist</h2>
+        <p>
+          Here you can track the stocks that you are currently interested in
         </p>
       </main>
       <nav>
