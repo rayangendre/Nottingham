@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import { Routes, Route, Link } from "react-router-dom";
+import Button from "react-bootstrap/Button"
 import './App.css';
 
 
@@ -24,8 +25,16 @@ function Home() {
         <p>The leader in stock portfolio</p>
       </main>
       <nav>
-        <Link to="/portfolio">Portfolio   </Link>
-        <Link to="/watchlist">Watchlist</Link>
+        <Link to="/portfolio">
+          <Button variant="outline-light" size ="lg">
+            Portfolio
+          </Button>
+        </Link>
+        <Link to="/watchlist">
+          <Button variant="outline-light" size ="lg">
+            Watchlist
+          </Button>
+        </Link>
       </nav>
     </div>
   );
@@ -41,7 +50,11 @@ function Portfolio() {
         </p>
       </main>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/">
+           <Button variant="outline-light" size ="lg">
+            Home
+          </Button>
+        </Link>
       </nav>
     </>
   );
@@ -57,7 +70,11 @@ function Watchlist() {
         </p>
       </main>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <Button variant="outline-light" size ="lg">
+            Home
+          </Button>
+        </Link>
       </nav>
     </>
   );
