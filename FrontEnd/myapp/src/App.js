@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="watchlist" element={<Watchlist />} />
+        <Route path="login" element={<LogIn />} />
       </Routes>
     </div>
   );
@@ -33,6 +34,11 @@ function Home() {
         <Link to="/watchlist">
           <Button variant="outline-light" size ="lg">
             Watchlist
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button variant="outline-light" size ="lg">
+            Log In
           </Button>
         </Link>
       </nav>
@@ -79,5 +85,26 @@ function Watchlist() {
     </>
   );
 }
+
+function LogIn() {
+  return (
+    <>
+      <main>
+        <h2>Log In</h2>
+        <p>
+          Log in to access your personalized portfolio, and buy/sell stocks
+        </p>
+      </main>
+      <nav>
+        <Link to="/">
+          <Button variant="outline-light" size ="lg">
+            Home
+          </Button>
+        </Link>
+      </nav>
+    </>
+  );
+}
+
 
 export default App;
