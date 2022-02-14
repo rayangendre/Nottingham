@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import { Routes, Route, Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button"
 import './App.css';
 
@@ -27,19 +28,19 @@ function Home() {
       </main>
       <nav>
         <Link to="/portfolio">
-          <Button variant="outline-light" size ="lg">
+          <button type="button" class="btn btn-outline-primary">
             Portfolio
-          </Button>
+          </button>
         </Link>
         <Link to="/watchlist">
-          <Button variant="outline-light" size ="lg">
+          <button type="button" class="btn btn-outline-primary">
             Watchlist
-          </Button>
+          </button>
         </Link>
         <Link to="/login">
-          <Button variant="outline-light" size ="lg">
+          <button type="button" class="btn btn-outline-primary">
             Log In
-          </Button>
+          </button>
         </Link>
       </nav>
     </div>
@@ -57,9 +58,9 @@ function Portfolio() {
       </main>
       <nav>
         <Link to="/">
-           <Button variant="outline-light" size ="lg">
+          <button type="button" class="btn btn-outline-primary">
             Home
-          </Button>
+          </button>
         </Link>
       </nav>
     </>
@@ -77,9 +78,9 @@ function Watchlist() {
       </main>
       <nav>
         <Link to="/">
-          <Button variant="outline-light" size ="lg">
+          <button type="button" class="btn btn-outline-primary">
             Home
-          </Button>
+          </button>
         </Link>
       </nav>
     </>
@@ -97,9 +98,9 @@ function LogIn() {
       </main>
       <nav>
         <Link to="/">
-          <Button variant="outline-light" size ="lg">
+          <button type="button" class="btn btn-outline-primary">
             Home
-          </Button>
+          </button>
         </Link>
       </nav>
     </>
