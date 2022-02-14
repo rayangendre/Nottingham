@@ -3,6 +3,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button"
 import './App.css';
+import Buy from './buysell.js'
+
 
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="watchlist" element={<Watchlist />} />
         <Route path="login" element={<LogIn />} />
+        <Route path="buy" element={<Buy />}/>
       </Routes>
     </div>
   );
@@ -61,6 +64,11 @@ function Portfolio() {
           <button type="button" class="btn btn-outline-primary">
             Home
           </button>
+        </Link>
+        <Link to="/buy">
+           <Button variant="outline-light" size ="lg">
+            Buy
+          </Button>
         </Link>
       </nav>
     </>
