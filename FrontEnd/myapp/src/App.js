@@ -7,7 +7,7 @@ const socket = new WebSocket('wss://ws.finnhub.io?token=');
 const finnhub = require('finnhub');
 
 const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-api_key.apiKey = "c86kguiad3iddpknnup0" // Replace this
+api_key.apiKey = "c86kguiad3iddpknnup0"
 const finnhubClient = new finnhub.DefaultApi()
 
 socket.addEventListener('open', function (event) {
