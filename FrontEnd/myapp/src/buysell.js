@@ -14,21 +14,19 @@ const Buy = function(){
           <Container>
             <main>
               <Row>
-                 <Col>Buy Stock</Col>
-                 <Col>Sell Stock</Col>
+                 <Col>
+                    <nav>
+                      <Link to="/">
+                        <button type="submit" class="btn btn-primary w-50">Home</button>
+                      </Link>
+                    </nav>
+                 </Col>
+                 <Col><h2>Buy Stock</h2></Col>
+                 <Col><h2>         </h2></Col>
               </Row>
-              <p>
-                Purchase stock in a secure way
-              </p>
             </main>
           </Container>
-          <Container>
-            <nav>
-              <Link to="/">
-              <button type="submit" class="btn btn-primary w-50">Home</button>
-              </Link>
-            </nav>
-          </Container>
+
           <Container>
           <Form>
             <Form.Group className="mb-3">
@@ -52,5 +50,46 @@ const Buy = function(){
         </>
       );
 }
+const Sell = function(){
+  return (
+      <>
+        <Container>
+          <main>
+            <Row>
+               <Col>
+                  <nav>
+                    <Link to="/">
+                      <button type="submit" class="btn btn-primary w-50">Home</button>
+                    </Link>
+                  </nav>
+               </Col>
+               <Col><h2>Sell Stock</h2></Col>
+               <Col><h2>         </h2></Col>
+            </Row>
+          </main>
+        </Container>
 
-export default Buy;
+        <Container>
+        <Form>
+          <Form.Group className="mb-3">
+            <Form.Label>Stock Name</Form.Label>
+            <Form.Control type="text" placeholder="Stock Name" />
+            <Form.Text className="text-muted">
+              Confidential Exchange Service
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Number of Shares</Form.Label>
+            <Form.Control type="text" placeholder="Number of Shares" />
+          </Form.Group>
+          
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+        </Container>
+      </>
+    );
+}
+export {Buy, Sell};

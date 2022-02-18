@@ -3,20 +3,21 @@ import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button"
 import './App.css';
-import Buy from './buysell.js'
+import {Buy, Sell} from './buysell.js'
 
 
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to Nottingham!</h1>
+      <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="watchlist" element={<Watchlist />} />
         <Route path="login" element={<LogIn />} />
         <Route path="buy" element={<Buy />}/>
+        <Route path="sell" element={<Sell />}/>
       </Routes>
     </div>
   );
@@ -68,6 +69,11 @@ function Portfolio() {
         <Link to="/buy">
            <Button variant="outline-light" size ="lg">
             Buy
+          </Button>
+        </Link>
+        <Link to="/sell">
+           <Button variant="outline-light" size ="lg">
+            Sell
           </Button>
         </Link>
       </nav>
