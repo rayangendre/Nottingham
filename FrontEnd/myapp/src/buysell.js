@@ -19,6 +19,9 @@ const Buy = function(){
                       <Link to="/">
                         <button type="submit" class="btn btn-primary w-50">Home</button>
                       </Link>
+                      <Link to="/portfolio">
+                        <button type="submit" class="btn btn-primary w-50">Portfolio</button>
+                      </Link>
                     </nav>
                  </Col>
                  <Col><h2>Buy Stock</h2></Col>
@@ -60,6 +63,9 @@ const Sell = function(){
                   <nav>
                     <Link to="/">
                       <button type="submit" class="btn btn-primary w-50">Home</button>
+                    </Link>
+                    <Link to="/portfolio">
+                      <button type="submit" class="btn btn-primary w-50">Portfolio</button>
                     </Link>
                   </nav>
                </Col>
