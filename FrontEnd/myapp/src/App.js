@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button"
 import './App.css';
 import {Buy, Sell} from './buysell.js'
+import Container from 'react-bootstrap/esm/Container';
+import Col from 'react-bootstrap/esm/Col';
+import Row from "react-bootstrap/Row"
 
 
 
@@ -54,29 +57,42 @@ function Home() {
 function Portfolio() {
   return (
     <>
-      <main>
-        <h2>Portfolio</h2>
+      <Container>
+        <Row>
+            
+              <Col>
+                 <nav>
+                <Link to="/">
+                  <button type="submit" class="btn btn-primary w-25">
+                    Home
+                  </button>
+                </Link>
+                <Link to="/buy">
+                  <button type="submit" class="btn btn-primary w-25">
+                    Buy
+                  </button>
+                </Link>
+                <Link to="/sell">
+                  <button type="submit" class="btn btn-primary w-25">
+                    Sell
+                  </button>
+                </Link>
+                </nav>
+              </Col>
+              <Col>
+              <h2>Portfolio</h2>
+              </Col>
+              <Col>
+              </Col>
+            
+        </Row>
+      </Container>
+      <Container>
+        
         <p>
           Here all your stocks are listed out
         </p>
-      </main>
-      <nav>
-        <Link to="/">
-          <button type="button" class="btn btn-outline-primary">
-            Home
-          </button>
-        </Link>
-        <Link to="/buy">
-           <Button variant="outline-light" size ="lg">
-            Buy
-          </Button>
-        </Link>
-        <Link to="/sell">
-           <Button variant="outline-light" size ="lg">
-            Sell
-          </Button>
-        </Link>
-      </nav>
+      </Container>
     </>
   );
 }
