@@ -3,24 +3,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button"
 import './App.css';
-const socket = new WebSocket('wss://ws.finnhub.io?token=');
-const finnhub = require('finnhub');
-
-const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-api_key.apiKey = "c86kguiad3iddpknnup0"
-const finnhubClient = new finnhub.DefaultApi()
-
-socket.addEventListener('open', function (event) {
-  socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'AAPL'}))
-});
-
-socket.addEventListener('message', function (event) {
-  console.log('Message from server ', event.data);
-});
-
-var unsubscribe = function(symbol) {
-  socket.send(JSON.stringify({'type':'unsubscribe','symbol': symbol}))
-}
+import '../node_modules/react-vis/dist/style.css';
+import {XYPlot, LineSeries} from 'react-vis';
 
 function App() {
   return (
@@ -138,7 +122,7 @@ function StockCheck(){
         <p>
           The current price of AAPL is: 
         </p>
-
+      
       </main>
       <nav>
         <Link to="/">
@@ -147,9 +131,9 @@ function StockCheck(){
           </button>
         </Link>
       </nav>
+      <div id='root' />
     </>
   );
 }
-
 
 export default App;

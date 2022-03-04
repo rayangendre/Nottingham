@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "chart.js": "^3.7.1",
     "finnhub": "^1.2.10",
     "websocket": "^1.0.34"
   }
