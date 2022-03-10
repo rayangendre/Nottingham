@@ -126,9 +126,9 @@ function StockCheck(){
   async function HandleSubmit(e){
     console.log(e.target.ticker.value)
     e.preventDefault()
-    const stockPrice = await checkPrice(e.target.ticker.value)
+    const stockPrice = await checkPrice(e.target.ticker.value.toUpperCase())
     console.log(stockPrice)
-    setTicker(e.target.ticker.value)
+    setTicker(e.target.ticker.value.toUpperCase())
     setPrice(stockPrice)
   }
 
@@ -143,7 +143,7 @@ function StockCheck(){
         <form onSubmit={HandleSubmit}>
           <div class="mb-3">
             <label class="form-label">Ticker</label>
-            <input name="ticker" type="text" class="form-control"/>
+            <input name="ticker" type="text" class="form-control" placeholder="Enter a ticker..."/>
             <button type="submit" class="btn btn-outline-primary" >Check Price</button>
           </div>
         </form>
