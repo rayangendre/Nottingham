@@ -14,10 +14,28 @@ import {Buy, Sell} from './buysell.js'
 import Container from 'react-bootstrap/esm/Container';
 import Col from 'react-bootstrap/esm/Col';
 import Row from "react-bootstrap/Row"
+import { Component } from 'react';
+import ApiTest from './ApiTest';
+import React from 'react';
+import {useState, useEffect} from 'react'
+
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa"
 
 function App() {
+
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => setData(data))
+  }, [])
+
+  var name = '';
+  if (data[0] != null){
+      name = data[0].name;
+  }else{
+      name = '';
+  }
   return (
     <div className="App">
       <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
@@ -30,9 +48,24 @@ function App() {
         <Route path="buy" element={<Buy />}/>
         <Route path="sell" element={<Sell />}/>
       </Routes>
+      <div>
+        {name}
+
+      </div>
     </div>
   );
 }
+
+
+
+// function ApiTester(setValue){
+//   console.log("calling api")
+//   fetch("http://localhost:4000/api/users")
+//           .then(res => res.text())
+//           .then(res => setValue({ apiResponse: res }));
+//   setValue({apiResponse: "value"});
+  
+// }
 
 function Home() {
   return (

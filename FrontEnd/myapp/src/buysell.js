@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
+import React from 'react'
 
 
 const Buy = function(){
@@ -53,8 +54,46 @@ const Buy = function(){
         </>
       );
 }
-const Sell = function(){
-  return (
+class Sell extends React.Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '', 
+      numberOfShares: 0
+    };
+
+    this.handleNumberChange = this.handleNumberChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleNumberChange(event) {
+    const target = event.target;
+    const num = target.value;
+    // this.setState({name: event.target.name});
+    this.setState({
+      numberOfShares:num
+    });
+  }
+
+  handleNameChange(event) {
+    const target = event.target;
+    
+    // this.setState({name: event.target.name});
+    this.setState({
+      name:target.value
+    });
+  }
+
+  handleSubmit(event) {
+    alert('Stock Name: ' + this.state.name + ' Stock Number: ' + this.state.numberOfShares);
+  
+    event.preventDefault();
+  }
+
+  render(){
+    return (
       <>
         <Container>
           <main>
@@ -76,18 +115,18 @@ const Sell = function(){
         </Container>
 
         <Container>
-        <Form>
+        <Form onSubmit = {this.handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Stock Name</Form.Label>
-            <Form.Control type="text" placeholder="Stock Name" />
+            <textarea class="form-control" rows="1" placeholder = 'StockName' value = {this.state.name} onChange ={this.handleNameChange}></textarea>
             <Form.Text className="text-muted">
               Confidential Exchange Service
             </Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3">
             <Form.Label>Number of Shares</Form.Label>
-            <Form.Control type="text" placeholder="Number of Shares" />
+            <textarea class="form-control" rows="1" placeholder = 'Number of Shares' value = {this.state.numberOfShares} onChange ={(event) => this.handleNumberChange(event)}></textarea>
           </Form.Group>
           
           <Button variant="primary" type="submit">
@@ -97,5 +136,7 @@ const Sell = function(){
         </Container>
       </>
     );
+  }
+  
 }
 export {Buy, Sell};
