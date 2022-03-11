@@ -8,8 +8,6 @@ import axios from "axios"
 //import '../node_modules/react-vis/dist/style.css';
 //import {XYPlot, LineSeries} from 'react-vis';
 import { polygonClient, restClient, websocketClient } from "@polygon.io/client-js";
-import { useState } from 'react';
-
 import {Buy, Sell} from './buysell.js'
 import Container from 'react-bootstrap/esm/Container';
 import Col from 'react-bootstrap/esm/Col';
