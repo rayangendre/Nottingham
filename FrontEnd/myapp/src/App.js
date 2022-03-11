@@ -3,23 +3,32 @@ import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button"
 import './App.css';
+
 import axios from "axios"
 //import '../node_modules/react-vis/dist/style.css';
 //import {XYPlot, LineSeries} from 'react-vis';
 import { polygonClient, restClient, websocketClient } from "@polygon.io/client-js";
 import { useState } from 'react';
+
+import {Buy, Sell} from './buysell.js'
+import Container from 'react-bootstrap/esm/Container';
+import Col from 'react-bootstrap/esm/Col';
+import Row from "react-bootstrap/Row"
+
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa"
 
 function App() {
   return (
     <div className="App">
-      <h1>Welcome to Nottingham!</h1>
+      <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="watchlist" element={<Watchlist />} />
         <Route path="stockcheck" element={<StockCheck />} />
         <Route path="login" element={<LogIn />} />
+        <Route path="buy" element={<Buy />}/>
+        <Route path="sell" element={<Sell />}/>
       </Routes>
     </div>
   );
@@ -61,19 +70,42 @@ function Home() {
 function Portfolio() {
   return (
     <>
-      <main>
-        <h2>Portfolio</h2>
+      <Container>
+        <Row>
+            
+              <Col>
+                 <nav>
+                <Link to="/">
+                  <button type="submit" class="btn btn-primary w-25">
+                    Home
+                  </button>
+                </Link>
+                <Link to="/buy">
+                  <button type="submit" class="btn btn-primary w-25">
+                    Buy
+                  </button>
+                </Link>
+                <Link to="/sell">
+                  <button type="submit" class="btn btn-primary w-25">
+                    Sell
+                  </button>
+                </Link>
+                </nav>
+              </Col>
+              <Col>
+              <h2>Portfolio</h2>
+              </Col>
+              <Col>
+              </Col>
+            
+        </Row>
+      </Container>
+      <Container>
+        
         <p>
           Here all your stocks are listed out
         </p>
-      </main>
-      <nav>
-        <Link to="/">
-          <button type="button" class="btn btn-outline-primary">
-            Home
-          </button>
-        </Link>
-      </nav>
+      </Container>
     </>
   );
 }
