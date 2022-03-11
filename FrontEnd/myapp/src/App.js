@@ -7,10 +7,16 @@ import {Buy, Sell} from './buysell.js'
 import Container from 'react-bootstrap/esm/Container';
 import Col from 'react-bootstrap/esm/Col';
 import Row from "react-bootstrap/Row"
+import { Component } from 'react';
+import ApiTest from './ApiTest';
+import React from 'react';
+
 
 
 
 function App() {
+
+  const [value, setValue] = React.useState("Api not called");
   return (
     <div className="App">
       <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
@@ -22,8 +28,24 @@ function App() {
         <Route path="buy" element={<Buy />}/>
         <Route path="sell" element={<Sell />}/>
       </Routes>
+      <div>
+        <button onClick={(setValue) => ApiTester()}>
+            Call ApiTest
+        </button>
+        <label>{value.apiResponse}</label>
+
+      </div>
     </div>
   );
+}
+
+function ApiTester(setValue){
+  console.log("calling api")
+  fetch("http://localhost:4000/api/users")
+          .then(res => res.text())
+          .then(res => setValue({ apiResponse: res }));
+  setValue({apiResponse: "value"});
+  
 }
 
 function Home() {

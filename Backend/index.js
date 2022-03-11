@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 // set up our express app
 const app = express();
+var cors = require("cors")
 
 const uri = "mongodb+srv://mainuser:mainuser@cluster0.uwdbk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -26,7 +27,7 @@ dbConnection.once("open", () => console.log("Connected to DB!"));
 // // connect to mongodb
 // mongoose.connect('mongodb://localhost/ourdata');
 // mongoose.Promise = global.Promise;
-
+app.use(cors());
 app.use(express.static('public'));
 
 app.use(express.json());
