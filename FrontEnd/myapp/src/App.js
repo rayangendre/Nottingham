@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import { Routes, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from "react-bootstrap/Button"
+//import Button from "react-bootstrap/Button"
 import './App.css';
+import './Table.js';
 
 import axios from "axios"
 //import '../node_modules/react-vis/dist/style.css';
@@ -16,13 +16,23 @@ import { Component } from 'react';
 import ApiTest from './ApiTest';
 import React from 'react';
 import {useState, useEffect} from 'react'
+import BasicTable from './Table.js';
 
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa"
 
+function createData(name, shares, price)
+{
+    return {name, shares, price}
+}
+
 function App() {
 
+<<<<<<< HEAD
   const [userId, setUserId] = useState("")
+=======
+  const [data, setData] = React.useState({});
+>>>>>>> 32162ae (modifying backend and added tables)
 
 
   return (
@@ -37,10 +47,17 @@ function App() {
         <Route path="buy" element={<Buy />}/>
         <Route path="sell" element={<Sell />}/>
       </Routes>
+<<<<<<< HEAD
+=======
+      <div>
+        {name}
+      </div>
+>>>>>>> 32162ae (modifying backend and added tables)
     </div>
   );
 }
 
+<<<<<<< HEAD
 
 
 // function ApiTester(setValue){
@@ -53,6 +70,9 @@ function App() {
 // }
 
 function Home(props) {
+=======
+function Home() {
+>>>>>>> 32162ae (modifying backend and added tables)
   return (
     <div>
       <main>
@@ -89,6 +109,15 @@ function Home(props) {
 }
 
 function Portfolio() {
+
+  const [testData, setTestData] = React.useState([
+    createData("APPLE", 123, 156.5), 
+    createData("TESLA", 43, 1156.0), 
+    createData("GOOGLE", 15, 1456.41), 
+    createData("BITCOIN", 345, 15.412345), 
+    createData("EPIC GAMES", 13, 74.98), 
+  ]);
+  
   return (
     <>
       <Container>
@@ -126,6 +155,7 @@ function Portfolio() {
         <p>
           Here all your stocks are listed out
         </p>
+        {BasicTable(testData)}
       </Container>
     </>
   );
@@ -133,9 +163,20 @@ function Portfolio() {
 
 function Watchlist() {
 
+<<<<<<< HEAD
 async function HandleSubmit(){
 
 }
+=======
+  const [testData, setTestData] = React.useState([
+    createData("APPLE", 123, 156.5), 
+    createData("TESLA", 43, 1156.0), 
+    createData("GOOGLE", 15, 1456.41), 
+    createData("BITCOIN", 345, 15.412345), 
+    createData("EPIC GAMES", 13, 74.98), 
+  ]);
+
+>>>>>>> 32162ae (modifying backend and added tables)
 
   return (
     <>
@@ -160,6 +201,7 @@ async function HandleSubmit(){
           </button>
         </Link>
       </nav>
+      {BasicTable(testData)}
     </>
   );
 }

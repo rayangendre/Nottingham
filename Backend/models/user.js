@@ -8,10 +8,15 @@ const UserSchema = new Schema({
         type: String,
     },
     watchList: [{
-        type: String
+        stock: {
+            stockTicker :{type: String},
+        }
     }],
     portfolioList: [{
-        type: String
+        stock: {
+            stockTicker :{type: String},
+            numShares: {type: String}
+        }
     }]
 
 })

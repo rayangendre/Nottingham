@@ -1,46 +1,49 @@
 const express = require('express');
-const mongoose = require('mongoose');
+var cors = require("cors")
 
 // set up our express app
 const app = express();
-var cors = require("cors")
+var cors = require("cors");
 
-const uri = "mongodb+srv://mainuser:mainuser@cluster0.uwdbk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const userServices = require("./models/user-services");
+const port = 4000;
 
-
-try {
-    // Connect to the MongoDB cluster
-    mongoose.connect(
-      uri,
-      { useNewUrlParser: true, useUnifiedTopology: true },
-      () => console.log(" Mongoose is connected"),
-    );
-  } catch (e) {
-    console.log("could not connect");
-  }
-  
-const dbConnection = mongoose.connection;
-dbConnection.on("error", (err) => console.log(`Connection error ${err}`));
-dbConnection.once("open", () => console.log("Connected to DB!"));
-
-
-// // connect to mongodb
-// mongoose.connect('mongodb://localhost/ourdata');
-// mongoose.Promise = global.Promise;
 app.use(cors());
-app.use(express.static('public'));
-
 app.use(express.json());
-// initialize routes
-app.use('/api',require('./router/api2'));
 
-// error handling middleware
-app.use(function(err,req,res,next){
-    //console.log(err);
-    res.status(422).send({error: err.message});
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
-// listen for requests
-app.listen(process.env.port || 4000, function(){
-    console.log('Ready to Go!');
+app.get("/users", async (req, res) => {
+  const name = req.query["name"];
+  const job = req.query["job"];
+  try {
+    const result = await userServices.getUsers(name, job);
+    res.send({ users_list: result });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("An error ocurred in the server.");
+  }
+});
+
+app.get("/users/:id", async (req, res) => {
+  const id = req.params["id"];
+  const result = await userServices.findUserById(id);
+  if (result === undefined || result === null)
+    res.status(404).send("Resource not found.");
+  else {
+    res.send({ users_list: result });
+  }
+});
+
+app.post("/users", async (req, res) => {
+  const user = req.body;
+  const savedUser = await userServices.addUser(user);
+  if (savedUser) res.status(201).send(savedUser);
+  else res.status(500).end();
+});
+
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
 });
