@@ -3,24 +3,19 @@ const Schema = mongoose.Schema;
 
 
 //User schema - has a name, watchlist, and portfolio list
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
     },
-    watchList: [{
-        stock: {
-            stockTicker :{type: String},
-        }
-    }],
-    portfolioList: [{
-        stock: {
-            stockTicker :{type: String},
-            numShares: {type: String}
-        }
-    }]
+    watchList: {
+        type: Array
+    },
+    portfolioList: {
+        type: Array
+    }
+    
 
 })
 
-const User = mongoose.model('user', UserSchema);
 
-module.exports = User;
+module.exports = UserSchema;

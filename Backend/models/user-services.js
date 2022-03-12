@@ -21,17 +21,13 @@ function setConnection(newConn){
   }
 
 
-  async function getUsers(name, job) {
+  async function getUsers(name) {
     const userModel = getDbConnection().model("User", UserSchema);
     let result;
-    if (name === undefined && job === undefined) {
+    if (name === undefined) {
       result = await userModel.find();
-    } else if (name && job === undefined) {
+    } else{
       result = await findUserByName(name);
-    } else if (job && name === undefined) {
-      result = await findUserByJob(job);
-    } else {
-      result = await findUserByNameAndJob(name, job);
     }
     return result;
   }
@@ -64,10 +60,6 @@ function setConnection(newConn){
     return await userModel.find({ name: name });
   }
   
-  async function findUserByJob(job) {
-    const userModel = getDbConnection().model("User", UserSchema);       
-    return await userModel.find({ job: job });
-  }
   
   module.exports = {
     getUsers,

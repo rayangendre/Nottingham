@@ -17,9 +17,9 @@ app.get("/", (req, res) => {
 
 app.get("/users", async (req, res) => {
   const name = req.query["name"];
-  const job = req.query["job"];
+  
   try {
-    const result = await userServices.getUsers(name, job);
+    const result = await userServices.getUsers(name);
     res.send({ users_list: result });
   } catch (error) {
     console.log(error);
@@ -43,6 +43,10 @@ app.post("/users", async (req, res) => {
   if (savedUser) res.status(201).send(savedUser);
   else res.status(500).end();
 });
+
+app.patch("/users", async (req, res) => {
+  
+})
 
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
