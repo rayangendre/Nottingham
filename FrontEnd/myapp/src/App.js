@@ -22,34 +22,21 @@ const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa"
 
 function App() {
 
-  const [data, setData] = useState({})
+  const [userId, setUserId] = useState("")
 
-  useEffect(() => {
-    fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => setData(data))
-  }, [])
 
-  var name = '';
-  if (data[0] != null){
-      name = data[0].name;
-  }else{
-      name = '';
-  }
   return (
     <div className="App">
       <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home userId = {userId}/>} />
         <Route path="portfolio" element={<Portfolio />} />
         <Route path="watchlist" element={<Watchlist />} />
         <Route path="stockcheck" element={<StockCheck />} />
-        <Route path="login" element={<LogIn />} />
+        <Route path="login" element={<LogIn userId = {userId} setUserId = {setUserId} />} />
         <Route path="buy" element={<Buy />}/>
         <Route path="sell" element={<Sell />}/>
       </Routes>
-      <div>
-        {name}
-
-      </div>
     </div>
   );
 }
@@ -65,7 +52,7 @@ function App() {
   
 // }
 
-function Home() {
+function Home(props) {
   return (
     <div>
       <main>
@@ -94,6 +81,9 @@ function Home() {
           </button>
         </Link>
       </nav>
+      <div>
+        {props.userId ? props.userId : "Not logged in"}
+      </div>
     </div>
   );
 }
@@ -142,6 +132,11 @@ function Portfolio() {
 }
 
 function Watchlist() {
+
+async function HandleSubmit(){
+
+}
+
   return (
     <>
       <main>
@@ -149,7 +144,15 @@ function Watchlist() {
         <p>
           Here you can track the stocks that you are currently interested in
         </p>
+        <form onSubmit={HandleSubmit}>
+          <div class="mb-3">
+            <label class="form-label">Add a stock to your watchlist</label>
+            <input name="watch" type="text" class="form-control" placeholder="Enter a stock ticker..."/>
+            <button type="submit" class="btn btn-outline-primary" >Add To Watchlist</button>
+          </div>
+        </form>
       </main>
+      
       <nav>
         <Link to="/">
           <button type="button" class="btn btn-outline-primary">
@@ -161,7 +164,49 @@ function Watchlist() {
   );
 }
 
-function LogIn() {
+function LogIn(props) {
+
+  const [userData, setUserData] = useState([])
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
+      setUserData(data)
+      //console.log(data)
+    })
+  }, [])
+
+  async function HandleSubmit(e){
+    const login = e.target.login.value
+    //console.log(login)
+    e.preventDefault()
+    let newId
+    if (newId = userExists(login)) {
+      console.log("User exists")
+      console.log(newId)
+    } else {
+      console.log("User does not exist...Creating user...")
+      newId = await createUser(login)
+      console.log("New user made... ID:".concat(newId))
+    }
+    props.setUserId(newId)
+  }
+
+  async function createUser(username){
+    const result = await axios.post("http://localhost:4000/api/users", {"name": username})
+    return result.data._id
+  }
+
+   function userExists(user) {
+    //console.log(userData)
+    for (let i = 0; i < userData.length; i++) {
+      //console.log(userData[i])
+      if (userData[i].name == user) {
+        return userData[i]._id
+      }
+    }
+    return null
+  }
+
   return (
     <>
       <main>
@@ -169,6 +214,13 @@ function LogIn() {
         <p>
           Log in to access your personalized portfolio, and buy/sell stocks
         </p>
+        <form onSubmit={HandleSubmit}>
+          <div class="mb-3">
+            <label class="form-label">Log In to your account</label>
+            <input name="login" type="text" class="form-control" placeholder="Enter your name..."/>
+            <button type="submit" class="btn btn-outline-primary" >Log In</button>
+          </div>
+        </form>
       </main>
       <nav>
         <Link to="/">
