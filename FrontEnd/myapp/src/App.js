@@ -28,11 +28,8 @@ function createData(name, shares, price)
 
 function App() {
 
-<<<<<<< HEAD
   const [userId, setUserId] = useState("")
-=======
   const [data, setData] = React.useState({});
->>>>>>> 32162ae (modifying backend and added tables)
 
 
   return (
@@ -47,32 +44,16 @@ function App() {
         <Route path="buy" element={<Buy />}/>
         <Route path="sell" element={<Sell />}/>
       </Routes>
-<<<<<<< HEAD
-=======
       <div>
         {name}
       </div>
->>>>>>> 32162ae (modifying backend and added tables)
     </div>
   );
 }
 
-<<<<<<< HEAD
-
-
-// function ApiTester(setValue){
-//   console.log("calling api")
-//   fetch("http://localhost:4000/api/users")
-//           .then(res => res.text())
-//           .then(res => setValue({ apiResponse: res }));
-//   setValue({apiResponse: "value"});
-  
-// }
 
 function Home(props) {
-=======
-function Home() {
->>>>>>> 32162ae (modifying backend and added tables)
+
   return (
     <div>
       <main>
@@ -163,11 +144,9 @@ function Portfolio() {
 
 function Watchlist() {
 
-<<<<<<< HEAD
 async function HandleSubmit(){
 
 }
-=======
   const [testData, setTestData] = React.useState([
     createData("APPLE", 123, 156.5), 
     createData("TESLA", 43, 1156.0), 
@@ -176,7 +155,6 @@ async function HandleSubmit(){
     createData("EPIC GAMES", 13, 74.98), 
   ]);
 
->>>>>>> 32162ae (modifying backend and added tables)
 
   return (
     <>
