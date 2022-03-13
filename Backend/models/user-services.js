@@ -70,6 +70,9 @@ function setConnection(newConn){
     if(user === undefined){
       return false;
     }
+
+    console.log("user:");
+    console.log(user);
     
     
     
@@ -96,8 +99,16 @@ function setConnection(newConn){
       const filter = {id: user.id};
       const opts = {new: true};
 
+      console.log("update:");
       console.log(update);
-      console.log(user);
+      console.log("portfolio list: ");
+      console.log(user.portfolioList);
+      console.log("portfolio addition");
+      console.log(values.portfolioAddition)
+      console.log("User ID:");
+      console.log(user.id);
+
+
 
       let result = await userModel.findOneAndUpdate(filter, update, opts);
 
@@ -107,6 +118,7 @@ function setConnection(newConn){
         return false;
       }
     }
+
 
     return false;
   }
