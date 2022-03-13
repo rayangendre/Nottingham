@@ -17,6 +17,7 @@ import ApiTest from './ApiTest';
 import React from 'react';
 import {useState, useEffect} from 'react'
 import BasicTable from './Table.js';
+import { WatchlistTable } from "./Table.js";
 
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa"
@@ -38,7 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home userId = {userId}/>} />
         <Route path="portfolio" element={<Portfolio />} />
-        <Route path="watchlist" element={<Watchlist />} />
+        <Route path="watchlist" element={<Watchlist userId = {userId}/>} />
         <Route path="stockcheck" element={<StockCheck />} />
         <Route path="login" element={<LogIn userId = {userId} setUserId = {setUserId} />} />
         <Route path="buy" element={<Buy />}/>
@@ -142,18 +143,26 @@ function Portfolio() {
   );
 }
 
-function Watchlist() {
+function Watchlist(props) {
 
-async function HandleSubmit(){
+  useEffect(() => {
+    fetch("http://localhost:4000/users/".concat(props.userId)).then(res => res.json()).then(data => {
+      setPersonalWatchlist(data.users_list.watchList)
+      //console.log(data.users_list.watchList)
+    })
+  }, [])
 
+async function HandleSubmit(e){
+  const toBeAdded = e.target.watch.value
+  console.log(toBeAdded)
+  e.preventDefault()
+  if (props.userId !== "") {
+    setPersonalWatchlist([...personalWatchlist, toBeAdded])
+  }
 }
-  const [testData, setTestData] = React.useState([
-    createData("APPLE", 123, 156.5), 
-    createData("TESLA", 43, 1156.0), 
-    createData("GOOGLE", 15, 1456.41), 
-    createData("BITCOIN", 345, 15.412345), 
-    createData("EPIC GAMES", 13, 74.98), 
-  ]);
+
+
+  const [personalWatchlist, setPersonalWatchlist] = useState([]);
 
 
   return (
@@ -179,7 +188,7 @@ async function HandleSubmit(){
           </button>
         </Link>
       </nav>
-      {BasicTable(testData)}
+      {WatchlistTable(personalWatchlist)}
     </>
   );
 }
@@ -189,8 +198,8 @@ function LogIn(props) {
   const [userData, setUserData] = useState([])
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-      setUserData(data)
+    fetch("http://localhost:4000/users").then(res => res.json()).then(data => {
+      setUserData(data.users_list)
       //console.log(data)
     })
   }, [])
@@ -212,7 +221,7 @@ function LogIn(props) {
   }
 
   async function createUser(username){
-    const result = await axios.post("http://localhost:4000/api/users", {"name": username})
+    const result = await axios.post("http://localhost:4000/users", {"name": username})
     return result.data._id
   }
 
@@ -220,7 +229,7 @@ function LogIn(props) {
     //console.log(userData)
     for (let i = 0; i < userData.length; i++) {
       //console.log(userData[i])
-      if (userData[i].name == user) {
+      if (userData[i].name === user) {
         return userData[i]._id
       }
     }

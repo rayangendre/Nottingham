@@ -42,3 +42,30 @@ export default function BasicTable(data) {
         </TableContainer>
     );
 }
+
+export function WatchlistTable(data) {
+    console.log(data);
+    return (
+        <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 100 }} aria-label="simple table">
+            <TableHead>
+            <TableRow>
+                <TableCell>Stock Name</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+            {data.map((row) => (
+                <TableRow
+                key={row}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                <TableCell component="th" scope="row">
+                    {row}
+                </TableCell>
+                </TableRow>
+            ))}
+            </TableBody>
+        </Table>
+        </TableContainer>
+    );
+}
