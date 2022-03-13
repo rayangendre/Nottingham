@@ -54,6 +54,61 @@ function setConnection(newConn){
       return false;
     }
   }
+
+  async function updateUser(values){
+    
+    const userModel = getDbConnection().model("User", UserSchema);
+    let user;
+    if(values.id){
+        user = await findUserById(values.id);
+    }else if(values.name){
+        user = await findUserByName(values.name);
+    }else{
+      return false;
+    }
+
+    if(user === undefined){
+      return false;
+    }
+    
+    
+    
+    if(values.watchListAddition != ""){
+      let newWatchList = [].concat(user.watchList);
+      newWatchList.push(values.watchListAddition);
+      const update = {watchList: newWatchList};
+      const filter = {id: user.id};
+      const opts = {new: true};
+
+      let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+      if(result){
+        return result;
+      }else{
+        return false;
+      }
+    }
+
+    if(values.portfolioAddition != ""){
+      let newPortList = user.portfolioList;
+      newPortList.push(values.portfolioAddition);
+      const update = {portfolioList: newPortList};
+      const filter = {id: user.id};
+      const opts = {new: true};
+
+      let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+      if(result){
+        return result;
+      }else{
+        return false;
+      }
+    }
+
+    return false;
+  }
+
+  
   
   async function findUserByName(name) {
     const userModel = getDbConnection().model("User", UserSchema);       
@@ -65,5 +120,6 @@ function setConnection(newConn){
     getUsers,
     findUserById,
     addUser,
-    setConnection
+    setConnection,
+    updateUser
   }
