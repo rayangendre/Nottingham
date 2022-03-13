@@ -6,16 +6,19 @@ const Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
+        required: true
     },
     watchList: {
-        type: Array
+        type: Array,
+        required: true
     },
     portfolioList: {
-        type: Array
+        type: Array,
+        required: true
     }
     
 
-})
+}, {collection: "users"})
 
 
 module.exports = UserSchema;

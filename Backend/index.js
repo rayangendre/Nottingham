@@ -61,8 +61,25 @@ app.patch("/users/:id", async (req, res) => {
     }else{
       res.status(500).end();
     }
+})
 
+app.patch("/users", async (req, res) => {
+  let watchListAddition = req.body["watchListAddition"];
+  let portfolioAddition = req.body["portfolioAddition"];
+  const name = req.body["name"];
 
+  var values = {};
+  values.watchListAddition = watchListAddition;
+  values.portfolioAddition = portfolioAddition;
+  values.name = name;
+
+  const result = await userServices.updateUser(values);
+
+  if(result){
+    res.status(200).send(result);
+  }else{
+    res.status(500).end();
+  }
 })
 
 app.listen(process.env.PORT || port, () => {

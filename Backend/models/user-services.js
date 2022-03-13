@@ -90,11 +90,14 @@ function setConnection(newConn){
     }
 
     if(values.portfolioAddition != ""){
-      let newPortList = user.portfolioList;
+      let newPortList = [].concat(user.portfolioList);
       newPortList.push(values.portfolioAddition);
       const update = {portfolioList: newPortList};
       const filter = {id: user.id};
       const opts = {new: true};
+
+      console.log(update);
+      console.log(user);
 
       let result = await userModel.findOneAndUpdate(filter, update, opts);
 
