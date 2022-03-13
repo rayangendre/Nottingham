@@ -63,6 +63,7 @@ function setConnection(newConn){
         user = await findUserById(values.id);
     }else if(values.name){
         user = await findUserByName(values.name);
+        // user = await findUserById(user.id);
     }else{
       return false;
     }
@@ -127,7 +128,7 @@ function setConnection(newConn){
   
   async function findUserByName(name) {
     const userModel = getDbConnection().model("User", UserSchema);       
-    return await userModel.find({ name: name });
+    return await userModel.findOne({ name: name });
   }
   
   

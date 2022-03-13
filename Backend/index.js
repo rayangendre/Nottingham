@@ -64,6 +64,7 @@ app.patch("/users/:id", async (req, res) => {
 })
 
 app.patch("/users", async (req, res) => {
+  console.log("The correct function");
   let watchListAddition = req.body["watchListAddition"];
   let portfolioAddition = req.body["portfolioAddition"];
   const name = req.body["name"];
