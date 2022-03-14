@@ -87,11 +87,13 @@ test("Fetching all users", async () => {
 });
 
 test("Fetching users by name", async () => {
-  const userName = "Neymar";
+  const userName = 'Neymar';
   const users = await userServices.getUsers(userName);
+  console.log('FETCH BY NAME');
+  console.log(users);
   expect(users).toBeDefined();
-  expect(users.length).toBeGreaterThan(0);
-  users.forEach((user) => expect(user.name).toBe(userName));
+  
+  expect(users.name).toBe(userName);
 });
 
 
@@ -217,4 +219,118 @@ test("Modifying User -- success adding to the watch list", async () => {
     expect(result.name).toBe(dummyUser.name);
     expect(result.watchList[3]).toBe("SBUX");
   });
+
+
+  test("Modifying User -- success adding to the portfolio list", async () => {
+    const dummyUser = {
+        name: "Kylian Mbappe",
+        watchList: ["V", "M", "PYPL"],
+        portfolioList:[
+            {name: "V", numShares: "2"},
+            {name: "DIS", numShares: "5"}
+        ]
+      };
+    const addedUser = await userServices.addUser(dummyUser);
+    
+    let values = {
+        "id": addedUser.id,
+        "watchListAddition": "",
+        "portfolioAddition": {name: "TSLA", numShares: "10"}
+    }
+    const result = await userServices.updateUser(values);
+
+    expect(result).toHaveProperty("_id");
+    expect(result.name).toBe(dummyUser.name);
+    expect(result.portfolioList[2].name).toBe("TSLA");
+  });
+
+  test("Modifying User -- fail adding to the portfolio list", async () => {
+    const dummyUser = {
+        name: "Kylian Mbappe",
+        watchList: ["V", "M", "PYPL"],
+        portfolioList:[
+            {name: "V", numShares: "2"},
+            {name: "DIS", numShares: "5"}
+        ]
+      };
+    const addedUser = await userServices.addUser(dummyUser);
+    
+    let values = {
+        "id": addedUser.id,
+        "watchListAddition": "",
+        "portfolioAddition": ""
+    }
+    const result = await userServices.updateUser(values);
+
+    expect(result).toBeFalsy();
+
+  });
+
+  test("Modifying User -- failure adding to the watch list", async () => {
+    const dummyUser = {
+        name: "Kylian Mbappe",
+        watchList: ["V", "M", "PYPL"],
+        portfolioList:[
+            {name: "V", numShares: "2"},
+            {name: "DIS", numShares: "5"}
+        ]
+      };
+    const addedUser = await userServices.addUser(dummyUser);
+    
+    let values = {
+        "id": addedUser.id,
+        "watchListAddition": "",
+        "portfolioAddition": ""
+    }
+    const result = await userServices.updateUser(values);
+
+    expect(result).toBeFalsy();
+  });
+
+  test("Modifying User -- success removing from the watch list", async () => {
+    const dummyUser = {
+        name: "Kylian Mbappe",
+        watchList: ["V", "M", "PYPL"],
+        portfolioList:[
+            {name: "V", numShares: "2"},
+            {name: "DIS", numShares: "5"}
+        ]
+      };
+    const addedUser = await userServices.addUser(dummyUser);
+    
+    let values = {
+        "id": addedUser.id,
+        "watchListSub": "PYPL",
+        "portfolioSub": ""
+    }
+    const result = await userServices.removeStock(values);
+
+    expect(result).toHaveProperty("_id");
+    expect(result.name).toBe(dummyUser.name);
+    expect(result.watchList[1]).toBe("M");
+  });
+
+  test("Modifying User -- success removing from the portfolio list", async () => {
+    const dummyUser = {
+        name: "Kylian Mbappe",
+        watchList: ["V", "M", "PYPL"],
+        portfolioList:[
+            {name: "V", numShares: "2"},
+            {name: "DIS", numShares: "5"}
+        ]
+      };
+    const addedUser = await userServices.addUser(dummyUser);
+    
+    let values = {
+        "id": addedUser.id,
+        "watchListSub": "",
+        "portfolioSub": {name:"DIS", numShares: "5"}
+    }
+    const result = await userServices.removeStock(values);
+
+    expect(result).toHaveProperty("_id");
+    expect(result.name).toBe(dummyUser.name);
+    expect(result.portfolioList[0].name).toBe("V");
+  });
+
 
