@@ -53,7 +53,6 @@ app.patch("/users/:id", async (req, res) => {
     values.watchListAddition = watchListAddition;
     values.portfolioAddition = portfolioAddition;
     values.id = id;
-
     const result = await userServices.updateUser(values);
 
     if(result){

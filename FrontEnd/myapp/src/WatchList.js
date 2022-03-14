@@ -7,6 +7,7 @@ import React from 'react';
 import {useState, useEffect} from 'react'
 
 import { WatchlistTable } from "./Table.js";
+import axios from "axios";
 
 
 
@@ -25,6 +26,7 @@ function Watchlist(props) {
     e.preventDefault()
     if (props.userId !== "") {
       setPersonalWatchlist([...personalWatchlist, toBeAdded])
+      await axios.patch("http://localhost:4000/users/".concat(props.userId), {"watchListAddition": toBeAdded})
     }
   }
   
