@@ -140,7 +140,7 @@ function setConnection(newConn){
         return e != values.watchListSub;
       });
       const update = {watchList: newWatchList};
-      const filter = {id: user.id};
+      const filter = {_id: user.id};
       const opts = {new: true};
 
       let result = await userModel.findOneAndUpdate(filter, update, opts);
@@ -158,7 +158,7 @@ function setConnection(newConn){
         return e.name != values.portfolioSub.name;
       });
       const update = {portfolioList: newPortList};
-      const filter = {id: user.id};
+      const filter = {_id: user.id};
       const opts = {new: true};
 
       let result = await userModel.findOneAndUpdate(filter, update, opts);
