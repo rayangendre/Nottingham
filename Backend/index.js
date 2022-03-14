@@ -63,7 +63,6 @@ app.patch("/users/:id", async (req, res) => {
 })
 
 app.patch("/users", async (req, res) => {
-  console.log("The correct function");
   let watchListAddition = req.body["watchListAddition"];
   let portfolioAddition = req.body["portfolioAddition"];
   const name = req.body["name"];
@@ -75,6 +74,26 @@ app.patch("/users", async (req, res) => {
 
   const result = await userServices.updateUser(values);
 
+  if(result){
+    res.status(200).send(result);
+  }else{
+    res.status(500).end();
+  }
+})
+
+app.delete("/users", async (req, res) => {
+  let watchListSub = req.body["watchListSub"];
+  let portfolioSub = req.body["portfolioSub"];
+  const name = req.body["name"];
+
+  var values = {};
+  values.watchListSub = watchListSub;
+  values.portfolioSub = portfolioSub;
+  values.name = name;
+
+  const result = await userServices.removeStock(values);
+
+  
   if(result){
     res.status(200).send(result);
   }else{

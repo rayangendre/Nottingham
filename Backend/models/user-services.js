@@ -106,17 +106,6 @@ function setConnection(newConn){
       const filter = {_id: user.id};
       const opts = {new: true};
 
-      console.log("update:");
-      console.log(update);
-      console.log("portfolio list: ");
-      console.log(user.portfolioList);
-      console.log("portfolio addition");
-      console.log(values.portfolioAddition)
-      console.log("User ID:");
-      console.log(user.id);
-
-
-
       let result = await userModel.findOneAndUpdate(filter, update, opts);
 
       if(result){
@@ -130,6 +119,61 @@ function setConnection(newConn){
     return false;
   }
 
+  async function removeStock(values){
+    const userModel = getDbConnection().model("User", UserSchema);
+    let user;
+    if(values.name){
+        user = await findUserByName(values.name);
+        // user = await findUserById(user.id);
+    }else{
+      return false;
+    }
+
+    if(user === undefined){
+      return false;
+    }
+    console.log(user);
+
+    if(values.watchListSub != ""){
+      let newWatchList = [].concat(user.watchList);
+      newWatchList = newWatchList.filter(function(e){
+        return e != values.watchListSub;
+      });
+      const update = {watchList: newWatchList};
+      const filter = {id: user.id};
+      const opts = {new: true};
+
+      let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+      if(result){
+        return result;
+      }else{
+        return false;
+      }
+    }
+
+    if(values.portfolioSub != ""){
+      let newPortList = [].concat(user.portfolioList);
+      newPortList = newPortList.filter(function(e){
+        return e.name != values.portfolioSub.name;
+      });
+      const update = {portfolioList: newPortList};
+      const filter = {id: user.id};
+      const opts = {new: true};
+
+      let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+      if(result){
+        return result;
+      }else{
+        return false;
+      }
+    }
+
+
+    return false;
+
+  }
   
   
   async function findUserByName(name) {
@@ -143,5 +187,6 @@ function setConnection(newConn){
     findUserById,
     addUser,
     setConnection,
-    updateUser
+    updateUser,
+    removeStock
   }
