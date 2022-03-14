@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from "react-bootstrap/Row"
 
 import React from 'react';
+import {useState, useEffect} from 'react'
 
 import BasicTable from './Table.js';
 
@@ -21,15 +22,20 @@ function createData(name, shares, price)
     return {name, shares, price}
 }
 
-function Portfolio() {
+function Portfolio(props) {
 
-    const [testData, setTestData] = React.useState([
-      createData("APPLE", 123, 156.5), 
-      createData("TESLA", 43, 1156.0), 
-      createData("GOOGLE", 15, 1456.41), 
-      createData("BITCOIN", 345, 15.412345), 
-      createData("EPIC GAMES", 13, 74.98), 
-    ]);
+    const [portList, setPortList] = useState([]);
+    useEffect(() => {
+      async function fetchAPI(props){
+        let response = await fetch("http://localhost:4000/users/".concat(props.userId)).then(res => res.json())
+        let portfolList = []
+        for(var i = 0; i < response.users_list.portfolioList.length; i++){
+          portfolList.push(createData(response.users_list.portfolioList[i].name, response.users_list.portfolioList[i].numShares, 100))
+        }
+        setPortList(portfolList)
+      }
+      fetchAPI(props)
+    }, [])
     
     return (
       <>
@@ -68,7 +74,7 @@ function Portfolio() {
           <p>
             Here all your stocks are listed out
           </p>
-          {BasicTable(testData)}
+          {BasicTable(portList)}
         </Container>
       </>
     );

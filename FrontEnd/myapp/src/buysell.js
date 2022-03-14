@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col"
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import React from 'react'
+import axios from "axios";
 
 
 class Buy extends React.Component{
@@ -41,8 +42,16 @@ class Buy extends React.Component{
     });
   }
 
-  handleSubmit(event) {
-    alert('Bought ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+  async handleSubmit(event) {
+    if((this.state.name != '') && (this.state.numberOfShares != null)){
+      let res = axios.patch("http://localhost:4000/users/".concat(this.props.userId), 
+            {"portfolioAddition": {"name": this.state.name, "numShares": this.state.numberOfShares}, "watchListAddition":""})
+      alert('Bought ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+      
+    }else{
+      alert('Enter a stock to buy');
+    }
+    
     event.preventDefault();
   }
   render(){
@@ -124,8 +133,18 @@ class Sell extends React.Component{
     });
   }
 
-  handleSubmit(event) {
-    alert('Sold ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+  async handleSubmit(event) {
+
+    if((this.state.name != '') && (this.state.numberOfShares != null)){
+      let res = axios.put("http://localhost:4000/users/".concat(this.props.userId), 
+            {"portfolioSub": {"name": this.state.name, "numShares": this.state.numberOfShares}, "watchListSub":""})
+      alert('Sold ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+      
+    }else{
+      alert('Enter a stock to sell');
+    }
+
+
     event.preventDefault();
   }
 

@@ -14,10 +14,14 @@ import axios from "axios";
 function Watchlist(props) {
 
     useEffect(() => {
-      fetch("http://localhost:4000/users/".concat(props.userId)).then(res => res.json()).then(data => {
+      if(props.userId != ""){
+        fetch("http://localhost:4000/users/".concat(props.userId)).then(res => res.json()).then(data => {
         setPersonalWatchlist(data.users_list.watchList)
         //console.log(data.users_list.watchList)
       })
+      }else{
+        setPersonalWatchlist([])
+      }
     }, [])
   
   async function HandleSubmit(e){

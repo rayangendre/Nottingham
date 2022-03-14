@@ -38,12 +38,12 @@ function App() {
       <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
       <Routes>
         <Route path="/" element={<Home userId = {userId}/>} />
-        <Route path="portfolio" element={<Portfolio />} />
+        <Route path="portfolio" element={<Portfolio userId = {userId}/>} />
         <Route path="watchlist" element={<Watchlist userId = {userId}/>} />
         <Route path="stockcheck" element={<StockCheck />} />
         <Route path="login" element={<LogIn userId = {userId} setUserId = {setUserId} />} />
-        <Route path="buy" element={<Buy />}/>
-        <Route path="sell" element={<Sell />}/>
+        <Route path="buy" element={<Buy userId = {userId}/>}/>
+        <Route path="sell" element={<Sell userId = {userId}/>}/>
       </Routes>
       <div>
         

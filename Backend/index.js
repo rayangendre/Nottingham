@@ -28,6 +28,7 @@ app.get("/users", async (req, res) => {
 });
 
 app.get("/users/:id", async (req, res) => {
+  
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
   if (result === undefined || result === null)
@@ -48,7 +49,8 @@ app.patch("/users/:id", async (req, res) => {
     let watchListAddition = req.body["watchListAddition"];
     let portfolioAddition = req.body["portfolioAddition"];
     const id = req.params["id"];
-    //console.log(id)
+    console.log('ID');
+    console.log(id);
     var values = {};
     values.watchListAddition = watchListAddition;
     values.portfolioAddition = portfolioAddition;
@@ -63,6 +65,7 @@ app.patch("/users/:id", async (req, res) => {
 })
 
 app.patch("/users", async (req, res) => {
+  console.log("The correct function");
   let watchListAddition = req.body["watchListAddition"];
   let portfolioAddition = req.body["portfolioAddition"];
   const name = req.body["name"];
@@ -74,14 +77,15 @@ app.patch("/users", async (req, res) => {
 
   const result = await userServices.updateUser(values);
 
-  if(result){
+if(result){
     res.status(200).send(result);
   }else{
     res.status(500).end();
   }
 })
 
-app.delete("/users", async (req, res) => {
+app.put("/users", async (req, res) => {
+  console.log("Called delete with user name");
   let watchListSub = req.body["watchListSub"];
   let portfolioSub = req.body["portfolioSub"];
   const name = req.body["name"];
@@ -90,6 +94,30 @@ app.delete("/users", async (req, res) => {
   values.watchListSub = watchListSub;
   values.portfolioSub = portfolioSub;
   values.name = name;
+
+  const result = await userServices.removeStock(values);
+
+  
+  if(result){
+    res.status(200).send(result);
+  }else{
+    res.status(500).end();
+  }
+})
+
+app.put("/users/:id", async (req, res) => {
+  console.log("Called delete with user id");
+  let watchListSub = req.body["watchListSub"];
+  let portfolioSub = req.body["portfolioSub"];
+  const id = req.params["id"];
+
+  console.log('req body');
+  console.log(req.body);
+
+  var values = {};
+  values.watchListSub = watchListSub;
+  values.portfolioSub = portfolioSub;
+  values.id = id;
 
   const result = await userServices.removeStock(values);
 

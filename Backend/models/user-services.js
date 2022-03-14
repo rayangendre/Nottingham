@@ -81,7 +81,7 @@ function setConnection(newConn){
     
     
     
-    if(values.watchListAddition != ""){
+    if(values.watchListAddition != "" && values.watchListAddition != null){
       let newWatchList = [].concat(user.watchList);
       newWatchList.push(values.watchListAddition);
       //console.log(user.id)
@@ -99,7 +99,7 @@ function setConnection(newConn){
       }
     }
 
-    if(values.portfolioAddition != ""){
+    if(values.portfolioAddition != "" && values.portfolioAddition != null){
       let newPortList = [].concat(user.portfolioList);
       newPortList.push(values.portfolioAddition);
       const update = {portfolioList: newPortList};
@@ -122,9 +122,15 @@ function setConnection(newConn){
   async function removeStock(values){
     const userModel = getDbConnection().model("User", UserSchema);
     let user;
-    if(values.name){
-        user = await findUserByName(values.name);
-        // user = await findUserById(user.id);
+    if(values.id){
+      //console.log("Using ID")
+      user = await findUserById(values.id);
+      console.log(user)
+
+    }else if(values.name){
+      //console.log("Using name")
+      user = await findUserByName(values.name);
+      // user = await findUserById(user.id);
     }else{
       return false;
     }
@@ -132,7 +138,10 @@ function setConnection(newConn){
     if(user === undefined){
       return false;
     }
-    console.log(user);
+
+    console.log('values');
+    console.log(values);
+    
 
     if(values.watchListSub != ""){
       let newWatchList = [].concat(user.watchList);
@@ -161,6 +170,12 @@ function setConnection(newConn){
       const filter = {_id: user.id};
       const opts = {new: true};
 
+      console.log('update:');
+      console.log(update);
+      console.log('portfolioSub');
+      console.log(values.portfolioSub);
+
+
       let result = await userModel.findOneAndUpdate(filter, update, opts);
 
       if(result){
@@ -174,6 +189,8 @@ function setConnection(newConn){
     return false;
 
   }
+
+
   
   
   async function findUserByName(name) {
