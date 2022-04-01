@@ -8,7 +8,7 @@ import axios from "axios"
 import React from 'react';
 import {useState, useEffect} from 'react'
 
-const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa"
+const apiKey = "RZEXR5SFIKLQNKYK"
 
 
 function StockCheck(){
@@ -22,11 +22,12 @@ function StockCheck(){
       const stockPrice = await checkPrice(e.target.ticker.value.toUpperCase())
       console.log(stockPrice)
       setTicker(e.target.ticker.value.toUpperCase())
-      setPrice(stockPrice)
+      setPrice(stockPrice["data"]["Time Series (1min)"]["2022-03-30 14:39:00"]["4. close"])
     }
   
     async function checkPrice(ticker){
-      return await axios.get("https://api.polygon.io/v2/aggs/ticker/".concat(ticker).concat("/prev?adjusted=true&apiKey=").concat(apiKey))
+      return await axios.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=".concat(ticker).concat("&interval=1min&apikey=").concat(apiKey));
+      // return await axios.get("https://api.polygon.io/v2/aggs/ticker/".concat(ticker).concat("/prev?adjusted=true&apiKey=").concat(apiKey))
     }
   
     return (
@@ -41,7 +42,7 @@ function StockCheck(){
             </div>
           </form>
           <p>
-            The current price of {ticker} is {price ? price.data.results[0].c : ""}: 
+            The current price of {ticker} is {price ? price : ""}: 
           </p>
         
         </main>
