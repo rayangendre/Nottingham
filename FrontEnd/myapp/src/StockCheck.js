@@ -22,8 +22,11 @@ function StockCheck(){
       const stockPrice = await checkPrice(e.target.ticker.value.toUpperCase())
       console.log(stockPrice)
       setTicker(e.target.ticker.value.toUpperCase())
-      const lastCheckTime = stockPrice["data"]["Meta Data"]["Last Refreshed"]
-      setPrice(stockPrice["data"]["Time Series (1min)"][lastCheckTime]["4. close"])
+      const timeSeriesObject = stockPrice["data"]["Time Series (1min)"]
+      const firstKey = Object.keys(timeSeriesObject)[0]
+      setPrice(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"])
+      // console.log(firstKey)
+      // console.log(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"])
     }
   
     async function checkPrice(ticker){
@@ -43,7 +46,7 @@ function StockCheck(){
             </div>
           </form>
           <p>
-            The current price of {ticker} is {price ? price : ""}: 
+            The current price of {ticker} is: {price ? price : ""} 
           </p>
         
         </main>
