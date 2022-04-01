@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import Button from "react-bootstrap/Button"
 import './App.css';
 import './Table.js';
+import './Stock.js';
 
 import axios from "axios"
 //import '../node_modules/react-vis/dist/style.css';
@@ -16,6 +17,7 @@ import React from 'react';
 import {useState, useEffect} from 'react'
 
 import BasicTable from './Table.js';
+import Stock from "./Stock.js";
 
 function createData(name, shares, price)
 {
@@ -76,6 +78,7 @@ function Portfolio(props) {
           </p>
           {BasicTable(portList)}
         </Container>
+        <Stock></Stock>
       </>
     );
   }
