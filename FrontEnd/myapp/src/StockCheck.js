@@ -19,11 +19,14 @@ function StockCheck(){
     async function HandleSubmit(e){
       console.log(e.target.ticker.value)
       e.preventDefault()
-      const stockPrice = await checkPrice(e.target.ticker.value.toUpperCase())
-      console.log(stockPrice)
       setTicker(e.target.ticker.value.toUpperCase())
+      //calls the API using the stock ticker
+      const stockPrice = await checkPrice(e.target.ticker.value.toUpperCase())
+      //the object that is extracted from the API response, since it is not a list we must do extra processing
       const timeSeriesObject = stockPrice["data"]["Time Series (1min)"]
+      //extract the first key from the JSON, corresponds to the latest minute of data returned
       const firstKey = Object.keys(timeSeriesObject)[0]
+      //set the price of the stock using the key we extracted and take the closing price
       setPrice(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"])
       // console.log(firstKey)
       // console.log(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"])
