@@ -22,7 +22,8 @@ function StockCheck(){
       const stockPrice = await checkPrice(e.target.ticker.value.toUpperCase())
       console.log(stockPrice)
       setTicker(e.target.ticker.value.toUpperCase())
-      setPrice(stockPrice["data"]["Time Series (1min)"]["2022-03-30 14:39:00"]["4. close"])
+      const lastCheckTime = stockPrice["data"]["Meta Data"]["Last Refreshed"]
+      setPrice(stockPrice["data"]["Time Series (1min)"][lastCheckTime]["4. close"])
     }
   
     async function checkPrice(ticker){
