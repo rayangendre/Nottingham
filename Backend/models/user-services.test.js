@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const UserSchema = require("./user");
 const userServices = require("./user-services");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const mockingoose = require('mockingoose');
+
 
 let mongoServer;
 let conn;
@@ -11,7 +11,7 @@ let userModel;
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
-  console.log("Running the before all function")
+  
 
   const mongooseOpts = {
     useNewUrlParser: true,
@@ -19,7 +19,7 @@ beforeAll(async () => {
   };
 
   conn = await mongoose.createConnection(uri, mongooseOpts);
-  console.log("Created the connection")
+  
 
   userModel = conn.model("User", UserSchema);
 
@@ -92,8 +92,6 @@ test("Fetching all users", async () => {
 test("Fetching users by name", async () => {
   const userName = 'Neymar';
   const users = await userServices.getUsers(userName);
-  console.log('FETCH BY NAME');
-  console.log(users);
   expect(users).toBeDefined();
   
   expect(users.name).toBe(userName);
