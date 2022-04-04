@@ -13,6 +13,7 @@ import axios from "axios";
 
 function Watchlist(props) {
 
+    //need to be getting the price of each stock through finhub, to be changed
     useEffect(() => {
       if(props.userId != ""){
         fetch("http://localhost:4000/users/".concat(props.userId)).then(res => res.json()).then(data => {

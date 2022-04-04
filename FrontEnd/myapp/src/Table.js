@@ -45,6 +45,7 @@ export default function BasicTable(data) {
     );
 }
 
+//changes to be made here, need to modify flow of data to enable price check
 export function WatchlistTable(data) {
     console.log(data);
     return (
