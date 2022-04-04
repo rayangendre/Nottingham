@@ -10,22 +10,48 @@ import { WatchlistTable } from "./Table.js";
 import axios from "axios";
 
 
+function createData(name, price){
+  return {name, price}
+}
+
 
 function Watchlist(props) {
 
     //need to be getting the price of each stock through finhub, to be changed
     useEffect(() => {
-      if(props.userId != ""){
-        fetch("http://localhost:4000/users/".concat(props.userId)).then(res => res.json()).then(data => {
-        setPersonalWatchlist(data.users_list.watchList)
-        //console.log(data.users_list.watchList)
-      })
-      }else{
-        setPersonalWatchlist([])
+      async function fetchAPI(props){
+        if(props.userId !== ""){
+          let response = await fetch("http://localhost:4000/users/".concat(props.userId)).then(res => res.json())
+          let watchListTable = []
+          
+          for(var i = 0; i < response.users_list.watchList.length; i++){
+            const price = await getPriceFromTicker(response.users_list.watchList[i]);
+            watchListTable.push(createData(response.users_list.watchList[i], price))
+          }
+          setPersonalWatchlist(watchListTable)
+        }else{
+          setPersonalWatchlist([])
+        }
       }
+      fetchAPI(props)
     }, [])
   
-    
+
+    async function checkPrice(ticker){
+      return await axios.get("https://finnhub.io/api/v1/quote?symbol=".concat(ticker).concat("&token=c9482oqad3if4j4v81qg"));
+      // return await axios.get("https://api.polygon.io/v2/aggs/ticker/".concat(ticker).concat("/prev?adjusted=true&apiKey=").concat(apiKey))
+    }
+
+    async function getPriceFromTicker(ticker){
+      const stockPrice = await checkPrice(ticker.toUpperCase())
+      console.log(stockPrice)
+      // const timeSeriesObject = stockPrice["data"]["Time Series (1min)"]
+      //extract the first key from the JSON, corresponds to the latest minute of data returned
+      // const firstKey = Object.keys(timeSeriesObject)[0]
+
+      return parseFloat(stockPrice["data"]["c"]);
+    }
+
   async function HandleSubmit(e){
     const toBeAdded = e.target.watch.value
     console.log(toBeAdded)
@@ -51,7 +77,7 @@ function Watchlist(props) {
             <div class="mb-3">
               <label class="form-label">Add a stock to your watchlist</label>
               <input name="watch" type="text" class="form-control" placeholder="Enter a stock ticker..."/>
-              <button type="submit" class="btn btn-outline-primary" >Add To Watchlist</button>
+              <button type="submit" class="btn btn-outline-primary">Add To Watchlist</button>
             </div>
           </form>
         </main>

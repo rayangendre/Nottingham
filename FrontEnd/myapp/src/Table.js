@@ -54,17 +54,19 @@ export function WatchlistTable(data) {
             <TableHead>
             <TableRow>
                 <TableCell>Stock Name</TableCell>
+                <TableCell>Price</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
             {data.map((row) => (
                 <TableRow
-                key={row}
+                key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                 <TableCell component="th" scope="row">
-                    {row}
+                    {row.name}
                 </TableCell>
+                <TableCell align="right">{row.price}</TableCell>
                 </TableRow>
             ))}
             </TableBody>
