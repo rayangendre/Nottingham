@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const UserSchema = require("./user");
 const userServices = require("./user-services");
 const { MongoMemoryServer } = require("mongodb-memory-server");
+const mockingoose = require('mockingoose');
 
 let mongoServer;
 let conn;
@@ -10,6 +11,7 @@ let userModel;
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
+  console.log("Running the beforer all function")
 
   const mongooseOpts = {
     useNewUrlParser: true,
