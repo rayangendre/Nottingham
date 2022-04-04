@@ -25,6 +25,7 @@ function Watchlist(props) {
       }
     }, [])
   
+    
   async function HandleSubmit(e){
     const toBeAdded = e.target.watch.value
     console.log(toBeAdded)
