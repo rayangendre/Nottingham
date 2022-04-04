@@ -22,6 +22,7 @@ export default function BasicTable(data) {
                 <TableCell>Stock Name</TableCell>
                 <TableCell align="right">Number Of Shares</TableCell>
                 <TableCell align="right">Price</TableCell>
+                <TableCell align="right">Total Value</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
@@ -35,6 +36,7 @@ export default function BasicTable(data) {
                 </TableCell>
                 <TableCell align="right">{row.shares}</TableCell>
                 <TableCell align="right">{currencyFormat(row.price)}</TableCell>
+                <TableCell align="right">{currencyFormat(row.totalValue)}</TableCell>
                 </TableRow>
             ))}
             </TableBody>

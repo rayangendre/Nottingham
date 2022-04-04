@@ -21,9 +21,9 @@ import Stock from "./Stock.js";
 
 const apiKey = "RZEXR5SFIKLQNKYK"
 
-function createData(name, shares, price)
+function createData(name, shares, totalValue, price)
 {
-    return {name, shares, price}
+    return {name, shares, totalValue, price}
 }
 
 function Portfolio(props) {
@@ -37,7 +37,7 @@ function Portfolio(props) {
           //this line here is adding the actual name, number of shares, and total price to the table
           //Make the api call here to alpha advantage
           const price = await getPriceFromTicker(response.users_list.portfolioList[i].name); //5 API calls per minute, can be a limiter
-          portfolList.push(createData(response.users_list.portfolioList[i].name, response.users_list.portfolioList[i].numShares, price));
+          portfolList.push(createData(response.users_list.portfolioList[i].name, response.users_list.portfolioList[i].numShares, (response.users_list.portfolioList[i].numShares * price), price));
         }
         setPortList(portfolList)
       }
@@ -45,19 +45,20 @@ function Portfolio(props) {
     }, [])
 
     async function checkPrice(ticker){
-      return await axios.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=".concat(ticker).concat("&interval=1min&apikey=").concat(apiKey));
+      return await axios.get("https://finnhub.io/api/v1/quote?symbol=".concat(ticker).concat("&token=c9482oqad3if4j4v81qg"));
       // return await axios.get("https://api.polygon.io/v2/aggs/ticker/".concat(ticker).concat("/prev?adjusted=true&apiKey=").concat(apiKey))
     }
 
     async function getPriceFromTicker(ticker){
       const stockPrice = await checkPrice(ticker.toUpperCase())
-      const timeSeriesObject = stockPrice["data"]["Time Series (1min)"]
+      console.log(stockPrice)
+      // const timeSeriesObject = stockPrice["data"]["Time Series (1min)"]
       //extract the first key from the JSON, corresponds to the latest minute of data returned
-      const firstKey = Object.keys(timeSeriesObject)[0]
+      // const firstKey = Object.keys(timeSeriesObject)[0]
 
-      return parseFloat(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"]);
+      return parseFloat(stockPrice["data"]["c"]);
     }
-    
+
 
 
     
