@@ -57,6 +57,7 @@ function Portfolio(props) {
 
       return parseFloat(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"]);
     }
+    
 
 
     
