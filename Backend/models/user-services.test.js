@@ -11,7 +11,7 @@ let userModel;
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
-  console.log("Running the beforer all function")
+  console.log("Running the before all function")
 
   const mongooseOpts = {
     useNewUrlParser: true,
@@ -19,6 +19,7 @@ beforeAll(async () => {
   };
 
   conn = await mongoose.createConnection(uri, mongooseOpts);
+  console.log("Created the connection")
 
   userModel = conn.model("User", UserSchema);
 
