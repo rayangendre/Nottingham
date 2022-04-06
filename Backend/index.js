@@ -79,7 +79,8 @@ app.patch("/users", async (req, res) => {
 
 if(result){
     res.status(200).send(result);
-  }else{
+  }
+else{
     res.status(500).end();
   }
 })
