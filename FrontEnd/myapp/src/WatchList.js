@@ -29,6 +29,10 @@ function Watchlist(props) {
     const toBeAdded = e.target.watch.value
     console.log(toBeAdded)
     e.preventDefault()
+    if (personalWatchlist.includes(toBeAdded)) {
+      alert("Already on watchlist")
+      return
+    }
     if (props.userId !== "") {
       setPersonalWatchlist([...personalWatchlist, toBeAdded])
       await axios.patch("http://localhost:4000/users/".concat(props.userId), {"watchListAddition": toBeAdded})
