@@ -9,74 +9,17 @@ let conn;
 let userModel;
 
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
-  
-
-  const mongooseOpts = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
-
-  conn = await mongoose.createConnection(uri, mongooseOpts);
-  
-
   userModel = conn.model("User", UserSchema);
-
-  userServices.setConnection(conn);
 });
 
 afterAll(async () => {
-  await conn.dropDatabase();
-  await conn.close();
-  await mongoServer.stop();
 });
 
 beforeEach(async () => {
-  let dummyUser = {
-    name: "Kylian Mbappe",
-    watchList: ["V", "M", "PYPL"],
-    portfolioList:[
-        {name: "V", numShares: "2"},
-        {name: "DIS", numShares: "5"}
-    ]
-  };
-  let result = new userModel(dummyUser);
-  await result.save();
+  jest.clearAllMocks();
+  mockingoose.resetAll();
 
-  dummyUser = {
-    name: "Neymar",
-    watchList: [],
-    portfolioList:[
-        {name: "AAPL", numShares: "100"},
-        {name: "KO", numShares: "5"},
-        {name: "BA", numShares: "5"}
-    ]
-  };
-  result = new userModel(dummyUser);
-  await result.save();
 
-  dummyUser = {
-    name: "Neymar",
-    watchList: ["KO", "AAPL"],
-    portfolioList:[
-        {name: "AAPL", numShares: "100"},
-    ]
-  };
-  result = new userModel(dummyUser);
-  await result.save();
-
-  dummyUser = {
-    name: "Verratti",
-    watchList: ["SBUX", "QQQ", "MSFT"],
-    portfolioList:[
-        {name: "MSFT", numShares: "100"},
-        {name: "SPXL", numShares: "10"},
-        {name: "MA", numShares: "5"}
-    ]
-  };
-  result = new userModel(dummyUser);
-  await result.save();
 });
 
 afterEach(async () => {
