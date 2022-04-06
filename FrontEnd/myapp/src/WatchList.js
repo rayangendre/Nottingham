@@ -34,6 +34,10 @@ function Watchlist(props) {
       await axios.patch("http://localhost:4000/users/".concat(props.userId), {"watchListAddition": toBeAdded})
     }
   }
+
+  async function removeFromWL(e) {
+    console.log(e)
+  }
   
   
     const [personalWatchlist, setPersonalWatchlist] = useState([]);
@@ -62,7 +66,8 @@ function Watchlist(props) {
             </button>
           </Link>
         </nav>
-        {WatchlistTable(personalWatchlist)}
+        <WatchlistTable data={personalWatchlist} removeFromWL={removeFromWL}></WatchlistTable>
+        
       </>
     );
   }
