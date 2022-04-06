@@ -56,7 +56,7 @@ export function WatchlistTable(props) {
             <TableHead>
             <TableRow>
                 <TableCell>Stock Name</TableCell>
-                <TableCell>Price</TableCell>
+                <TableCell align="right">Price</TableCell>
                 <TableCell align="right"></TableCell>
             </TableRow>
             </TableHead>
