@@ -37,6 +37,13 @@ function Watchlist(props) {
 
   async function removeFromWL(e) {
     console.log(e)
+    let newWatchlist = [].concat(personalWatchlist);
+    newWatchlist = newWatchlist.filter(function(entry){
+      return entry != e; 
+    })
+    console.log(newWatchlist) 
+    setPersonalWatchlist(newWatchlist)
+    await axios.put("http://localhost:4000/users/".concat(props.userId), {"watchListSub": e})
   }
   
   
