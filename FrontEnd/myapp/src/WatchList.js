@@ -74,7 +74,7 @@ function Watchlist(props) {
     })
     console.log(newWatchlist) 
     setPersonalWatchlist(newWatchlist)
-    await axios.put("http://localhost:4000/users/".concat(props.userId), {"watchListSub": e})
+    await axios.put("http://localhost:4000/users/".concat(props.userId), {"watchListSub": e.name})
   }
   
   
