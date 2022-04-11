@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const UserSchema = require("./user");
 const userServices = require("./user-services");
-const { MongoMemoryServer } = require("mongodb-memory-server");
+const mockingoose = require('mockingoose');
 
 
 let mongoServer;
@@ -9,7 +9,7 @@ let conn;
 let userModel;
 
 beforeAll(async () => {
-  userModel = conn.model("User", UserSchema);
+  userModel = mongoose.model("User", UserSchema);
 });
 
 afterAll(async () => {
@@ -23,21 +23,50 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  await userModel.deleteMany();
+  
 });
 
 test("Fetching all users", async () => {
+  userModel.find = jest.fn().mockResolvedValue([]);
+
   const users = await userServices.getUsers();
+
   expect(users).toBeDefined();
-  expect(users.length).toBeGreaterThan(0);
+  expect(users.length).toBeGreaterThanOrEqual(0);
+  expect(userModel.find.mock.calls.length).toBe(1);
+  expect(userModel.find).toHaveBeenCalledWith();
 });
 
 test("Fetching users by name", async () => {
+
+  const result = [
+    {
+      name: 'Neymar',
+      portfolioList: [],
+      watchList: []
+    },
+    {
+      name: 'Neymar',
+      portfolioList: ["APPL", "TSLA"],
+      watchList: ["GOOGL"]
+    }
+  ]
+
+  userModel.find = jest.fn().mockResolvedValue(result);
+
   const userName = 'Neymar';
   const users = await userServices.getUsers(userName);
-  expect(users).toBeDefined();
   
-  expect(users.name).toBe(userName);
+
+
+
+  // Mock-related assertions
+    //The mocked function (mongoose find) should be called only once  
+  expect(userModel.find.mock.calls.length).toBe(2);
+    // and should be called with the following param  
+  expect(userModel.find).toHaveBeenCalledWith({name: userName});
+  
+  
 });
 
 
