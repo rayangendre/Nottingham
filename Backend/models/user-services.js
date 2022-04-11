@@ -139,8 +139,7 @@ function setConnection(newConn){
       return false;
     }
 
-    console.log('values');
-    console.log(values);
+
     
 
     if(values.watchListSub != ""){
