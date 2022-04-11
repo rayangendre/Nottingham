@@ -13,17 +13,18 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  jest.clearAllMocks();
+  mockingoose.resetAll();
 });
 
 beforeEach(async () => {
   jest.clearAllMocks();
   mockingoose.resetAll();
-
-
 });
 
 afterEach(async () => {
-  
+  jest.clearAllMocks();
+  mockingoose.resetAll();
 });
 
 test("Fetching all users", async () => {
@@ -44,27 +45,19 @@ test("Fetching users by name", async () => {
       name: 'Neymar',
       portfolioList: [],
       watchList: []
-    },
-    {
-      name: 'Neymar',
-      portfolioList: ["APPL", "TSLA"],
-      watchList: ["GOOGL"]
     }
   ]
 
-  userModel.find = jest.fn().mockResolvedValue(result);
+  userModel.findOne = jest.fn().mockResolvedValue(result);
 
   const userName = 'Neymar';
   const users = await userServices.getUsers(userName);
   
-
-
-
   // Mock-related assertions
     //The mocked function (mongoose find) should be called only once  
-  expect(userModel.find.mock.calls.length).toBe(2);
+  expect(userModel.findOne.mock.calls.length).toBe(1);
     // and should be called with the following param  
-  expect(userModel.find).toHaveBeenCalledWith({name: userName});
+  expect(userModel.findOne).toHaveBeenCalledWith({name: userName});
   
   
 });
@@ -72,6 +65,8 @@ test("Fetching users by name", async () => {
 
 test("Fetching by invalid id format", async () => {
   const anyId = "123";
+  const result = undefined;
+  userModel.findById = jest.fn().mockResolvedValue(result);
   const user = await userServices.findUserById(anyId);
   expect(user).toBeUndefined();
 });
