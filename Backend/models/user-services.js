@@ -22,6 +22,7 @@ function setConnection(newConn){
 
 
   async function getUsers(name) {
+    console.log("Calling getUsers")
     const userModel = getDbConnection().model("User", UserSchema);
     let result;
     if (name === undefined) {
@@ -33,6 +34,7 @@ function setConnection(newConn){
   }
   
   async function findUserById(id) {
+    console.log("Calling findUserById");
     const userModel = getDbConnection().model("User", UserSchema);     
     try {
       return await userModel.findById(id);
