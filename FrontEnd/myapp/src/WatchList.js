@@ -61,7 +61,9 @@ function Watchlist(props) {
       return
     }
     if (props.userId !== "") {
-      setPersonalWatchlist([...personalWatchlist, toBeAdded])
+      const price = await getPriceFromTicker(toBeAdded)
+      console.log(price)
+      setPersonalWatchlist([...personalWatchlist, {"name": toBeAdded, "price": price}])
       await axios.patch("http://localhost:4000/users/".concat(props.userId), {"watchListAddition": toBeAdded})
     }
   }
