@@ -136,9 +136,11 @@ class Sell extends React.Component{
   async handleSubmit(event) {
 
     if((this.state.name != '') && (this.state.numberOfShares != null)){
-      let res = axios.put("http://localhost:4000/users/".concat(this.props.userId), 
-            {"portfolioSub": {"name": this.state.name, "numShares": this.state.numberOfShares}, "watchListSub":""})
-      alert('Sold ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+      if (window.confirm(`Sell ${this.state.numberOfShares} shares of ${this.state.name}?`) == true) {
+        let res = axios.put("http://localhost:4000/users/".concat(this.props.userId), 
+        {"portfolioSub": {"name": this.state.name, "numShares": parseInt(this.state.numberOfShares)}, "watchListSub":""})
+        alert('Sold ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+      }
       
     }else{
       alert('Enter a stock to sell');
