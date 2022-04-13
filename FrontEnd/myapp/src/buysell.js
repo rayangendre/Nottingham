@@ -45,7 +45,7 @@ class Buy extends React.Component{
   async handleSubmit(event) {
     if((this.state.name != '') && (this.state.numberOfShares != null)){
       let res = axios.patch("http://localhost:4000/users/".concat(this.props.userId), 
-            {"portfolioAddition": {"name": this.state.name, "numShares": this.state.numberOfShares}, "watchListAddition":""})
+            {"portfolioAddition": {"name": this.state.name, "numShares": parseInt(this.state.numberOfShares)}, "watchListAddition":""})
       alert('Bought ' + this.state.numberOfShares + ' shares of ' + this.state.name);
       
     }else{

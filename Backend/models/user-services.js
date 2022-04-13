@@ -101,7 +101,14 @@ function setConnection(newConn){
 
     if(values.portfolioAddition != "" && values.portfolioAddition != null){
       let newPortList = [].concat(user.portfolioList);
-      newPortList.push(values.portfolioAddition);
+      console.log(values)
+      indexForAddition = newPortList.findIndex(item => {return item.name == values.portfolioAddition.name})
+      console.log("Adding:", indexForAddition)
+      if (indexForAddition == -1) {
+        newPortList.push(values.portfolioAddition);
+      } else {
+        newPortList[indexForAddition].numShares += parseInt(values.portfolioAddition.numShares)
+      }
       const update = {portfolioList: newPortList};
       const filter = {_id: user.id};
       const opts = {new: true};
@@ -163,9 +170,12 @@ function setConnection(newConn){
 
     if(values.portfolioSub != ""){
       let newPortList = [].concat(user.portfolioList);
-      newPortList = newPortList.filter(function(e){
+      indexForRemoval = newPortList.findIndex(item => {return item.name == values.portfolioSub.name})
+      console.log("Removing:", indexForRemoval)
+      /*newPortList = newPortList.filter(function(e){
         return e.name != values.portfolioSub.name;
-      });
+      });*/
+      newPortList[indexForRemoval].numShares -= values.portfolioSub.numShares
       const update = {portfolioList: newPortList};
       const filter = {_id: user.id};
       const opts = {new: true};
