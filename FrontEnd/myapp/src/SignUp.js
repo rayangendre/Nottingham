@@ -9,7 +9,7 @@ import Container from "react-bootstrap/esm/Container";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/Row";
 
-function LogIn(props) {
+function SignUp(props) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -100,7 +100,7 @@ function LogIn(props) {
       </Row>
       <div className="app">
         <div className="login-form">
-          <div className="title">Sign In</div>
+          <div className="title">Sign Up for Account</div>
           {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
         </div>
       </div>
@@ -108,4 +108,4 @@ function LogIn(props) {
   );
 }
 
-export { LogIn };
+export { SignUp };

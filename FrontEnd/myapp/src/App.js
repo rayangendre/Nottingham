@@ -23,6 +23,7 @@ import { useState, useEffect } from "react";
 import BasicTable from "./Table.js";
 import { WatchlistTable } from "./Table.js";
 import { LogIn } from "./Login.js";
+import { SignUp } from "./SignUp.js";
 import { Watchlist } from "./WatchList.js";
 import { StockCheck } from "./StockCheck.js";
 import { Portfolio } from "./Portfolio.js";
@@ -54,6 +55,10 @@ function App() {
         <Route path="watchlist" element={<Watchlist userId={userId} />} />
         <Route path="stockcheck" element={<StockCheck />} />
         <Route path="login" element={<LogIn userId={userId} setId={setId} />} />
+        <Route
+          path="signup"
+          element={<SignUp userId={userId} setId={setId} />}
+        />
         <Route path="buy" element={<Buy userId={userId} />} />
         <Route path="sell" element={<Sell userId={userId} />} />
       </Routes>
@@ -88,6 +93,11 @@ function Home(props) {
         <Link to="/login">
           <button type="button" class="btn btn-outline-primary">
             Log In
+          </button>
+        </Link>
+        <Link to="/signup">
+          <button type="button" class="btn btn-outline-primary">
+            Sign Up
           </button>
         </Link>
       </nav>
