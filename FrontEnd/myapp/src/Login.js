@@ -104,7 +104,7 @@ function LogIn(props) {
           </nav>
         </Col>
         <Col>
-          <h2>Portfolio</h2>
+          <h2>Welcome</h2>
         </Col>
         <Col></Col>
       </Row>
