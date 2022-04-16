@@ -1,5 +1,7 @@
 const express = require("express");
 var cors = require("cors");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // set up our express app
 const app = express();
@@ -11,8 +13,28 @@ const port = 4000;
 app.use(cors());
 app.use(express.json());
 
+function generateAccessToken(username) {
+  return jwt.sign({ username: username }, process.env.TOKEN_SECRET, {
+    expiresIn: "60s",
+  });
+}
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
+});
+
+app.post("/login", async (req, res) => {
+  const username = req.body.username;
+  const pwd = req.body.pwd;
+
+  const existing_user = await userServices.getUsers(username);
+
+  if (existing_user === undefined || existing_user == null) {
+    //Unauthorized due to invalid username
+    res.status(401).send("Unauthorized Username");
+  } else {
+    const isValid = await bcrypt.compare(pwd, existing_user.pwd);
+  }
 });
 
 app.get("/users", async (req, res) => {
