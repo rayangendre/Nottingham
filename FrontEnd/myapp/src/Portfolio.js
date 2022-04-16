@@ -83,6 +83,16 @@ function Portfolio(props) {
                   Home
                 </button>
               </Link>
+              <Link to="/buy">
+                <button type="submit" class="btn btn-primary w-25">
+                  Buy
+                </button>
+              </Link>
+              <Link to="/sell">
+                <button type="submit" class="btn btn-primary w-25">
+                  Sell
+                </button>
+              </Link>
             </nav>
           </Col>
           <Col>
