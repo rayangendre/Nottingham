@@ -3,81 +3,87 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import "./login-styles.css";
 
 function LogIn(props) {
-  const [userData, setUserData] = useState([]);
+  // React States
+  const [errorMessages, setErrorMessages] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  useEffect(() => {
-    fetch("http://localhost:4000/users")
-      .then((res) => res.json())
-      .then((data) => {
-        setUserData(data.users_list);
-        //console.log(data)
-      });
-  }, []);
+  // User Login info
+  const database = [
+    {
+      username: "user1",
+      password: "pass1",
+    },
+    {
+      username: "user2",
+      password: "pass2",
+    },
+  ];
 
-  async function HandleSubmit(e) {
-    const login = e.target.login.value;
-    //console.log(login)
-    e.preventDefault();
-    let newId;
-    if ((newId = userExists(login))) {
-      console.log("User exists");
-      console.log(newId);
-    } else {
-      console.log("User does not exist...Creating user...");
-      newId = await createUser(login);
-      console.log("New user made... ID:".concat(newId));
-    }
-    props.setUserId(newId);
-  }
+  const errors = {
+    uname: "invalid username",
+    pass: "invalid password",
+  };
 
-  async function createUser(username) {
-    const result = await axios.post("http://localhost:4000/users", {
-      name: username,
-    });
-    return result.data._id;
-  }
+  const handleSubmit = (event) => {
+    //Prevent page reload
+    event.preventDefault();
 
-  function userExists(user) {
-    //console.log(userData)
-    for (let i = 0; i < userData.length; i++) {
-      //console.log(userData[i])
-      if (userData[i].name === user) {
-        return userData[i]._id;
+    var { uname, pass } = document.forms[0];
+
+    // Find user login info
+    const userData = database.find((user) => user.username === uname.value);
+
+    // Compare user info
+    if (userData) {
+      if (userData.password !== pass.value) {
+        // Invalid password
+        setErrorMessages({ name: "pass", message: errors.pass });
+      } else {
+        setIsSubmitted(true);
       }
+    } else {
+      // Username not found
+      setErrorMessages({ name: "uname", message: errors.uname });
     }
-    return null;
-  }
+  };
+
+  // Generate JSX code for error message
+  const renderErrorMessage = (name) =>
+    name === errorMessages.name && (
+      <div className="error">{errorMessages.message}</div>
+    );
+
+  // JSX code for login form
+  const renderForm = (
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <label>Username </label>
+          <input type="text" name="uname" required />
+          {renderErrorMessage("uname")}
+        </div>
+        <div className="input-container">
+          <label>Password </label>
+          <input type="password" name="pass" required />
+          {renderErrorMessage("pass")}
+        </div>
+        <div className="button-container">
+          <input type="submit" />
+        </div>
+      </form>
+    </div>
+  );
 
   return (
-    <>
-      <main>
-        <h2>Log In</h2>
-        <p>Log in to access your personalized portfolio, and buy/sell stocks</p>
-        <form onSubmit={HandleSubmit}>
-          <div class="mb-3">
-            <label class="form-label">Log In to your account</label>
-            <input
-              name="login"
-              type="text"
-              class="form-control"
-              placeholder="Enter your name..."
-            />
-            <button type="submit" class="btn btn-outline-primary">
-              Log In
-            </button>
-          </div>
-        </form>
-      </main>
-      <nav>
-        <Link to="/">
-          <button type="button" class="btn btn-outline-primary">
-            Home
-          </button>
-        </Link>
-      </nav>
-    </>
+    <div className="app">
+      <div className="login-form">
+        <div className="title">Sign In</div>
+        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+      </div>
+    </div>
   );
 }
 
