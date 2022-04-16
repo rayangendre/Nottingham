@@ -26,12 +26,24 @@ import { LogIn } from "./Login.js";
 import { Watchlist } from "./WatchList.js";
 import { StockCheck } from "./StockCheck.js";
 import { Portfolio } from "./Portfolio.js";
+import { useCookies } from "react-cookie";
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa";
 
 function App() {
   const [userId, setUserId] = useState("");
   const [data, setData] = React.useState({});
+  const [cookies, setCookie] = useCookies(["auth_token"]);
+
+  function setToken(token) {
+    setCookie("auth_token", token, {
+      path: "/",
+    });
+  }
+
+  function setId(userId) {
+    setUserId(userId);
+  }
 
   return (
     <div className="App">
@@ -41,10 +53,7 @@ function App() {
         <Route path="portfolio" element={<Portfolio userId={userId} />} />
         <Route path="watchlist" element={<Watchlist userId={userId} />} />
         <Route path="stockcheck" element={<StockCheck />} />
-        <Route
-          path="login"
-          element={<LogIn userId={userId} setUserId={setUserId} />}
-        />
+        <Route path="login" element={<LogIn userId={userId} setId={setId} />} />
         <Route path="buy" element={<Buy userId={userId} />} />
         <Route path="sell" element={<Sell userId={userId} />} />
       </Routes>
