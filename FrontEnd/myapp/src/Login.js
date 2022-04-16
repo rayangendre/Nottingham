@@ -5,6 +5,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./login-styles.css";
 
+import Container from "react-bootstrap/esm/Container";
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/Row";
+
 function LogIn(props) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
@@ -78,10 +82,37 @@ function LogIn(props) {
   );
 
   return (
-    <div className="app">
-      <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+    <div>
+      <Row>
+        <Col>
+          <nav>
+            <Link to="/">
+              <button type="submit" class="btn btn-primary w-25">
+                Home
+              </button>
+            </Link>
+            <Link to="/buy">
+              <button type="submit" class="btn btn-primary w-25">
+                Buy
+              </button>
+            </Link>
+            <Link to="/sell">
+              <button type="submit" class="btn btn-primary w-25">
+                Sell
+              </button>
+            </Link>
+          </nav>
+        </Col>
+        <Col>
+          <h2>Portfolio</h2>
+        </Col>
+        <Col></Col>
+      </Row>
+      <div className="app">
+        <div className="login-form">
+          <div className="title">Sign In</div>
+          {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        </div>
       </div>
     </div>
   );
