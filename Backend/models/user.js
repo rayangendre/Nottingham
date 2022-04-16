@@ -8,6 +8,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    pwd: {
+      type: String,
+      required: true,
+    },
     watchList: {
       type: Array,
       required: true,
