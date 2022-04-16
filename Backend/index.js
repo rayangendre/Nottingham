@@ -15,7 +15,7 @@ app.use(express.json());
 
 function generateAccessToken(username) {
   return jwt.sign({ username: username }, process.env.TOKEN_SECRET, {
-    expiresIn: "60s",
+    expiresIn: "100000s",
   });
 }
 
@@ -34,6 +34,19 @@ app.post("/login", async (req, res) => {
     res.status(401).send("Unauthorized Username");
   } else {
     const isValid = await bcrypt.compare(pwd, existing_user.pwd);
+    if (isValid) {
+      const token = generateAccessToken(username);
+      const id = existing_user._id;
+
+      const res = {
+        token: token,
+        id: id,
+      };
+
+      res.status(200).send(res);
+    } else {
+      res.status(401).send("Unauthorized Password");
+    }
   }
 });
 
