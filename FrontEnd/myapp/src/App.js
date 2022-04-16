@@ -36,12 +36,14 @@ function App() {
   const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
 
+  //sets the auth token of the user
   function setToken(token) {
     setCookie("auth_token", token, {
       path: "/",
     });
   }
 
+  //sets the id of the current user that is logged in
   function setId(userId) {
     setUserId(userId);
   }
