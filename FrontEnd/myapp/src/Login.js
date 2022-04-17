@@ -14,45 +14,42 @@ function LogIn(props) {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1",
-    },
-    {
-      username: "user2",
-      password: "pass2",
-    },
-  ];
-
   const errors = {
     uname: "invalid username",
     pass: "invalid password",
   };
 
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     //Prevent page reload
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
 
     // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
+    const userData = await axios
+      .post("http://localhost:4000/login", {
+        name: uname.value,
+        pwd: pass.value,
+      })
+      .catch((error) => {
+        console.log("caught 401 error");
+        return error.response;
+      });
 
     // Compare user info
     if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
+      if (userData.status == 200) {
+        props.setId(userData.data.id);
         setIsSubmitted(true);
+      } else if (userData.status == 401) {
+        if (userData.data.error == "Unauthorized Username") {
+          setErrorMessages({ name: "uname", message: errors.uname });
+        } else {
+          setErrorMessages({ name: "pass", message: errors.pass });
+        }
       }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
     }
-  };
+  }
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>

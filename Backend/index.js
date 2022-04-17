@@ -31,7 +31,7 @@ app.post("/login", async (req, res) => {
 
   if (existing_user === undefined || existing_user == null) {
     //Unauthorized due to invalid username
-    res.status(401).send("Unauthorized Username");
+    res.status(401).send({ error: "Unauthorized Username" });
   } else {
     const isValid = await bcrypt.compare(pwd, existing_user.pwd);
     if (isValid) {
@@ -45,7 +45,9 @@ app.post("/login", async (req, res) => {
 
       res.status(200).send(result);
     } else {
-      res.status(401).send("Unauthorized Password");
+      body = {};
+      body.error = "Unauthorized Password";
+      res.status(401).send(body);
     }
   }
 });
