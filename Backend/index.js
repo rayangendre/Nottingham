@@ -15,7 +15,7 @@ app.use(express.json());
 
 function generateAccessToken(username) {
   return jwt.sign({ username: username }, process.env.TOKEN_SECRET, {
-    expiresIn: "100000s",
+    expiresIn: "3600s",
   });
 }
 
@@ -38,14 +38,51 @@ app.post("/login", async (req, res) => {
       const token = generateAccessToken(username);
       const id = existing_user._id;
 
-      const res = {
+      const result = {
         token: token,
         id: id,
       };
 
-      res.status(200).send(res);
+      res.status(200).send(result);
     } else {
       res.status(401).send("Unauthorized Password");
+    }
+  }
+});
+
+app.post("/signup", async (req, res) => {
+  const username = req.body.username;
+  const userPwd = req.body.pwd;
+  if (!username && !userPwd) {
+    res.status(400).send("Bad request: Invalid input data.");
+  } else {
+    const existing_user = await userServices.getUsers(username);
+
+    if (username === existing_user.name) {
+      //Conflicting usernames. Assuming it's not allowed, then:
+      res.status(409).send("Username already taken");
+    } else {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPWd = await bcrypt.hash(userPwd, salt);
+
+      new_user = {};
+      new_user.name = username;
+      new_user.pwd = hashedPWd;
+
+      const token = generateAccessToken(username);
+
+      const savedUser = await userServices.addUser(new_user);
+
+      const result = {
+        token: token,
+        id: savedUser._id,
+      };
+
+      if (savedUser) {
+        res.status(201).send(result);
+      } else {
+        res.status(500).end();
+      }
     }
   }
 });
@@ -99,7 +136,6 @@ app.patch("/users/:id", async (req, res) => {
 });
 
 app.patch("/users", async (req, res) => {
-  console.log("The correct function");
   let watchListAddition = req.body["watchListAddition"];
   let portfolioAddition = req.body["portfolioAddition"];
   const name = req.body["name"];
