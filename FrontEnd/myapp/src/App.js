@@ -10,7 +10,7 @@ import "./Table.js";
 import { Buy, Sell } from "./buysell.js";
 
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { LogIn } from "./Login.js";
 import { SignUp } from "./SignUp.js";
