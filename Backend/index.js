@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const username = req.body.username;
+  const username = req.body.name;
   const pwd = req.body.pwd;
 
   const existing_user = await userServices.getUsers(username);
