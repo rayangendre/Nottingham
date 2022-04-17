@@ -40,6 +40,24 @@ class Buy extends React.Component {
     });
   }
 
+  async validTicker(ticker) {
+    const stockPrice = await axios.get(
+      "https://finnhub.io/api/v1/quote?symbol="
+        .concat(ticker.toUpperCase())
+        .concat("&token=c9482oqad3if4j4v81qg")
+    );
+
+    const numPrice = parseFloat(stockPrice["data"]["c"]);
+    console.log("price");
+    console.log(numPrice);
+    if (numPrice === 0) {
+      console.log("returning false");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   async handleSubmit(event) {
     if (this.state.name != "" && this.state.numberOfShares != null) {
       if (
@@ -47,22 +65,27 @@ class Buy extends React.Component {
           `Buy ${this.state.numberOfShares} shares of ${this.state.name}?`
         ) == true
       ) {
-        let res = axios.patch(
-          "http://localhost:4000/users/".concat(this.props.userId),
-          {
-            portfolioAddition: {
-              name: this.state.name,
-              numShares: parseInt(this.state.numberOfShares),
-            },
-            watchListAddition: "",
-          }
-        );
-        alert(
-          "Bought " +
-            this.state.numberOfShares +
-            " shares of " +
-            this.state.name
-        );
+        const valid = await this.validTicker(this.state.name);
+        if (valid) {
+          let res = axios.patch(
+            "http://localhost:4000/users/".concat(this.props.userId),
+            {
+              portfolioAddition: {
+                name: this.state.name,
+                numShares: parseInt(this.state.numberOfShares),
+              },
+              watchListAddition: "",
+            }
+          );
+          alert(
+            "Bought " +
+              this.state.numberOfShares +
+              " shares of " +
+              this.state.name
+          );
+        } else {
+          alert("Invalid stock name");
+        }
       }
     } else {
       alert("Enter a stock to buy");
