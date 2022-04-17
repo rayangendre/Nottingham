@@ -40,14 +40,49 @@ class Buy extends React.Component {
     });
   }
 
+  async validTicker(ticker) {
+    const stockPrice = await axios.get(
+      "https://finnhub.io/api/v1/quote?symbol="
+        .concat(ticker.toUpperCase())
+        .concat("&token=c9482oqad3if4j4v81qg")
+    );
+
+    const numPrice = parseFloat(stockPrice["data"]["c"]);
+    console.log("price");
+    console.log(numPrice);
+    if (numPrice === 0) {
+      console.log("returning false");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   async handleSubmit(event) {
-    if((this.state.name != '') && (this.state.numberOfShares != null)){
-      let res = axios.patch("http://localhost:4000/users/".concat(this.props.userId), 
-            {"portfolioAddition": {"name": this.state.name, "numShares": parseInt(this.state.numberOfShares)}, "watchListAddition":""})
-      alert('Bought ' + this.state.numberOfShares + ' shares of ' + this.state.name);
-      
-    }else{
-      alert('Enter a stock to buy');
+    if (this.state.name != "" && this.state.numberOfShares != null) {
+      const valid = await this.validTicker(this.state.name);
+      if (valid) {
+        let res = axios.patch(
+          "http://localhost:4000/users/".concat(this.props.userId),
+          {
+            portfolioAddition: {
+              name: this.state.name,
+              numShares: parseInt(this.state.numberOfShares),
+            },
+            watchListAddition: "",
+          }
+        );
+        alert(
+          "Bought " +
+            this.state.numberOfShares +
+            " shares of " +
+            this.state.name
+        );
+      } else {
+        alert("Invalid stock name");
+      }
+    } else {
+      alert("Enter a stock to buy");
     }
 
     event.preventDefault();
@@ -150,16 +185,28 @@ class Sell extends React.Component {
   }
 
   async handleSubmit(event) {
-
-    if((this.state.name != '') && (this.state.numberOfShares != null)){
-      if (window.confirm(`Sell ${this.state.numberOfShares} shares of ${this.state.name}?`) == true) {
-        let res = axios.put("http://localhost:4000/users/".concat(this.props.userId), 
-        {"portfolioSub": {"name": this.state.name, "numShares": parseInt(this.state.numberOfShares)}, "watchListSub":""})
-        alert('Sold ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+    if (this.state.name != "" && this.state.numberOfShares != null) {
+      if (
+        window.confirm(
+          `Sell ${this.state.numberOfShares} shares of ${this.state.name}?`
+        ) == true
+      ) {
+        let res = axios.put(
+          "http://localhost:4000/users/".concat(this.props.userId),
+          {
+            portfolioSub: {
+              name: this.state.name,
+              numShares: parseInt(this.state.numberOfShares),
+            },
+            watchListSub: "",
+          }
+        );
+        alert(
+          "Sold " + this.state.numberOfShares + " shares of " + this.state.name
+        );
       }
-      
-    }else{
-      alert('Enter a stock to sell');
+    } else {
+      alert("Enter a stock to sell");
     }
 
     event.preventDefault();
