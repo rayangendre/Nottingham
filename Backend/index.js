@@ -51,14 +51,14 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  const username = req.body.username;
+  const username = req.body.name;
   const userPwd = req.body.pwd;
   if (!username && !userPwd) {
     res.status(400).send("Bad request: Invalid input data.");
   } else {
     const existing_user = await userServices.getUsers(username);
 
-    if (username === existing_user.name) {
+    if (existing_user != null && username === existing_user.name) {
       //Conflicting usernames. Assuming it's not allowed, then:
       res.status(409).send("Username already taken");
     } else {
