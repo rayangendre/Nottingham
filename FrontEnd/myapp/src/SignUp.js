@@ -15,44 +15,43 @@ function SignUp(props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1",
-    },
-    {
-      username: "user2",
-      password: "pass2",
-    },
-  ];
 
   const errors = {
-    uname: "invalid username",
-    pass: "invalid password",
+    fail: "failed to create user",
+    exists: "user exists already",
   };
 
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     //Prevent page reload
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
 
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
+    // Sign up user
+    const userData = await axios
+      .post("http://localhost:4000/signup", {
+        name: uname.value,
+        pwd: pass.value,
+      })
+      .catch((error) => {
+        console.log("caught error");
+        return error.response;
+      });
+
+    console.log(userData);
 
     // Compare user info
     if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
+      if (userData.status == 201) {
+        props.setId(userData.data.id);
         setIsSubmitted(true);
+      } else if (userData.status == 409) {
+        setErrorMessages({ name: "exists", message: errors.exists });
+      } else {
+        setErrorMessages({ name: "fail", message: errors.fail });
       }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
     }
-  };
+  }
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
@@ -67,12 +66,12 @@ function SignUp(props) {
         <div className="input-container">
           <label>Username </label>
           <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
           <label>Password </label>
           <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
+          {renderErrorMessage("exists")}
+          {renderErrorMessage("fail")}
         </div>
         <div className="button-container">
           <input type="submit" />
@@ -101,7 +100,7 @@ function SignUp(props) {
       <div className="app">
         <div className="login-form">
           <div className="title">Sign Up for Account</div>
-          {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+          {isSubmitted ? <div>User was successfully created</div> : renderForm}
         </div>
       </div>
     </div>
