@@ -1,5 +1,5 @@
-const express = require('express');
-var cors = require("cors")
+const express = require("express");
+var cors = require("cors");
 
 // set up our express app
 const app = express();
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 app.get("/users", async (req, res) => {
   const name = req.query["name"];
-  
+
   try {
     const result = await userServices.getUsers(name);
     res.send({ users_list: result });
@@ -28,7 +28,6 @@ app.get("/users", async (req, res) => {
 });
 
 app.get("/users/:id", async (req, res) => {
-  
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
   if (result === undefined || result === null)
@@ -46,23 +45,23 @@ app.post("/users", async (req, res) => {
 });
 
 app.patch("/users/:id", async (req, res) => {
-    let watchListAddition = req.body["watchListAddition"];
-    let portfolioAddition = req.body["portfolioAddition"];
-    const id = req.params["id"];
-    console.log('ID');
-    console.log(id);
-    var values = {};
-    values.watchListAddition = watchListAddition;
-    values.portfolioAddition = portfolioAddition;
-    values.id = id;
-    const result = await userServices.updateUser(values);
+  let watchListAddition = req.body["watchListAddition"];
+  let portfolioAddition = req.body["portfolioAddition"];
+  const id = req.params["id"];
+  console.log("ID");
+  console.log(id);
+  var values = {};
+  values.watchListAddition = watchListAddition;
+  values.portfolioAddition = portfolioAddition;
+  values.id = id;
+  const result = await userServices.updateUser(values);
 
-    if(result){
-      res.status(200).send(result);
-    }else{
-      res.status(500).end();
-    }
-})
+  if (result) {
+    res.status(200).send(result);
+  } else {
+    res.status(500).end();
+  }
+});
 
 app.patch("/users", async (req, res) => {
   console.log("The correct function");
@@ -77,12 +76,12 @@ app.patch("/users", async (req, res) => {
 
   const result = await userServices.updateUser(values);
 
-if(result){
+  if (result) {
     res.status(200).send(result);
-  }else{
+  } else {
     res.status(500).end();
   }
-})
+});
 
 app.put("/users", async (req, res) => {
   console.log("Called delete with user name");
@@ -97,13 +96,12 @@ app.put("/users", async (req, res) => {
 
   const result = await userServices.removeStock(values);
 
-  
-  if(result){
+  if (result) {
     res.status(200).send(result);
-  }else{
+  } else {
     res.status(500).end();
   }
-})
+});
 
 app.put("/users/:id", async (req, res) => {
   console.log("Called delete with user id");
@@ -111,7 +109,7 @@ app.put("/users/:id", async (req, res) => {
   let portfolioSub = req.body["portfolioSub"];
   const id = req.params["id"];
 
-  console.log('req body');
+  console.log("req body");
   console.log(req.body);
 
   var values = {};
@@ -121,13 +119,12 @@ app.put("/users/:id", async (req, res) => {
 
   const result = await userServices.removeStock(values);
 
-  
-  if(result){
+  if (result) {
     res.status(200).send(result);
-  }else{
+  } else {
     res.status(500).end();
   }
-})
+});
 
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
