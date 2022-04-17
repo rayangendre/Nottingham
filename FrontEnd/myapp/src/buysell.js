@@ -59,6 +59,7 @@ class Buy extends React.Component {
   }
 
   async handleSubmit(event) {
+    event.preventDefault();
     if (this.state.name != "" && this.state.numberOfShares != null) {
       if (
         window.confirm(
@@ -90,8 +91,6 @@ class Buy extends React.Component {
     } else {
       alert("Enter a stock to buy");
     }
-
-    event.preventDefault();
   }
   render() {
     return (
