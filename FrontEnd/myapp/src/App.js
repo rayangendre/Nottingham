@@ -4,24 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./Table.js";
 
-import axios from "axios";
 //import '../node_modules/react-vis/dist/style.css';
 //import {XYPlot, LineSeries} from 'react-vis';
-import {
-  polygonClient,
-  restClient,
-  websocketClient,
-} from "@polygon.io/client-js";
+
 import { Buy, Sell } from "./buysell.js";
-import Container from "react-bootstrap/esm/Container";
-import Col from "react-bootstrap/esm/Col";
-import Row from "react-bootstrap/Row";
-import { Component } from "react";
-import ApiTest from "./ApiTest";
+
 import React from "react";
 import { useState, useEffect } from "react";
-import BasicTable from "./Table.js";
-import { WatchlistTable } from "./Table.js";
+
 import { LogIn } from "./Login.js";
 import { SignUp } from "./SignUp.js";
 import { Watchlist } from "./WatchList.js";
