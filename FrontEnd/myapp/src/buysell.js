@@ -41,13 +41,31 @@ class Buy extends React.Component {
   }
 
   async handleSubmit(event) {
-    if((this.state.name != '') && (this.state.numberOfShares != null)){
-      let res = axios.patch("http://localhost:4000/users/".concat(this.props.userId), 
-            {"portfolioAddition": {"name": this.state.name, "numShares": parseInt(this.state.numberOfShares)}, "watchListAddition":""})
-      alert('Bought ' + this.state.numberOfShares + ' shares of ' + this.state.name);
-      
-    }else{
-      alert('Enter a stock to buy');
+    if (this.state.name != "" && this.state.numberOfShares != null) {
+      if (
+        window.confirm(
+          `Buy ${this.state.numberOfShares} shares of ${this.state.name}?`
+        ) == true
+      ) {
+        let res = axios.patch(
+          "http://localhost:4000/users/".concat(this.props.userId),
+          {
+            portfolioAddition: {
+              name: this.state.name,
+              numShares: parseInt(this.state.numberOfShares),
+            },
+            watchListAddition: "",
+          }
+        );
+        alert(
+          "Bought " +
+            this.state.numberOfShares +
+            " shares of " +
+            this.state.name
+        );
+      }
+    } else {
+      alert("Enter a stock to buy");
     }
 
     event.preventDefault();
@@ -150,16 +168,28 @@ class Sell extends React.Component {
   }
 
   async handleSubmit(event) {
-
-    if((this.state.name != '') && (this.state.numberOfShares != null)){
-      if (window.confirm(`Sell ${this.state.numberOfShares} shares of ${this.state.name}?`) == true) {
-        let res = axios.put("http://localhost:4000/users/".concat(this.props.userId), 
-        {"portfolioSub": {"name": this.state.name, "numShares": parseInt(this.state.numberOfShares)}, "watchListSub":""})
-        alert('Sold ' + this.state.numberOfShares + ' shares of ' + this.state.name);
+    if (this.state.name != "" && this.state.numberOfShares != null) {
+      if (
+        window.confirm(
+          `Sell ${this.state.numberOfShares} shares of ${this.state.name}?`
+        ) == true
+      ) {
+        let res = axios.put(
+          "http://localhost:4000/users/".concat(this.props.userId),
+          {
+            portfolioSub: {
+              name: this.state.name,
+              numShares: parseInt(this.state.numberOfShares),
+            },
+            watchListSub: "",
+          }
+        );
+        alert(
+          "Sold " + this.state.numberOfShares + " shares of " + this.state.name
+        );
       }
-      
-    }else{
-      alert('Enter a stock to sell');
+    } else {
+      alert("Enter a stock to sell");
     }
 
     event.preventDefault();
