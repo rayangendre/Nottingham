@@ -19,25 +19,27 @@ function StockCheck() {
     console.log(e.target.ticker.value);
     e.preventDefault();
     setTicker(e.target.ticker.value.toUpperCase());
+    //console.log(ticker)
     //calls the API using the stock ticker
     const stockPrice = await checkPrice(e.target.ticker.value.toUpperCase());
+    //console.log(stockPrice)
     //the object that is extracted from the API response, since it is not a list we must do extra processing
-    const timeSeriesObject = stockPrice["data"]["Time Series (1min)"];
+    //const timeSeriesObject = stockPrice["data"]["Time Series (1min)"];
     //extract the first key from the JSON, corresponds to the latest minute of data returned
-    const firstKey = Object.keys(timeSeriesObject)[0];
+    //const firstKey = Object.keys(timeSeriesObject)[0];
     //set the price of the stock using the key we extracted and take the closing price
-    setPrice(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"]);
+    setPrice(stockPrice);
     // console.log(firstKey)
     // console.log(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"])
   }
 
   async function checkPrice(ticker) {
-    return await axios.get(
-      "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="
+    const stockPrice = await axios.get(
+      "https://finnhub.io/api/v1/quote?symbol="
         .concat(ticker)
-        .concat("&interval=1min&apikey=")
-        .concat(apiKey)
+        .concat("&token=c9482oqad3if4j4v81qg")
     );
+    return parseFloat(stockPrice["data"]["c"]);
   }
 
   return (
@@ -59,7 +61,7 @@ function StockCheck() {
           </div>
         </form>
         <p>
-          The current price of {ticker} is: {price ? price : ""}
+          The current price of {ticker} is: $ {price ? price : ""}
         </p>
       </main>
       <nav>
