@@ -37,10 +37,12 @@ app.post("/login", async (req, res) => {
     if (isValid) {
       const token = generateAccessToken(username);
       const id = existing_user._id;
+      const name = existing_user.name;
 
       const result = {
         token: token,
         id: id,
+        name: name,
       };
 
       res.status(200).send(result);
@@ -78,6 +80,7 @@ app.post("/signup", async (req, res) => {
       const result = {
         token: token,
         id: savedUser._id,
+        name: new_user.name,
       };
 
       if (savedUser) {

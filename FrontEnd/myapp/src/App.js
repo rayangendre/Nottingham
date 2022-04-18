@@ -23,6 +23,7 @@ const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa";
 
 function App() {
   const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
   const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
 
@@ -38,18 +39,28 @@ function App() {
     setUserId(userId);
   }
 
+  function setName(userName) {
+    setUserName(userName);
+  }
+
   return (
     <div className="App">
       <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
       <Routes>
-        <Route path="/" element={<Home userId={userId} />} />
+        <Route
+          path="/"
+          element={<Home userId={userId} userName={userName} />}
+        />
         <Route path="portfolio" element={<Portfolio userId={userId} />} />
         <Route path="watchlist" element={<Watchlist userId={userId} />} />
         <Route path="stockcheck" element={<StockCheck />} />
-        <Route path="login" element={<LogIn userId={userId} setId={setId} />} />
+        <Route
+          path="login"
+          element={<LogIn userId={userId} setId={setId} setName={setName} />}
+        />
         <Route
           path="signup"
-          element={<SignUp userId={userId} setId={setId} />}
+          element={<SignUp userId={userId} setId={setId} setName={setName} />}
         />
         <Route path="buy" element={<Buy userId={userId} />} />
         <Route path="sell" element={<Sell userId={userId} />} />
@@ -93,7 +104,11 @@ function Home(props) {
           </button>
         </Link>
       </nav>
-      <div>{props.userId ? props.userId : "Not logged in"}</div>
+      <div>
+        {props.userName
+          ? "Logged in as ".concat(props.userName)
+          : "Not logged in"}
+      </div>
     </div>
   );
 }

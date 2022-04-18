@@ -44,6 +44,7 @@ function SignUp(props) {
     if (userData) {
       if (userData.status == 201) {
         props.setId(userData.data.id);
+        props.setName(userData.data.name);
         setIsSubmitted(true);
       } else if (userData.status == 409) {
         setErrorMessages({ name: "exists", message: errors.exists });

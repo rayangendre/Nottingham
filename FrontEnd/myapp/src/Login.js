@@ -43,6 +43,8 @@ function LogIn(props) {
     if (userData) {
       if (userData.status == 200) {
         props.setId(userData.data.id);
+        props.setName(userData.data.name);
+        console.log(userData);
         setIsSubmitted(true);
       } else if (userData.status == 401) {
         if (userData.data.error == "Unauthorized Username") {
