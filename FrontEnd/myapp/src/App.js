@@ -18,6 +18,7 @@ import { Watchlist } from "./WatchList.js";
 import { StockCheck } from "./StockCheck.js";
 import { Portfolio } from "./Portfolio.js";
 import { useCookies } from "react-cookie";
+import { Dynamic } from "./Dynamic.js";
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa";
 
@@ -64,6 +65,7 @@ function App() {
         />
         <Route path="buy" element={<Buy userId={userId} />} />
         <Route path="sell" element={<Sell userId={userId} />} />
+        <Route path="dynamic" element={<Dynamic />} />} />
       </Routes>
       <div></div>
     </div>

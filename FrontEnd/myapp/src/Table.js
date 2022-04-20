@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { getThemeProps } from "@mui/system";
+import { Link } from "react-router-dom";
 
 function currencyFormat(number) {
   return "$ " + number.toFixed(2);
@@ -67,7 +68,7 @@ export function WatchlistTable(props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                <Link to="/dynamic">{row.name}</Link>
               </TableCell>
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">
