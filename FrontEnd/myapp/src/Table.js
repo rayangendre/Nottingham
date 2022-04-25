@@ -68,7 +68,7 @@ export function WatchlistTable(props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <Link to="/dynamic">{row.name}</Link>
+                <Link to={"/dynamic/" + row.name}>{row.name}</Link>
               </TableCell>
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">

@@ -9,6 +9,7 @@ class Stock extends React.Component {
     this.state = {
       stockChartXValues: [],
       stockChartYValues: [],
+      ticker: this.props.symbol,
     };
   }
 
@@ -23,7 +24,7 @@ class Stock extends React.Component {
 
     let API_Call =
       "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
-        .concat(StockSymbol)
+        .concat(this.state.ticker)
         .concat("&outputsize=compact&apikey=")
         .concat(API_KEY);
     let stockChartXValuesFunction = [];
@@ -55,7 +56,6 @@ class Stock extends React.Component {
   render() {
     return (
       <div>
-        <h4>Chart</h4>
         <Plot
           data={[
             {
@@ -66,7 +66,7 @@ class Stock extends React.Component {
               marker: { color: "red" },
             },
           ]}
-          layout={{ width: 720, height: 440, title: StockSymbol }}
+          layout={{ width: 720, height: 440 }}
         />
       </div>
     );

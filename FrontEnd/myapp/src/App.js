@@ -27,6 +27,7 @@ function App() {
   const [userName, setUserName] = useState("");
   const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
+  const [ticker, setTicker] = useState("");
 
   //sets the auth token of the user
   function setToken(token) {
@@ -65,7 +66,8 @@ function App() {
         />
         <Route path="buy" element={<Buy userId={userId} />} />
         <Route path="sell" element={<Sell userId={userId} />} />
-        <Route path="dynamic" element={<Dynamic />} />} />
+        <Route path="/dynamic/:ticker" element={<Dynamic ticker={ticker} />} />}
+        />
       </Routes>
       <div></div>
     </div>

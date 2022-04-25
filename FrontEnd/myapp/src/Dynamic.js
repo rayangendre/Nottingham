@@ -15,14 +15,17 @@ import Row from "react-bootstrap/Row";
 
 import React from "react";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import BasicTable from "./Table.js";
 import Stock from "./Stock.js";
 
 function Dynamic(props) {
+  const { ticker } = useParams();
   return (
     <div>
-      <p1>Dynamic Page</p1>
+      <h1>{ticker}</h1>
+      <Stock symbol={ticker} />
     </div>
   );
 }
