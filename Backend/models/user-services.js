@@ -172,9 +172,6 @@ async function updateUser(values) {
       let newPortList = [].concat(user.portfolioList);
       indexForRemoval = newPortList.findIndex(item => {return item.name == values.portfolioSub.name})
       console.log("Removing:", indexForRemoval)
-      /*newPortList = newPortList.filter(function(e){
-        return e.name != values.portfolioSub.name;
-      });*/
       newPortList[indexForRemoval].numShares -= values.portfolioSub.numShares
       const update = {portfolioList: newPortList};
       const filter = {_id: user.id};
@@ -184,48 +181,15 @@ async function updateUser(values) {
       console.log(update);
       console.log('portfolioSub');
       console.log(values.portfolioSub);
+      let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+      if (result) {
+        return result;
+      } else {
+        return false;
+      }
+
     }
-
-  if (values.watchListSub != "") {
-    let newWatchList = [].concat(user.watchList);
-    newWatchList = newWatchList.filter(function (e) {
-      return e != values.watchListSub;
-    });
-    const update = { watchList: newWatchList };
-    const filter = { _id: user.id };
-    const opts = { new: true };
-
-    let result = await userModel.findOneAndUpdate(filter, update, opts);
-
-    if (result) {
-      return result;
-    } else {
-      return false;
-    }
-  }
-
-  if (values.portfolioSub != "") {
-    let newPortList = [].concat(user.portfolioList);
-    newPortList = newPortList.filter(function (e) {
-      return e.name != values.portfolioSub.name;
-    });
-    const update = { portfolioList: newPortList };
-    const filter = { _id: user.id };
-    const opts = { new: true };
-
-    console.log("update:");
-    console.log(update);
-    console.log("portfolioSub");
-    console.log(values.portfolioSub);
-
-    let result = await userModel.findOneAndUpdate(filter, update, opts);
-
-    if (result) {
-      return result;
-    } else {
-      return false;
-    }
-  }
 
   return false;
 }
