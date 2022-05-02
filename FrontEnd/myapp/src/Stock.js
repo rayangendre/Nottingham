@@ -1,5 +1,6 @@
 import React from "react";
 import Plot from "react-plotly.js";
+import { articles } from "./News.js";
 
 let StockSymbol = "V";
 
@@ -10,11 +11,19 @@ class Stock extends React.Component {
       stockChartXValues: [],
       stockChartYValues: [],
       ticker: this.props.symbol,
+      articles: [],
+      apiError: "",
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchStock();
+    try {
+      const response = await articles(this.state.ticker);
+      this.setState({ articles: response.articles });
+    } catch (error) {
+      this.setState({ apiError: "Could not find anything" });
+    }
   }
 
   fetchStock() {
@@ -66,7 +75,7 @@ class Stock extends React.Component {
               marker: { color: "red" },
             },
           ]}
-          layout={{ width: 720, height: 440 }}
+          layout={{ width: 780, height: 440 }}
         />
       </div>
     );
