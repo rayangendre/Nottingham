@@ -96,7 +96,14 @@ function SignUp(props) {
         <Col>
           <h2>Welcome</h2>
         </Col>
-        <Col></Col>
+        <Col>
+          <p>
+            Already have an account?&nbsp;
+            <Link to ="/login">
+              Log In
+            </Link>
+          </p>
+        </Col>
       </Row>
       <div className="app">
         <div className="login-form">
