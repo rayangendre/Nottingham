@@ -62,7 +62,11 @@ function Watchlist(props) {
     const toBeAdded = e.target.watch.value;
     console.log(toBeAdded);
     e.preventDefault();
-    if (personalWatchlist.includes(toBeAdded)) {
+    if (
+      personalWatchlist.findIndex((item) => {
+        return item.name == toBeAdded;
+      }) != -1
+    ) {
       alert("Already on watchlist");
       return;
     }
