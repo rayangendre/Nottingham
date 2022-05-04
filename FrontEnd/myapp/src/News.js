@@ -1,8 +1,9 @@
-const NEWS_API_KEY = process.env.NEWS_API_KEY;
-
 export const articles = async (stockName) => {
+  const key = process.env.NEWS_API_KEY;
+  console.log(key);
+
   const response = await fetch(
-    `https://newsapi.org/v2/everything?q=${stockName}&sortBy=publishedAt&apiKey=${NEWS_API_KEY}`
+    `https://newsapi.org/v2/everything?q=${stockName}&sortBy=publishedAt&apiKey=${key}`
   );
   const json = await response.json();
   return json;

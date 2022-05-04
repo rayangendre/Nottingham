@@ -20,6 +20,9 @@ import { Portfolio } from "./Portfolio.js";
 import { useCookies } from "react-cookie";
 import { Dynamic } from "./Dynamic.js";
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa";
 
 function App() {
