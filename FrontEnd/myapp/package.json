@@ -13,6 +13,7 @@
     "axios": "^0.26.1",
     "bootstrap": "^5.1.3",
     "chart.js": "^3.7.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "finnhub": "^1.2.10",
     "plotly.js": "^2.11.1",

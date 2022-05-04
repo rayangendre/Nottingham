@@ -1,5 +1,6 @@
 export const articles = async (stockName) => {
-  const key = process.env.NEWS_API_KEY;
+  // require('dotenv').config();
+  const key = process.env.REACT_APP_NEWS_API_KEY;
   console.log(key);
 
   const response = await fetch(
