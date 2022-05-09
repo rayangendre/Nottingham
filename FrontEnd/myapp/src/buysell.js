@@ -61,8 +61,8 @@ class Buy extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     if (this.state.name != "" && this.state.numberOfShares != null) {
-      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0) {
-        alert("Please enter a positive number.");
+      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0 || parseInt(this.state.numberOfShares) != parseFloat(this.state.numberOfShares)) {
+        alert("Please enter a positive whole number.");
         return;
       }
       if (
@@ -197,8 +197,8 @@ class Sell extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     if (this.state.name != "" && this.state.numberOfShares != null) {
-      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0) {
-        alert("Please enter a positive number.");
+      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0 || parseInt(this.state.numberOfShares) != parseFloat(this.state.numberOfShares)) {
+        alert("Please enter a positive whole number.");
         return;
       }
       if (
