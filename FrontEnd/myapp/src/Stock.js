@@ -1,5 +1,9 @@
 import React from "react";
 import Plot from "react-plotly.js";
+import { articles } from "./News.js";
+import { Container, Header } from "semantic-ui-react";
+import { List } from "semantic-ui-react";
+import { ArticleList } from "./ArticlesList.js";
 
 let StockSymbol = "V";
 
@@ -9,11 +13,20 @@ class Stock extends React.Component {
     this.state = {
       stockChartXValues: [],
       stockChartYValues: [],
+      ticker: this.props.symbol,
+      articles: [],
+      apiError: "",
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchStock();
+    try {
+      const response = await articles(this.state.ticker);
+      this.setState({ articles: response.articles });
+    } catch (error) {
+      this.setState({ apiError: "Could not find anything" });
+    }
   }
 
   fetchStock() {
@@ -23,7 +36,7 @@ class Stock extends React.Component {
 
     let API_Call =
       "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
-        .concat(StockSymbol)
+        .concat(this.state.ticker)
         .concat("&outputsize=compact&apikey=")
         .concat(API_KEY);
     let stockChartXValuesFunction = [];
@@ -55,7 +68,6 @@ class Stock extends React.Component {
   render() {
     return (
       <div>
-        <h4>Chart</h4>
         <Plot
           data={[
             {
@@ -66,8 +78,19 @@ class Stock extends React.Component {
               marker: { color: "red" },
             },
           ]}
-          layout={{ width: 720, height: 440, title: StockSymbol }}
+          layout={{ width: 780, height: 440 }}
         />
+        <Container>
+          <Header as="h2" style={{ textAlign: "center", margin: 20 }}>
+            News about {this.state.ticker}
+          </Header>
+          {this.state.articles.length > 0 && (
+            <ArticleList articles={this.state.articles} />
+          )}
+          {this.state.apiError && (
+            <p>Could not fetch any articles. Please try again.</p>
+          )}
+        </Container>
       </div>
     );
   }

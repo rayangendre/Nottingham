@@ -18,6 +18,9 @@ import { Watchlist } from "./WatchList.js";
 import { StockCheck } from "./StockCheck.js";
 import { Portfolio } from "./Portfolio.js";
 import { useCookies } from "react-cookie";
+import { Dynamic } from "./Dynamic.js";
+
+require("dotenv").config();
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa";
 
@@ -26,6 +29,7 @@ function App() {
   const [userName, setUserName] = useState("");
   const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
+  const [ticker, setTicker] = useState("");
 
   //sets the auth token of the user
   function setToken(token) {
@@ -64,6 +68,8 @@ function App() {
         />
         <Route path="buy" element={<Buy userId={userId} />} />
         <Route path="sell" element={<Sell userId={userId} />} />
+        <Route path="/dynamic/:ticker" element={<Dynamic ticker={ticker} />} />}
+        />
       </Routes>
       <div></div>
     </div>
