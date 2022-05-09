@@ -92,7 +92,35 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
+/* Using this funcion as a "middleware" function for
+  all the endpoints that need access control protecion */
+function authenticateUser(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  //Getting the 2nd part of the auth hearder (the token)
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (!token) {
+    console.log("No token received");
+    return res.status(401).end();
+  } else {
+    // If a callback is supplied, verify() runs async
+    // If a callback isn't supplied, verify() runs synchronously
+    // verify() throws an error if the token is invalid
+    try {
+      // verify() returns the decoded obj which includes whatever objs
+      // we use to code/sign the token
+      const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+      // in our case, we used the username to sign the token
+      console.log(decoded);
+      next();
+    } catch (error) {
+      console.log(error);
+      return res.status(401).end();
+    }
+  }
+}
+
+app.get("/users", authenticateUser, async (req, res) => {
   const name = req.query["name"];
 
   try {

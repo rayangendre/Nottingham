@@ -47,7 +47,7 @@ function App() {
       const config = {
         headers: { Authorization: `Bearer ${cookies.auth_token}` },
       };
-      const response = await axios.get("http://localhost:5000/users", config);
+      const response = await axios.get("http://localhost:4000/users", config);
       console.log(response);
       return response.data.users_list;
     } catch (error) {
@@ -79,7 +79,14 @@ function App() {
         <Route path="stockcheck" element={<StockCheck />} />
         <Route
           path="login"
-          element={<LogIn userId={userId} setId={setId} setName={setName} />}
+          element={
+            <LogIn
+              userId={userId}
+              setId={setId}
+              setName={setName}
+              setToken={setToken}
+            />
+          }
         />
         <Route
           path="signup"
