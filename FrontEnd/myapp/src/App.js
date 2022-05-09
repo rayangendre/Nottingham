@@ -22,7 +22,7 @@ import { LogIn } from "./Login.js"
 import {Watchlist} from "./WatchList.js"
 import {StockCheck} from "./StockCheck.js"
 import {Portfolio} from "./Portfolio.js"
-
+import Header from './Header';
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa"
 
@@ -37,7 +37,11 @@ function App() {
     <div className="App">
       <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
       <Routes>
+        <Route path='/:page' component={Header} />
+        <Route path ='/' component={Header}/>
+
         <Route path="/" element={<Home userId = {userId}/>} />
+        <Route path="/home" element={<Home userId = {userId}/>} />
         <Route path="portfolio" element={<Portfolio userId = {userId}/>} />
         <Route path="watchlist" element={<Watchlist userId = {userId}/>} />
         <Route path="stockcheck" element={<StockCheck />} />
@@ -51,7 +55,6 @@ function App() {
     </div>
   );
 }
-
 
 function Home(props) {
 
