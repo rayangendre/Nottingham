@@ -45,7 +45,7 @@ function App() {
   async function fetchAll() {
     try {
       const config = {
-        headers: { Authorization: `Bearer ${cookies.auth_token}` },
+        headers: { Authorization: "Bearer ${cookies.auth_token}" },
       };
       const response = await axios.get("http://localhost:4000/users", config);
       console.log(response);
