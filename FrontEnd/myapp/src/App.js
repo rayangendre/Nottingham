@@ -38,6 +38,29 @@ function App() {
     });
   }
 
+  useEffect(() => {
+    fetchAll().then((result) => {
+      if (result) {
+        setCharacters(result);
+      }
+    });
+  }, [cookies]);
+
+  async function fetchAll() {
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${cookies.auth_token}` },
+      };
+      const response = await axios.get("http://localhost:5000/users", config);
+      console.log(response);
+      return response.data.users_list;
+    } catch (error) {
+      // We're not handling errors. Just logging into the console.
+      console.log(error);
+      return false;
+    }
+  }
+
   //sets the id of the current user that is logged in
   function setId(userId) {
     setUserId(userId);
