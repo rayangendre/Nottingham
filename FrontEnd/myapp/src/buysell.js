@@ -39,7 +39,7 @@ class Buy extends React.Component {
       name: target.value,
     });
   }
-
+  //comment
   async validTicker(ticker) {
     const stockPrice = await axios.get(
       "https://finnhub.io/api/v1/quote?symbol="
@@ -61,7 +61,12 @@ class Buy extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     if (this.state.name != "" && this.state.numberOfShares != null) {
-      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0 || parseInt(this.state.numberOfShares) != parseFloat(this.state.numberOfShares)) {
+      if (
+        isNaN(this.state.numberOfShares) ||
+        this.state.numberOfShares <= 0 ||
+        parseInt(this.state.numberOfShares) !=
+          parseFloat(this.state.numberOfShares)
+      ) {
         alert("Please enter a positive whole number.");
         return;
       }
@@ -197,7 +202,12 @@ class Sell extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     if (this.state.name != "" && this.state.numberOfShares != null) {
-      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0 || parseInt(this.state.numberOfShares) != parseFloat(this.state.numberOfShares)) {
+      if (
+        isNaN(this.state.numberOfShares) ||
+        this.state.numberOfShares <= 0 ||
+        parseInt(this.state.numberOfShares) !=
+          parseFloat(this.state.numberOfShares)
+      ) {
         alert("Please enter a positive whole number.");
         return;
       }
