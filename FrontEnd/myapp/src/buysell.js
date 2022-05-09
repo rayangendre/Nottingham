@@ -61,6 +61,10 @@ class Buy extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     if (this.state.name != "" && this.state.numberOfShares != null) {
+      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0) {
+        alert("Please enter a positive number.");
+        return;
+      }
       if (
         window.confirm(
           `Buy ${this.state.numberOfShares} shares of ${this.state.name}?`
@@ -92,6 +96,7 @@ class Buy extends React.Component {
       alert("Enter a stock to buy");
     }
   }
+
   render() {
     return (
       <>
@@ -190,7 +195,12 @@ class Sell extends React.Component {
   }
 
   async handleSubmit(event) {
+    event.preventDefault();
     if (this.state.name != "" && this.state.numberOfShares != null) {
+      if (isNaN(this.state.numberOfShares) || this.state.numberOfShares <= 0) {
+        alert("Please enter a positive number.");
+        return;
+      }
       if (
         window.confirm(
           `Sell ${this.state.numberOfShares} shares of ${this.state.name}?`
@@ -213,8 +223,6 @@ class Sell extends React.Component {
     } else {
       alert("Enter a stock to sell");
     }
-
-    event.preventDefault();
   }
 
   render() {
