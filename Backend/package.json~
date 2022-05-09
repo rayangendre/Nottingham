@@ -21,10 +21,5 @@
     "mockingoose": "^2.15.2",
     "mongodb-memory-server": "^8.4.2",
     "nodemon": "^2.0.15"
-  },
-  "scripts": {
-	  "test": "jest && prettier --check .",
-	  "dev": "nodemon backend_with_db.js",
-	  "start": "node backend_with_db.js"
-   }
+  }
 }

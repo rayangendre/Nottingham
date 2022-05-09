@@ -112,6 +112,8 @@ test("Deleting a user by Id -- successful path", async () => {
     name: "Harry Potter",
     job: "Young wizard",
   };
+  userModel.addUser = jest.fn().mockResolvedValue(result);
+
   const result = new userModel(dummyUser);
   const addedUser = await result.save();
   const deleteResult = await userModel.findOneAndDelete({ _id: addedUser.id });
@@ -208,6 +210,8 @@ test("Modifying User -- success adding to the watch list", async () => {
     const result = await userServices.updateUser(values);
 
     expect(result).toHaveProperty("_id");
+    userModel.addUser = jest.fn().mockResolvedValue(result);
+
     expect(result.name).toBe(dummyUser.name);
     expect(result.watchList[3]).toBe("SBUX");
   });
@@ -233,6 +237,9 @@ test("Modifying User -- success adding to the watch list", async () => {
 
     expect(result).toHaveProperty("_id");
     expect(result.name).toBe(dummyUser.name);
+
+    userModel.addUser = jest.fn().mockResolvedValue(result);
+
     expect(result.portfolioList[2].name).toBe("TSLA");
   });
 
@@ -299,6 +306,8 @@ test("Modifying User -- success adding to the watch list", async () => {
     const result = await userServices.removeStock(values);
 
     expect(result).toHaveProperty("_id");
+    userModel.addUser = jest.fn().mockResolvedValue(result);
+
     expect(result.name).toBe(dummyUser.name);
     expect(result.watchList[1]).toBe("M");
   });
@@ -323,6 +332,8 @@ test("Modifying User -- success adding to the watch list", async () => {
     const result = await userServices.removeStock(values);
 
     expect(result).toHaveProperty("_id");
+    userModel.addUser = jest.fn().mockResolvedValue(result);
+
     expect(result.name).toBe(dummyUser.name);
     expect(result.portfolioList[0].name).toBe("V");
   });
