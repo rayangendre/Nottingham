@@ -9,5 +9,8 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "ajv-formats": "^2.1.1"
   }
 }

@@ -105,7 +105,6 @@ function Portfolio(props) {
         <p>Here all your stocks are listed out</p>
         {BasicTable(portList)}
       </Container>
-      <Stock></Stock>
     </>
   );
 }
