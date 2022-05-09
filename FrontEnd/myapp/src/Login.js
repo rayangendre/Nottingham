@@ -44,6 +44,7 @@ function LogIn(props) {
       if (userData.status == 200) {
         props.setId(userData.data.id);
         props.setName(userData.data.name);
+        props.setToken(userData.data.token);
         console.log(userData);
         setIsSubmitted(true);
       } else if (userData.status == 401) {
