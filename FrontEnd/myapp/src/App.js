@@ -32,8 +32,11 @@ function App() {
   const [userName, setUserName] = useState("");
   const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
+<<<<<<< HEAD
   const [ticker, setTicker] = useState("");
   const [characters, setCharacters] = useState([]);
+=======
+>>>>>>> 15c8bc9 (finsihed adding cookies)
 
   //sets the auth token of the user
   function setToken(token) {
@@ -47,6 +50,7 @@ function App() {
       if (result) {
         console.log(result._id);
         setId(result._id);
+        setName(result.name);
       }
     });
   }, [cookies]);
