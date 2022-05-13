@@ -6,7 +6,9 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "test": "npm start"
+    "test": "prettier --check . && jest",
+    "dev": "nodemon backend_with_db.js",
+    "start": "node backend_with_db.js"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
