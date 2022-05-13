@@ -99,6 +99,8 @@ function authenticateUser(req, res, next) {
   //Getting the 2nd part of the auth hearder (the token)
   const token = authHeader && authHeader.split(" ")[1];
 
+  console.log("Calling Authenticate Users");
+
   if (!token) {
     console.log("No token received");
     return res.status(401).end();
@@ -111,8 +113,9 @@ function authenticateUser(req, res, next) {
       // we use to code/sign the token
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
       // in our case, we used the username to sign the token
-      console.log(decoded);
-      next();
+      // console.log(decoded);
+
+      return decoded;
     } catch (error) {
       console.log(error);
       return res.status(401).end();
@@ -120,9 +123,37 @@ function authenticateUser(req, res, next) {
   }
 }
 
-app.get("/users", authenticateUser, async (req, res) => {
-  const name = req.query["name"];
+app.get("/users", async (req, res) => {
+  console.log("Calling getUsers in the API");
 
+  const authHeader = req.headers["authorization"];
+  //Getting the 2nd part of the auth hearder (the token)
+  const token = authHeader && authHeader.split(" ")[1];
+
+  console.log("Calling Authenticate Users");
+
+  decoded = null;
+  if (!token) {
+    console.log("No token received");
+    return res.status(401).end();
+  } else {
+    // If a callback is supplied, verify() runs async
+    // If a callback isn't supplied, verify() runs synchronously
+    // verify() throws an error if the token is invalid
+    try {
+      // verify() returns the decoded obj which includes whatever objs
+      // we use to code/sign the token
+      decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+      // in our case, we used the username to sign the token
+      // console.log(decoded);
+    } catch (error) {
+      console.log(error);
+      return res.status(401).end();
+    }
+  }
+
+  const name = decoded.username;
+  console.log(name);
   try {
     const result = await userServices.getUsers(name);
     res.send({ users_list: result });
@@ -133,6 +164,7 @@ app.get("/users", authenticateUser, async (req, res) => {
 });
 
 app.get("/users/:id", async (req, res) => {
+  console.log("Calling getUsers with a userID");
   const id = req.params["id"];
   const result = await userServices.findUserById(id);
   if (result === undefined || result === null)

@@ -18,6 +18,9 @@ import { Watchlist } from "./WatchList.js";
 import { StockCheck } from "./StockCheck.js";
 import { Portfolio } from "./Portfolio.js";
 import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import { componentDidMount } from "react";
+import axios from "axios";
 
 const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa";
 
@@ -26,6 +29,7 @@ function App() {
   const [userName, setUserName] = useState("");
   const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
+  const [characters, setCharacters] = useState([]);
 
   //sets the auth token of the user
   function setToken(token) {
@@ -37,7 +41,8 @@ function App() {
   useEffect(() => {
     fetchAll().then((result) => {
       if (result) {
-        setCharacters(result);
+        console.log(result._id);
+        setId(result._id);
       }
     });
   }, [cookies]);
@@ -45,10 +50,12 @@ function App() {
   async function fetchAll() {
     try {
       const config = {
-        headers: { Authorization: "Bearer ${cookies.auth_token}" },
+        headers: { Authorization: "Bearer ".concat(cookies.auth_token) },
       };
+
       const response = await axios.get("http://localhost:4000/users", config);
       console.log(response);
+      console.log(response.data.users_list);
       return response.data.users_list;
     } catch (error) {
       // We're not handling errors. Just logging into the console.
