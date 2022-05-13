@@ -5,7 +5,10 @@
     "prettier": "2.6.2"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "prettier --check . && jest",
+    "dev": "nodemon backend_with_db.js",
+    "start": "node backend_with_db.js"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
