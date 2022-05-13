@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //import Button from "react-bootstrap/Button"
 import "./App.css";
 import "./Table.js";
+import { currencyFormat } from "./Table.js";
 
 import axios from "axios";
 import React from "react";
@@ -17,7 +18,7 @@ function StockCheck() {
   async function HandleSubmit(e) {
     console.log(e.target.ticker.value);
     e.preventDefault();
-    const ticker = e.target.ticker.value.toUpperCase()
+    const ticker = e.target.ticker.value.toUpperCase();
     //console.log("Ticker: ", ticker)
     //calls the API using the stock ticker
     const stockPrice = await checkPrice(ticker);
@@ -27,7 +28,10 @@ function StockCheck() {
     //extract the first key from the JSON, corresponds to the latest minute of data returned
     //const firstKey = Object.keys(timeSeriesObject)[0];
     //set the price of the stock using the key we extracted and take the closing price
-    const message = "The value of ".concat(ticker).concat(" is $").concat(stockPrice);
+    const message = "The value of "
+      .concat(ticker)
+      .concat(" is ")
+      .concat(currencyFormat(stockPrice));
     setMessage(message);
     //console.log("Message: ", message);
     // console.log(firstKey)
@@ -61,9 +65,7 @@ function StockCheck() {
             </button>
           </div>
         </form>
-        <p>
-          {message}
-        </p>
+        <p>{message}</p>
       </main>
       <nav>
         <Link to="/">

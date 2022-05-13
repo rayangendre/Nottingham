@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import { getThemeProps } from "@mui/system";
 import { Link } from "react-router-dom";
 
-function currencyFormat(number) {
+export function currencyFormat(number) {
   return "$ " + number.toFixed(2);
 }
 
@@ -70,7 +70,7 @@ export function WatchlistTable(props) {
               <TableCell component="th" scope="row">
                 <Link to={"/dynamic/" + row.name}>{row.name}</Link>
               </TableCell>
-              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">{currencyFormat(row.price)}</TableCell>
               <TableCell align="right">
                 <button
                   onClick={() => props.removeFromWL(row)}
