@@ -96,23 +96,26 @@ async function updateUser(values) {
     }
   }
 
-    console.log("user:");
-    console.log(user);
-    
+  console.log("user:");
+  console.log(user);
 
-    if(values.portfolioAddition != "" && values.portfolioAddition != null){
-      let newPortList = [].concat(user.portfolioList);
-      console.log(values)
-      indexForAddition = newPortList.findIndex(item => {return item.name == values.portfolioAddition.name})
-      console.log("Adding:", indexForAddition)
-      if (indexForAddition == -1) {
-        newPortList.push(values.portfolioAddition);
-      } else {
-        newPortList[indexForAddition].numShares += parseInt(values.portfolioAddition.numShares)
-      }
-      const update = {portfolioList: newPortList};
-      const filter = {_id: user.id};
-      const opts = {new: true};
+  if (values.portfolioAddition != "" && values.portfolioAddition != null) {
+    let newPortList = [].concat(user.portfolioList);
+    console.log(values);
+    indexForAddition = newPortList.findIndex((item) => {
+      return item.name == values.portfolioAddition.name;
+    });
+    console.log("Adding:", indexForAddition);
+    if (indexForAddition == -1) {
+      newPortList.push(values.portfolioAddition);
+    } else {
+      newPortList[indexForAddition].numShares += parseInt(
+        values.portfolioAddition.numShares
+      );
+    }
+    const update = { portfolioList: newPortList };
+    const filter = { _id: user.id };
+    const opts = { new: true };
 
     let result = await userModel.findOneAndUpdate(filter, update, opts);
 
@@ -126,74 +129,72 @@ async function updateUser(values) {
   return false;
 }
 
-  async function removeStock(values){
-    const userModel = getDbConnection().model("User", UserSchema);
-    let user;
-    if(values.id){
-      //console.log("Using ID")
-      user = await findUserById(values.id);
-      console.log(user)
+async function removeStock(values) {
+  const userModel = getDbConnection().model("User", UserSchema);
+  let user;
+  if (values.id) {
+    //console.log("Using ID")
+    user = await findUserById(values.id);
+    console.log(user);
+  } else if (values.name) {
+    //console.log("Using name")
+    user = await findUserByName(values.name);
+    // user = await findUserById(user.id);
+  } else {
+    return false;
+  }
 
-    }else if(values.name){
-      //console.log("Using name")
-      user = await findUserByName(values.name);
-      // user = await findUserById(user.id);
-    }else{
+  if (user === undefined) {
+    return false;
+  }
+
+  console.log("values");
+  console.log(values);
+
+  if (values.watchListSub != "") {
+    let newWatchList = [].concat(user.watchList);
+    newWatchList = newWatchList.filter(function (e) {
+      return e != values.watchListSub;
+    });
+    const update = { watchList: newWatchList };
+    const filter = { _id: user.id };
+    const opts = { new: true };
+
+    let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+    if (result) {
+      return result;
+    } else {
       return false;
     }
+  }
 
-    if(user === undefined){
+  if (values.portfolioSub != "") {
+    let newPortList = [].concat(user.portfolioList);
+    indexForRemoval = newPortList.findIndex((item) => {
+      return item.name == values.portfolioSub.name;
+    });
+    console.log("Removing:", indexForRemoval);
+    newPortList[indexForRemoval].numShares -= values.portfolioSub.numShares;
+    const update = { portfolioList: newPortList };
+    const filter = { _id: user.id };
+    const opts = { new: true };
+
+    console.log("update:");
+    console.log(update);
+    console.log("portfolioSub");
+    console.log(values.portfolioSub);
+    let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+    if (result) {
+      return result;
+    } else {
       return false;
     }
-
-    console.log('values');
-    console.log(values);
-    
-
-    if(values.watchListSub != ""){
-      let newWatchList = [].concat(user.watchList);
-      newWatchList = newWatchList.filter(function(e){
-        return e != values.watchListSub;
-      });
-      const update = {watchList: newWatchList};
-      const filter = {_id: user.id};
-      const opts = {new: true};
-
-      let result = await userModel.findOneAndUpdate(filter, update, opts);
-
-      if(result){
-        return result;
-      }else{
-        return false;
-      }
-    }
-
-    if(values.portfolioSub != ""){
-      let newPortList = [].concat(user.portfolioList);
-      indexForRemoval = newPortList.findIndex(item => {return item.name == values.portfolioSub.name})
-      console.log("Removing:", indexForRemoval)
-      newPortList[indexForRemoval].numShares -= values.portfolioSub.numShares
-      const update = {portfolioList: newPortList};
-      const filter = {_id: user.id};
-      const opts = {new: true};
-
-      console.log('update:');
-      console.log(update);
-      console.log('portfolioSub');
-      console.log(values.portfolioSub);
-      let result = await userModel.findOneAndUpdate(filter, update, opts);
-
-      if (result) {
-        return result;
-      } else {
-        return false;
-      }
-
-    }
+  }
 
   return false;
 }
-
 
 async function findUserByName(name) {
   const userModel = getDbConnection().model("User", UserSchema);
@@ -207,4 +208,4 @@ module.exports = {
   setConnection,
   updateUser,
   removeStock,
-}
+};

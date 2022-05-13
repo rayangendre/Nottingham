@@ -99,9 +99,7 @@ function SignUp(props) {
         <Col>
           <p>
             Already have an account?&nbsp;
-            <Link to ="/login">
-              Log In
-            </Link>
+            <Link to="/login">Log In</Link>
           </p>
         </Col>
       </Row>
