@@ -43,6 +43,8 @@ function LogIn(props) {
     if (userData) {
       if (userData.status == 200) {
         props.setId(userData.data.id);
+        console.log("ID in the login");
+        console.log(userData.data.id);
         props.setName(userData.data.name);
         props.setToken(userData.data.token);
         console.log(userData);
