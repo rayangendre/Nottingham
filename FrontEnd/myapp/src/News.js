@@ -4,7 +4,7 @@ export const articles = async (stockName) => {
   console.log(key);
 
   const response = await fetch(
-    `https://newsapi.org/v2/everything?q=${stockName}&sortBy=publishedAt&apiKey=${key}`
+    `https://newsapi.org/v2/everything?q=${stockName}%20stock&sortBy=publishedAt&apiKey=${key}`
   );
   const json = await response.json();
   return json;
