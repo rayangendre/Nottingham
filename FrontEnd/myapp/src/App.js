@@ -20,23 +20,18 @@ import { Portfolio } from "./Portfolio.js";
 import { useCookies } from "react-cookie";
 import { Dynamic } from "./Dynamic.js";
 
-require("dotenv").config();
 import { useEffect } from "react";
 import { componentDidMount } from "react";
 import axios from "axios";
-
-const apiKey = "Yhaw6WexncpW6UEMOiwDTI5s5zlVEFQa";
+require("dotenv").config();
 
 function App() {
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
-<<<<<<< HEAD
   const [ticker, setTicker] = useState("");
   const [characters, setCharacters] = useState([]);
-=======
->>>>>>> 15c8bc9 (finsihed adding cookies)
 
   //sets the auth token of the user
   function setToken(token) {

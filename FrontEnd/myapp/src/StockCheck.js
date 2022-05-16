@@ -9,8 +9,6 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 
-const apiKey = "RZEXR5SFIKLQNKYK";
-
 function StockCheck() {
   let myvalue, myquery;
   const [message, setMessage] = useState("");
@@ -42,7 +40,8 @@ function StockCheck() {
     const stockPrice = await axios.get(
       "https://finnhub.io/api/v1/quote?symbol="
         .concat(ticker)
-        .concat("&token=c9482oqad3if4j4v81qg")
+        .concat("&token=")
+        .concat(process.env.REACT_APP_FINHUB_API_KEY)
     );
     return parseFloat(stockPrice["data"]["c"]);
   }

@@ -19,8 +19,6 @@ import { useState, useEffect } from "react";
 import BasicTable from "./Table.js";
 import Stock from "./Stock.js";
 
-const apiKey = "RZEXR5SFIKLQNKYK";
-
 function createData(name, shares, totalValue, price) {
   return { name, shares, totalValue, price };
 }
@@ -57,7 +55,8 @@ function Portfolio(props) {
     return await axios.get(
       "https://finnhub.io/api/v1/quote?symbol="
         .concat(ticker)
-        .concat("&token=c9482oqad3if4j4v81qg")
+        .concat("&token=")
+        .concat(process.env.REACT_APP_FINHUB_API_KEY)
     );
     // return await axios.get("https://api.polygon.io/v2/aggs/ticker/".concat(ticker).concat("/prev?adjusted=true&apiKey=").concat(apiKey))
   }

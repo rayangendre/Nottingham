@@ -32,13 +32,12 @@ class Stock extends React.Component {
   fetchStock() {
     const pointerToThis = this;
     console.log(pointerToThis);
-    const API_KEY = "RZEXR5SFIKLQNKYK";
 
     let API_Call =
       "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
         .concat(this.state.ticker)
         .concat("&outputsize=compact&apikey=")
-        .concat(API_KEY);
+        .concat(process.env.REACT_APP_ALPHA_KEY);
     let stockChartXValuesFunction = [];
     let stockChartYValuesFunction = [];
 

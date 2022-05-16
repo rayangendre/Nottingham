@@ -44,7 +44,8 @@ class Buy extends React.Component {
     const stockPrice = await axios.get(
       "https://finnhub.io/api/v1/quote?symbol="
         .concat(ticker.toUpperCase())
-        .concat("&token=c9482oqad3if4j4v81qg")
+        .concat("&token=")
+        .concat(process.env.REACT_APP_FINHUB_API_KEY)
     );
 
     const numPrice = parseFloat(stockPrice["data"]["c"]);
