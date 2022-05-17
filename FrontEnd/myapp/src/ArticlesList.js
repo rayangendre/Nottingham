@@ -3,6 +3,7 @@ import { List, Grid, Header, Image } from "semantic-ui-react";
 
 const ArticleItem = (props) => {
   const { article } = props;
+
   return (
     <List.Item style={{ padding: 30 }}>
       <Grid>

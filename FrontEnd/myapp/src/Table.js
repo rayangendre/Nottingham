@@ -33,7 +33,7 @@ export default function BasicTable(data) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                <Link to={"/dynamic/" + row.name}>{row.name}</Link>
               </TableCell>
               <TableCell align="right">{row.shares}</TableCell>
               <TableCell align="right">{currencyFormat(row.price)}</TableCell>
