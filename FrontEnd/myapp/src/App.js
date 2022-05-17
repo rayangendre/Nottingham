@@ -104,8 +104,7 @@ function App() {
         />
         <Route path="buy" element={<Buy userId={userId} />} />
         <Route path="sell" element={<Sell userId={userId} />} />
-        <Route path="/dynamic/:ticker" element={<Dynamic ticker={ticker} />} />}
-        />
+        <Route path="/dynamic/:ticker" element={<Dynamic ticker={ticker} />} />
       </Routes>
       <div></div>
     </div>
