@@ -137,13 +137,13 @@ class Buy extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Stock Name</Form.Label>
-              <textarea
+              <input
                 class="form-control"
                 rows="1"
                 placeholder="StockName"
                 value={this.state.name}
                 onChange={this.handleNameChange}
-              ></textarea>
+              ></input>
               <Form.Text className="text-muted">
                 Confidential Buying Service
               </Form.Text>
@@ -151,13 +151,13 @@ class Buy extends React.Component {
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Number of Shares</Form.Label>
-              <textarea
+              <input
                 class="form-control"
                 rows="1"
                 placeholder="Number of Shares"
                 value={this.state.numberOfShares}
                 onChange={(event) => this.handleNumberChange(event)}
-              ></textarea>
+              ></input>
             </Form.Group>
 
             <Button variant="primary" type="submit">
@@ -270,13 +270,13 @@ class Sell extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Stock Name</Form.Label>
-              <textarea
+              <input
                 class="form-control"
                 rows="1"
                 placeholder="StockName"
                 value={this.state.name}
                 onChange={this.handleNameChange}
-              ></textarea>
+              ></input>
               <Form.Text className="text-muted">
                 Confidential Exchange Service
               </Form.Text>
@@ -284,13 +284,13 @@ class Sell extends React.Component {
 
             <Form.Group className="mb-3">
               <Form.Label>Number of Shares</Form.Label>
-              <textarea
+              <input
                 class="form-control"
                 rows="1"
                 placeholder="Number of Shares"
                 value={this.state.numberOfShares}
                 onChange={(event) => this.handleNumberChange(event)}
-              ></textarea>
+              ></input>
             </Form.Group>
 
             <Button variant="primary" type="submit">
