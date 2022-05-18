@@ -196,6 +196,48 @@ async function removeStock(values) {
   return false;
 }
 
+async function purchase(id, purchase) {
+  const userModel = getDbConnection().model("User", UserSchema);
+
+  let user;
+  if (id) {
+    user = await findUserById(id);
+  } else {
+    return false;
+  }
+
+  if (user === undefined) {
+    return false;
+  }
+
+  let modified_purchase = [].concat(user.purchase_history);
+
+  indexForAddition = modified_purchase.findIndex((item) => {
+    return item.ticker == purchase.ticker;
+  });
+  console.log("Modifying the purchase history for: ", indexForAddition);
+
+  if (indexForAddition == -1) {
+    modified_purchase.push(purchase);
+  } else {
+    modified_purchase[indexForAddition].price =
+      (parseInt(purchase.price) + modified_purchase[indexForAddition].price) /
+      2;
+  }
+
+  const update = { purchase_history: modified_purchase };
+  const filter = { _id: id };
+  const opts = { new: true };
+
+  let result = await userModel.findOneAndUpdate(filter, update, opts);
+
+  if (result) {
+    return result;
+  } else {
+    return false;
+  }
+}
+
 async function findUserByName(name) {
   const userModel = getDbConnection().model("User", UserSchema);
   return await userModel.findOne({ name: name });
@@ -208,4 +250,5 @@ module.exports = {
   setConnection,
   updateUser,
   removeStock,
+  purchase,
 };

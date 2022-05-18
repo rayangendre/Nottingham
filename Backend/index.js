@@ -262,6 +262,20 @@ app.put("/users/:id", async (req, res) => {
   }
 });
 
+app.put("/purchase_hist/:id", async (req, res) => {
+  console.log("Adding item to the purchase history");
+  let purchase = req.body["purchase"];
+  const id = req.params["id"];
+
+  const result = await userServices.purchase(id, purchase);
+
+  if (result) {
+    res.status(200).send(result);
+  } else {
+    res.status(500).end();
+  }
+});
+
 app.listen(process.env.PORT || port, () => {
   console.log("REST API is listening.");
 });
