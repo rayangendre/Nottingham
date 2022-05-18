@@ -22,6 +22,7 @@ const UserSchema = new mongoose.Schema(
     },
     purchase_history: {
       type: Array,
+      required: true,
     },
   },
   { collection: "users" }
