@@ -24,6 +24,7 @@ export default function BasicTable(data) {
             <TableCell align="right">Number Of Shares</TableCell>
             <TableCell align="right">Current Price</TableCell>
             <TableCell align="right">Total Value</TableCell>
+            <TableCell align="right">Percent Change</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -40,6 +41,7 @@ export default function BasicTable(data) {
               <TableCell align="right">
                 {currencyFormat(row.totalValue)}
               </TableCell>
+              <TableCell align="right">{row.percentChange}</TableCell>
             </TableRow>
           ))}
         </TableBody>

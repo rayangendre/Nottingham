@@ -37,12 +37,24 @@ function Portfolio(props) {
         const price = await getPriceFromTicker(
           response.users_list.portfolioList[i].name
         ); //5 API calls per minute, can be a limiter
+
+        let previous_price = response.purchase_history;
+        const percent_change = 0;
+        if (previous_price == []) {
+        } else {
+          let indexForPreviousPrice = previous_price.findIndex((item) => {
+            return item.ticker == response.users_list.portfolioList[i].name;
+          });
+          previous_price = previous_price[indexForPreviousPrice].price;
+          percent_change = ((price - previous_price) / previous_price) * 100;
+        }
         portfolList.push(
           createData(
             response.users_list.portfolioList[i].name,
             response.users_list.portfolioList[i].numShares,
             response.users_list.portfolioList[i].numShares * price,
-            price
+            price,
+            percent_change
           )
         );
       }
