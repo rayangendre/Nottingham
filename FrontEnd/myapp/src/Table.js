@@ -41,7 +41,7 @@ export default function BasicTable(data) {
               <TableCell align="right">
                 {currencyFormat(row.totalValue)}
               </TableCell>
-              <TableCell align="right">{row.percentChange}</TableCell>
+              <TableCell align="right">{row.percent_change}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -19,8 +19,8 @@ import { useState, useEffect } from "react";
 import BasicTable from "./Table.js";
 import Stock from "./Stock.js";
 
-function createData(name, shares, totalValue, price) {
-  return { name, shares, totalValue, price };
+function createData(name, shares, totalValue, price, percent_change) {
+  return { name, shares, totalValue, price, percent_change };
 }
 
 function Portfolio(props) {
@@ -38,9 +38,11 @@ function Portfolio(props) {
           response.users_list.portfolioList[i].name
         ); //5 API calls per minute, can be a limiter
 
-        let previous_price = response.purchase_history;
+        let previous_price =
+          response.users_list.portfolioList[i].purchase_history;
         const percent_change = 0;
-        if (previous_price == []) {
+        if (previous_price == undefined) {
+          percent_change = 0;
         } else {
           let indexForPreviousPrice = previous_price.findIndex((item) => {
             return item.ticker == response.users_list.portfolioList[i].name;
@@ -48,6 +50,8 @@ function Portfolio(props) {
           previous_price = previous_price[indexForPreviousPrice].price;
           percent_change = ((price - previous_price) / previous_price) * 100;
         }
+        console.log("percent change ", percent_change);
+
         portfolList.push(
           createData(
             response.users_list.portfolioList[i].name,
