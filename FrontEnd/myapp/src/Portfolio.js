@@ -38,8 +38,8 @@ function Portfolio(props) {
           response.users_list.portfolioList[i].name
         ); //5 API calls per minute, can be a limiter
 
-        let previous_price =
-          response.users_list.portfolioList[i].purchase_history;
+        let previous_price = response.users_list.purchase_history;
+        console.log("Purchase History ", response.users_list.purchase_history);
         const percent_change = 0;
         if (previous_price == undefined) {
           percent_change = 0;

@@ -51,12 +51,13 @@ class Buy extends React.Component {
     const numPrice = parseFloat(stockPrice["data"]["c"]);
     console.log("price");
     console.log(numPrice);
-    if (numPrice === 0) {
-      console.log("returning false");
-      return false;
-    } else {
-      return true;
-    }
+    return numPrice;
+    // if (numPrice === 0) {
+    //   console.log("returning false");
+    //   return false;
+    // } else {
+    //   return true;
+    // }
   }
 
   async handleSubmit(event) {
@@ -76,8 +77,8 @@ class Buy extends React.Component {
           `Buy ${this.state.numberOfShares} shares of ${this.state.name}?`
         ) == true
       ) {
-        const valid = await this.validTicker(this.state.name);
-        if (valid) {
+        const numPrice = await this.validTicker(this.state.name);
+        if (numPrice != 0) {
           let res = axios.patch(
             "http://localhost:4000/users/".concat(this.props.userId),
             {
@@ -86,6 +87,15 @@ class Buy extends React.Component {
                 numShares: parseInt(this.state.numberOfShares),
               },
               watchListAddition: "",
+            }
+          );
+          res = axios.patch(
+            "http://localhost:4000/purchase_hist/".concat(this.props.userId),
+            {
+              purchase: {
+                ticker: this.state.name,
+                price: numPrice,
+              },
             }
           );
           alert(
