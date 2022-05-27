@@ -47,8 +47,10 @@ function Portfolio(props) {
           let indexForPreviousPrice = previous_price.findIndex((item) => {
             return item.ticker == response.users_list.portfolioList[i].name;
           });
-          previous_price = previous_price[indexForPreviousPrice].price;
-          percent_change = ((price - previous_price) / previous_price) * 100;
+          if (indexForPreviousPrice != -1) {
+            previous_price = previous_price[indexForPreviousPrice].price;
+            percent_change = ((price - previous_price) / previous_price) * 100;
+          }
         }
         console.log("percent change ", percent_change);
 
