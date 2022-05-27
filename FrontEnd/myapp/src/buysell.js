@@ -89,7 +89,7 @@ class Buy extends React.Component {
               watchListAddition: "",
             }
           );
-          res = axios.patch(
+          res = axios.put(
             "http://localhost:4000/purchase_hist/".concat(this.props.userId),
             {
               purchase: {
@@ -98,6 +98,7 @@ class Buy extends React.Component {
               },
             }
           );
+          console.log("Adding to portfolio list");
           alert(
             "Bought " +
               this.state.numberOfShares +
