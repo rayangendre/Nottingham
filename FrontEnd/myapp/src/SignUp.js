@@ -85,13 +85,7 @@ function SignUp(props) {
     <div>
       <Row>
         <Col>
-          <nav>
-            <Link to="/">
-              <button type="submit" class="btn btn-primary w-25">
-                Home
-              </button>
-            </Link>
-          </nav>
+          <nav></nav>
         </Col>
         <Col>
           <h2>Welcome</h2>
