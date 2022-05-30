@@ -81,6 +81,7 @@ function App() {
       <Link to="/" style={{ textDecoration: "none" }}>
         <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
       </Link>
+
       <Routes>
         <Route
           path="/"
