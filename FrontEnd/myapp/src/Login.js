@@ -89,15 +89,7 @@ function LogIn(props) {
   return (
     <div>
       <Row>
-        <Col>
-          <nav>
-            <Link to="/">
-              <button type="submit" class="btn btn-primary w-25">
-                Home
-              </button>
-            </Link>
-          </nav>
-        </Col>
+        <Col></Col>
         <Col>
           <h2>Welcome</h2>
         </Col>
