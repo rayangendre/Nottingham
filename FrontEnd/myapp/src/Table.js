@@ -14,6 +14,16 @@ export function currencyFormat(number) {
   return "$ " + number.toFixed(2);
 }
 
+export function percentChange(number) {
+  if (number < 0) {
+    return "-" + number.toFixed(2);
+  } else if (number > 0) {
+    return "+" + number.toFixed(2);
+  } else {
+    return number.toFixed(2);
+  }
+}
+
 export default function BasicTable(data) {
   console.log("Graphing data: " + JSON.stringify(data));
   return (
@@ -42,7 +52,12 @@ export default function BasicTable(data) {
               <TableCell align="right">
                 {currencyFormat(row.totalValue)}
               </TableCell>
-              <TableCell align="right">{row.percent_change}</TableCell>
+              <TableCell
+                align="right"
+                style={{ color: row.percent_change >= 0 ? "green" : "red" }}
+              >
+                {percentChange(row.percent_change)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
