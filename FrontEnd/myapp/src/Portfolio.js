@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import Button from "react-bootstrap/Button"
 import "./App.css";
@@ -25,8 +25,13 @@ function createData(name, shares, totalValue, price) {
 
 function Portfolio(props) {
   const [portList, setPortList] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchAPI(props) {
+      if (!props.userId) {
+        navigate("/login", { replace: true });
+        return;
+      }
       let response = await fetch(
         "http://localhost:4000/users/".concat(props.userId)
       ).then((res) => res.json());
