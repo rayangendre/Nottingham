@@ -121,14 +121,6 @@ function Watchlist(props) {
           </div>
         </form>
       </main>
-
-      <nav>
-        <Link to="/">
-          <button type="button" class="btn btn-outline-primary">
-            Home
-          </button>
-        </Link>
-      </nav>
       <WatchlistTable
         data={personalWatchlist}
         removeFromWL={removeFromWL}

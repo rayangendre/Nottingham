@@ -79,19 +79,81 @@ const Navbar = () => {
 
   return (
     <div className="App">
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
-      </Link>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <a className="navbar-brand" href="/">
+          NOTTINGHAM
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <a className="nav-link" href="/login">
+                Login
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/portfolio">
+                Portfolio
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/watchlist">
+                Watchlist
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/stockcheck">
+                StockCheck
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="/"
+                id="navbarDropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Account
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Something else here
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <Routes>
-        <Route
-          path="/"
-          element={<Home userId={userId} userName={userName} />}
-        />
+        <Route path="/" />
         <Route path="portfolio" element={<Portfolio userId={userId} />} />
         <Route path="watchlist" element={<Watchlist userId={userId} />} />
         <Route path="stockcheck" element={<StockCheck />} />
         <Route
           path="login"
+          navbar={<Home userId={userId} userName={userName} />}
           element={
             <LogIn
               userId={userId}
@@ -116,70 +178,9 @@ const Navbar = () => {
 
 function Home(props) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/">
-        NOTTINGHAM
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul className="navbar-nav">
-          <li className="nav-item active">
-            <a className="nav-link" href="/login">
-              Login
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/portfolio">
-              Portfolio
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/watchlist">
-              Watchlist
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/stockcheck">
-              StockCheck
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="/"
-              id="navbarDropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Account
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">
-                Action
-              </a>
-              <a class="dropdown-item" href="#">
-                Another action
-              </a>
-              <a class="dropdown-item" href="#">
-                Something else here
-              </a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <div>
+      <Navbar />
+    </div>
   );
 }
 

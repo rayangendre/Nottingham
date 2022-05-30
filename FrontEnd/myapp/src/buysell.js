@@ -111,11 +111,6 @@ class Buy extends React.Component {
             <Row>
               <Col>
                 <nav>
-                  <Link to="/">
-                    <button type="submit" class="btn btn-primary w-50">
-                      Home
-                    </button>
-                  </Link>
                   <Link to="/portfolio">
                     <button type="submit" class="btn btn-primary w-50">
                       Portfolio
@@ -244,11 +239,6 @@ class Sell extends React.Component {
             <Row>
               <Col>
                 <nav>
-                  <Link to="/">
-                    <button type="submit" class="btn btn-primary w-50">
-                      Home
-                    </button>
-                  </Link>
                   <Link to="/portfolio">
                     <button type="submit" class="btn btn-primary w-50">
                       Portfolio

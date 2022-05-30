@@ -76,12 +76,8 @@ function Portfolio(props) {
       <Container>
         <Row>
           <Col>
+            <Col></Col>
             <nav>
-              <Link to="/">
-                <button type="submit" class="btn btn-primary w-25">
-                  Home
-                </button>
-              </Link>
               <Link to="/buy">
                 <button type="submit" class="btn btn-primary w-25">
                   Buy

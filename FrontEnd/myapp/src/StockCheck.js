@@ -66,13 +66,6 @@ function StockCheck() {
         </form>
         <p>{message}</p>
       </main>
-      <nav>
-        <Link to="/">
-          <button type="button" class="btn btn-outline-primary">
-            Home
-          </button>
-        </Link>
-      </nav>
       <div id="root" />
     </>
   );
