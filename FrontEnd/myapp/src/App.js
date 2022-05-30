@@ -35,7 +35,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <h1 class="p-3 mb-2 bg-dark text-white">NOTTINGHAM</h1>
+      </Link>
       <Routes>
         <Route path='/:page' component={Header} />
         <Route path ='/' component={Header}/>
@@ -62,7 +64,7 @@ function Home(props) {
     <div>
       <main>
         <h2>Welcome to the homepage!</h2>
-        <p>The leader in stock portfolio</p>
+        <p>The leader in stock portfolios</p>
       </main>
       <nav>
         <Link to="/portfolio">
