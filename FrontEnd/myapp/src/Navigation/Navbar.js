@@ -21,6 +21,7 @@ import { StockCheck } from "../StockCheck.js";
 import { Portfolio } from "../Portfolio.js";
 import { useCookies } from "react-cookie";
 import { Dynamic } from "../Dynamic.js";
+import { LogOut } from "../LogOut.js";
 
 import { useEffect } from "react";
 import { componentDidMount } from "react";
@@ -98,8 +99,8 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="/login">
-                Login
+              <a className="nav-link" href={userName ? "/logout" : "/login"}>
+                {userName ? userName : "Login"}
               </a>
             </li>
             <li className="nav-item">
@@ -133,13 +134,13 @@ const Navbar = () => {
                 aria-labelledby="navbarDropdownMenuLink"
               >
                 <a class="dropdown-item" href="#">
-                  Action
+                  Login
                 </a>
                 <a class="dropdown-item" href="#">
-                  Another action
+                  Logout
                 </a>
                 <a class="dropdown-item" href="#">
-                  Something else here
+                  Sign Up
                 </a>
               </div>
             </li>
@@ -153,7 +154,6 @@ const Navbar = () => {
         <Route path="stockcheck" element={<StockCheck />} />
         <Route
           path="login"
-          navbar={<Home userId={userId} userName={userName} />}
           element={
             <LogIn
               userId={userId}
@@ -162,6 +162,10 @@ const Navbar = () => {
               setToken={setToken}
             />
           }
+        />
+        <Route
+          path="logout"
+          element={<LogOut userId={userId} userName={userName} />}
         />
         <Route
           path="signup"
