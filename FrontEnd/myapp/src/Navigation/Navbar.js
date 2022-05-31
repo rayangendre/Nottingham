@@ -133,13 +133,13 @@ const Navbar = () => {
                 aria-labelledby="navbarDropdownMenuLink"
               >
                 <a class="dropdown-item" href="#">
-                  Action
+                  Login
                 </a>
                 <a class="dropdown-item" href="#">
-                  Another action
+                  Logout
                 </a>
                 <a class="dropdown-item" href="#">
-                  Something else here
+                  Sign Up
                 </a>
               </div>
             </li>
@@ -153,7 +153,6 @@ const Navbar = () => {
         <Route path="stockcheck" element={<StockCheck />} />
         <Route
           path="login"
-          navbar={<Home userId={userId} userName={userName} />}
           element={
             <LogIn
               userId={userId}
