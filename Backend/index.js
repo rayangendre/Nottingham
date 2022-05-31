@@ -54,7 +54,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.port("/logout", async (req, res) => {});
+app.post("/logout", async (req, res) => {});
 
 app.post("/signup", async (req, res) => {
   const username = req.body.name;
