@@ -20,6 +20,7 @@ function Watchlist(props) {
     async function fetchAPI(props) {
       if (!props.userId) {
         navigate("/login", { replace: true });
+        window.alert("Please login to view your watchlist!");
         return;
       }
       let response = await fetch(

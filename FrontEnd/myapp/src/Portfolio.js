@@ -29,6 +29,7 @@ function Portfolio(props) {
     async function fetchAPI(props) {
       if (!props.userId) {
         navigate("/login", { replace: true });
+        window.alert("Please login to view your portfolio!");
         return;
       }
       let response = await fetch(
