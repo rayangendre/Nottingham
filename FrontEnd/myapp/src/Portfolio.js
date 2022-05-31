@@ -101,12 +101,12 @@ function Portfolio(props) {
             <Col></Col>
             <nav>
               <Link to="/buy">
-                <button type="submit" class="btn btn-primary w-25">
+                <button type="submit" className="btn btn-primary w-25">
                   Buy
                 </button>
               </Link>
               <Link to="/sell">
-                <button type="submit" class="btn btn-primary w-25">
+                <button type="submit" className="btn btn-primary w-25">
                   Sell
                 </button>
               </Link>
