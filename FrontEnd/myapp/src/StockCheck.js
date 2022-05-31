@@ -6,10 +6,9 @@ import { currencyFormat } from "./Table.js";
 
 import axios from "axios";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function StockCheck() {
-  let myvalue, myquery;
   const [message, setMessage] = useState("");
 
   async function HandleSubmit(e) {

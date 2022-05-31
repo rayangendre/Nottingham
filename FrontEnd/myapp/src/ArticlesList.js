@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Grid, Header, Image } from "semantic-ui-react";
+import { List, Grid, Header } from "semantic-ui-react";
 
 const ArticleItem = (props) => {
   const { article } = props;

@@ -2,10 +2,7 @@ import React from "react";
 import Plot from "react-plotly.js";
 import { articles } from "./News.js";
 import { Container, Header } from "semantic-ui-react";
-import { List } from "semantic-ui-react";
 import { ArticleList } from "./ArticlesList.js";
-
-let StockSymbol = "V";
 
 class Stock extends React.Component {
   constructor(props) {
