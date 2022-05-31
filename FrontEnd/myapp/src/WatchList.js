@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import Button from "react-bootstrap/Button"
 import "./App.css";
@@ -15,26 +15,27 @@ function createData(name, price) {
 
 function Watchlist(props) {
   //need to be getting the price of each stock through finhub, to be changed
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchAPI(props) {
-      if (props.userId !== "") {
-        let response = await fetch(
-          "http://localhost:4000/users/".concat(props.userId)
-        ).then((res) => res.json());
-        let watchListTable = [];
-
-        for (var i = 0; i < response.users_list.watchList.length; i++) {
-          const price = await getPriceFromTicker(
-            response.users_list.watchList[i]
-          );
-          watchListTable.push(
-            createData(response.users_list.watchList[i], price)
-          );
-        }
-        setPersonalWatchlist(watchListTable);
-      } else {
-        setPersonalWatchlist([]);
+      if (!props.userId) {
+        navigate("/login", { replace: true });
+        return;
       }
+      let response = await fetch(
+        "http://localhost:4000/users/".concat(props.userId)
+      ).then((res) => res.json());
+      let watchListTable = [];
+
+      for (var i = 0; i < response.users_list.watchList.length; i++) {
+        const price = await getPriceFromTicker(
+          response.users_list.watchList[i]
+        );
+        watchListTable.push(
+          createData(response.users_list.watchList[i], price)
+        );
+      }
+      setPersonalWatchlist(watchListTable);
     }
     fetchAPI(props);
   }, []);
