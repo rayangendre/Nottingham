@@ -21,7 +21,7 @@ import { StockCheck } from "../StockCheck.js";
 import { Portfolio } from "../Portfolio.js";
 import { useCookies } from "react-cookie";
 import { Dynamic } from "../Dynamic.js";
-import { LogOut } from "../LogOut.js";
+import { LogOut } from "../logout.js";
 
 import { useEffect } from "react";
 import axios from "axios";
