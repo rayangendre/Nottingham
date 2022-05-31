@@ -21,6 +21,7 @@ import { StockCheck } from "../StockCheck.js";
 import { Portfolio } from "../Portfolio.js";
 import { useCookies } from "react-cookie";
 import { Dynamic } from "../Dynamic.js";
+import { LogOut } from "../LogOut.js";
 
 import { useEffect } from "react";
 import { componentDidMount } from "react";
@@ -164,7 +165,7 @@ const Navbar = () => {
         />
         <Route
           path="logout"
-          element={<LogIn userId={userId} userName={userName} />}
+          element={<LogOut userId={userId} userName={userName} />}
         />
         <Route
           path="signup"

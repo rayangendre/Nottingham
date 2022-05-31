@@ -16,6 +16,7 @@ function LogOut(props) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  console.log("LOGOUT AT ONCE");
 
   async function handleSubmit(event) {
     //Prevent page reload
@@ -35,23 +36,6 @@ function LogOut(props) {
       });
 
     // Compare user info
-    if (userData) {
-      if (userData.status == 200) {
-        props.setId(userData.data.id);
-        console.log("ID in the login");
-        console.log(userData.data.id);
-        props.setName(userData.data.name);
-        props.setToken(userData.data.token);
-        console.log(userData);
-        setIsSubmitted(true);
-      } else if (userData.status == 401) {
-        if (userData.data.error == "Unauthorized Username") {
-          setErrorMessages({ name: "uname", message: errors.uname });
-        } else {
-          setErrorMessages({ name: "pass", message: errors.pass });
-        }
-      }
-    }
   }
 
   // Generate JSX code for error message
@@ -65,11 +49,11 @@ function LogOut(props) {
   return (
     <div>
       <Row>
-        <Col></Col>
         <Col>
-          <h2>Are you sure you want to log out of {props.userName} </h2>
+          <h2>Are you sure you want to log out of {props.userName}?</h2>
         </Col>
       </Row>
+      <Row></Row>
       <nav>
         <Link to="/">
           <button type="submit" class="btn btn-primary w-25">
