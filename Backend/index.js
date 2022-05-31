@@ -231,7 +231,9 @@ app.put("/users", async (req, res) => {
   values.name = name;
 
   const result = await userServices.removeStock(values);
-
+  if (result == false) {
+    res.status(500).end();
+  }
   if (result) {
     res.status(200).send(result);
   } else {
@@ -255,6 +257,10 @@ app.put("/users/:id", async (req, res) => {
 
   const result = await userServices.removeStock(values);
 
+  if (result == false) {
+    console.log("Returning 500");
+    res.status(500).end();
+  }
   if (result) {
     res.status(200).send(result);
   } else {

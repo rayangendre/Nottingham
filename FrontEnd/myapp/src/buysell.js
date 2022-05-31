@@ -228,19 +228,28 @@ class Sell extends React.Component {
           `Sell ${this.state.numberOfShares} shares of ${this.state.name}?`
         ) == true
       ) {
-        let res = axios.put(
-          "http://localhost:4000/users/".concat(this.props.userId),
-          {
-            portfolioSub: {
-              name: this.state.name,
-              numShares: parseInt(this.state.numberOfShares),
-            },
-            watchListSub: "",
-          }
-        );
-        alert(
-          "Sold " + this.state.numberOfShares + " shares of " + this.state.name
-        );
+        try {
+          let res = await axios.put(
+            "http://localhost:4000/users/".concat(this.props.userId),
+            {
+              portfolioSub: {
+                name: this.state.name,
+                numShares: parseInt(this.state.numberOfShares),
+              },
+              watchListSub: "",
+            }
+          );
+          alert(
+            "Sold " +
+              this.state.numberOfShares +
+              " shares of " +
+              this.state.name
+          );
+        } catch (err) {
+          alert(
+            "DO NOT OWN " + this.state.name + ", sell a stock that you own"
+          );
+        }
       }
     } else {
       alert("Enter a stock to sell");
