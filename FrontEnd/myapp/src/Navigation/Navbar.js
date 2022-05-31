@@ -81,9 +81,9 @@ const Navbar = () => {
   return (
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">
+        <Link to="/" className="navbar-brand">
           NOTTINGHAM
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -99,24 +99,24 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href={userName ? "/logout" : "/login"}>
+              <Link to={userName ? "/logout" : "/login"} className="nav-link">
                 {userName ? userName : "Login"}
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/portfolio">
+              <Link to="/portfolio" className="nav-link">
                 Portfolio
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/watchlist">
+              <Link to="/watchlist" className="nav-link">
                 Watchlist
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/stockcheck">
+              <Link to="/stockcheck" className="nav-link">
                 StockCheck
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
               <a
