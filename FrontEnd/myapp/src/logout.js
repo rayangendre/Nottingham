@@ -16,7 +16,6 @@ function LogOut(props) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  console.log("LOGOUT AT ONCE");
 
   async function handleSubmit(event) {
     //Prevent page reload

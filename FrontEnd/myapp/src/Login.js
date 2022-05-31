@@ -16,7 +16,6 @@ function LogIn(props) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  console.log("WHY AM I HERE");
 
   const errors = {
     uname: "invalid username",
