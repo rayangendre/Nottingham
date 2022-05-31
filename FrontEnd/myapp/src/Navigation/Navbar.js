@@ -99,7 +99,7 @@ const Navbar = () => {
           <ul className="navbar-nav">
             <li className="nav-item active">
               <a className="nav-link" href="/login">
-                Login
+                {userName ? userName : "Login"}
               </a>
             </li>
             <li className="nav-item">
