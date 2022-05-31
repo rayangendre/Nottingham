@@ -25,9 +25,8 @@ function LogOut(props) {
 
     // Find user login info
     const userData = await axios
-      .post("http://localhost:4000/login", {
+      .post("http://localhost:4000/logout", {
         name: uname.value,
-        pwd: pass.value,
       })
       .catch((error) => {
         console.log("caught 401 error");
