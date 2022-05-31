@@ -175,6 +175,10 @@ async function removeStock(values) {
       return item.name == values.portfolioSub.name;
     });
     console.log("Removing:", indexForRemoval);
+    if (indexForRemoval === -1) {
+      return false;
+    }
+
     newPortList[indexForRemoval].numShares -= values.portfolioSub.numShares;
     const update = { portfolioList: newPortList };
     const filter = { _id: user.id };
