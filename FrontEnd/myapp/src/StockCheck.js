@@ -50,15 +50,15 @@ function StockCheck() {
       <main>
         <h2>StockCheck</h2>
         <form onSubmit={HandleSubmit}>
-          <div class="mb-3">
-            <label class="form-label">Ticker</label>
+          <div className="mb-3">
+            <label className="form-label">Ticker</label>
             <input
               name="ticker"
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Enter a ticker..."
             />
-            <button type="submit" class="btn btn-outline-primary">
+            <button type="submit" className="btn btn-outline-primary">
               Check Price
             </button>
           </div>
