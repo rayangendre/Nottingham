@@ -1,4 +1,4 @@
-import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import Button from "react-bootstrap/Button"
 import "./App.css";
@@ -17,7 +17,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import BasicTable from "./Table.js";
-import Stock from "./Stock.js";
 
 function createData(name, shares, totalValue, price, percent_change) {
   return { name, shares, totalValue, price, percent_change };
@@ -45,14 +44,14 @@ function Portfolio(props) {
 
         let previous_price = response.users_list.purchase_history;
         console.log("Purchase History ", response.users_list.purchase_history);
-        const percent_change = 0;
-        if (previous_price == undefined) {
+        let percent_change = 0;
+        if (previous_price === undefined) {
           percent_change = 0;
         } else {
           let indexForPreviousPrice = previous_price.findIndex((item) => {
-            return item.ticker == response.users_list.portfolioList[i].name;
+            return item.ticker === response.users_list.portfolioList[i].name;
           });
-          if (indexForPreviousPrice != -1) {
+          if (indexForPreviousPrice !== -1) {
             previous_price = previous_price[indexForPreviousPrice].price;
             percent_change = ((price - previous_price) / previous_price) * 100;
           }

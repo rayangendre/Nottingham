@@ -1,10 +1,9 @@
 import logo from "./logo.svg";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Stack from "react-bootstrap/Stack";
 import Form from "react-bootstrap/Form";
 import React from "react";
 import axios from "axios";
@@ -62,11 +61,11 @@ class Buy extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    if (this.state.name != "" && this.state.numberOfShares != null) {
+    if (this.state.name !== "" && this.state.numberOfShares != null) {
       if (
         isNaN(this.state.numberOfShares) ||
         this.state.numberOfShares <= 0 ||
-        parseInt(this.state.numberOfShares) !=
+        parseInt(this.state.numberOfShares) !==
           parseFloat(this.state.numberOfShares)
       ) {
         alert("Please enter a positive whole number.");
@@ -75,10 +74,10 @@ class Buy extends React.Component {
       if (
         window.confirm(
           `Buy ${this.state.numberOfShares} shares of ${this.state.name}?`
-        ) == true
+        ) === true
       ) {
         const numPrice = await this.validTicker(this.state.name);
-        if (numPrice != 0) {
+        if (numPrice !== 0) {
           let res = axios.patch(
             "http://localhost:4000/users/".concat(this.props.userId),
             {
@@ -208,11 +207,11 @@ class Sell extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    if (this.state.name != "" && this.state.numberOfShares != null) {
+    if (this.state.name !== "" && this.state.numberOfShares != null) {
       if (
         isNaN(this.state.numberOfShares) ||
         this.state.numberOfShares <= 0 ||
-        parseInt(this.state.numberOfShares) !=
+        parseInt(this.state.numberOfShares) !==
           parseFloat(this.state.numberOfShares)
       ) {
         alert("Please enter a positive whole number.");
@@ -221,7 +220,7 @@ class Sell extends React.Component {
       if (
         window.confirm(
           `Sell ${this.state.numberOfShares} shares of ${this.state.name}?`
-        ) == true
+        ) === true
       ) {
         let res = axios.put(
           "http://localhost:4000/users/".concat(this.props.userId),

@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import React from "react";
@@ -41,7 +41,7 @@ function LogIn(props) {
 
     // Compare user info
     if (userData) {
-      if (userData.status == 200) {
+      if (userData.status === 200) {
         props.setId(userData.data.id);
         console.log("ID in the login");
         console.log(userData.data.id);
@@ -49,8 +49,8 @@ function LogIn(props) {
         props.setToken(userData.data.token);
         console.log(userData);
         setIsSubmitted(true);
-      } else if (userData.status == 401) {
-        if (userData.data.error == "Unauthorized Username") {
+      } else if (userData.status === 401) {
+        if (userData.data.error === "Unauthorized Username") {
           setErrorMessages({ name: "uname", message: errors.uname });
         } else {
           setErrorMessages({ name: "pass", message: errors.pass });

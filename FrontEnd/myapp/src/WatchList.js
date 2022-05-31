@@ -1,4 +1,4 @@
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import Button from "react-bootstrap/Button"
 import "./App.css";
@@ -66,8 +66,8 @@ function Watchlist(props) {
     e.preventDefault();
     if (
       personalWatchlist.findIndex((item) => {
-        return item.name == toBeAdded;
-      }) != -1
+        return item.name === toBeAdded;
+      }) !== -1
     ) {
       alert("Already on watchlist");
       return;
@@ -89,7 +89,7 @@ function Watchlist(props) {
     console.log(e);
     let newWatchlist = [].concat(personalWatchlist);
     newWatchlist = newWatchlist.filter(function (entry) {
-      return entry != e;
+      return entry !== e;
     });
     console.log(newWatchlist);
     setPersonalWatchlist(newWatchlist);

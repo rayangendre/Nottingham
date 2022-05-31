@@ -118,9 +118,9 @@ const Navbar = () => {
                 StockCheck
               </a>
             </li>
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle"
                 href="/"
                 id="navbarDropdownMenuLink"
                 data-toggle="dropdown"
@@ -130,16 +130,16 @@ const Navbar = () => {
                 Account
               </a>
               <div
-                class="dropdown-menu"
+                className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Login
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Logout
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Sign Up
                 </a>
               </div>

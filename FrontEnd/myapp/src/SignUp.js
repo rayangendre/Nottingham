@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import React from "react";
@@ -42,11 +42,11 @@ function SignUp(props) {
 
     // Compare user info
     if (userData) {
-      if (userData.status == 201) {
+      if (userData.status === 201) {
         props.setId(userData.data.id);
         props.setName(userData.data.name);
         setIsSubmitted(true);
-      } else if (userData.status == 409) {
+      } else if (userData.status === 409) {
         setErrorMessages({ name: "exists", message: errors.exists });
       } else {
         setErrorMessages({ name: "fail", message: errors.fail });
