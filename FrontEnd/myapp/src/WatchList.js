@@ -61,6 +61,26 @@ function Watchlist(props) {
     return parseFloat(stockPrice["data"]["c"]);
   }
 
+  async function validTicker(ticker) {
+    const stockPrice = await axios.get(
+      "https://finnhub.io/api/v1/quote?symbol="
+        .concat(ticker.toUpperCase())
+        .concat("&token=")
+        .concat(process.env.REACT_APP_FINHUB_API_KEY)
+    );
+
+    const numPrice = parseFloat(stockPrice["data"]["c"]);
+    console.log("price");
+    console.log(numPrice);
+    return numPrice;
+    // if (numPrice === 0) {
+    //   console.log("returning false");
+    //   return false;
+    // } else {
+    //   return true;
+    // }
+  }
+
   async function HandleSubmit(e) {
     const toBeAdded = e.target.watch.value;
     console.log(toBeAdded);
@@ -74,15 +94,20 @@ function Watchlist(props) {
       return;
     }
     if (props.userId !== "") {
-      const price = await getPriceFromTicker(toBeAdded);
+      // const price = await getPriceFromTicker(toBeAdded);
+      const price = await validTicker(toBeAdded);
       console.log(price);
-      setPersonalWatchlist([
-        ...personalWatchlist,
-        { name: toBeAdded, price: price },
-      ]);
-      await axios.patch("http://localhost:4000/users/".concat(props.userId), {
-        watchListAddition: toBeAdded,
-      });
+      if (price != 0) {
+        setPersonalWatchlist([
+          ...personalWatchlist,
+          { name: toBeAdded, price: price },
+        ]);
+        await axios.patch("http://localhost:4000/users/".concat(props.userId), {
+          watchListAddition: toBeAdded,
+        });
+      } else {
+        alert("Invalid stock name");
+      }
     }
   }
 
