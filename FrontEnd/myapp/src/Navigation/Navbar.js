@@ -98,7 +98,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="/login">
+              <a className="nav-link" href={userName ? "/logout" : "/login"}>
                 {userName ? userName : "Login"}
               </a>
             </li>
@@ -161,6 +161,10 @@ const Navbar = () => {
               setToken={setToken}
             />
           }
+        />
+        <Route
+          path="logout"
+          element={<LogIn userId={userId} userName={userName} />}
         />
         <Route
           path="signup"
