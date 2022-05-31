@@ -24,16 +24,13 @@ import { Dynamic } from "../Dynamic.js";
 import { LogOut } from "../LogOut.js";
 
 import { useEffect } from "react";
-import { componentDidMount } from "react";
 import axios from "axios";
 require("dotenv").config();
 const Navbar = () => {
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
-  const [data, setData] = React.useState({});
   const [cookies, setCookie] = useCookies(["auth_token"]);
-  const [ticker, setTicker] = useState("");
-  const [characters, setCharacters] = useState([]);
+  const [ticker] = useState("");
 
   //sets the auth token of the user
   function setToken(token) {
@@ -118,32 +115,6 @@ const Navbar = () => {
                 StockCheck
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="/"
-                id="navbarDropdownMenuLink"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Account
-              </a>
-              <div
-                className="dropdown-menu"
-                aria-labelledby="navbarDropdownMenuLink"
-              >
-                <a className="dropdown-item" href="#">
-                  Login
-                </a>
-                <a className="dropdown-item" href="#">
-                  Logout
-                </a>
-                <a className="dropdown-item" href="#">
-                  Sign Up
-                </a>
-              </div>
-            </li>
           </ul>
         </div>
       </nav>
@@ -179,13 +150,5 @@ const Navbar = () => {
     </div>
   );
 };
-
-function Home(props) {
-  return (
-    <div>
-      <Navbar />
-    </div>
-  );
-}
 
 export default Navbar;
