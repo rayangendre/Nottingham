@@ -95,11 +95,6 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
-            <li className="nav-item active">
-              <Link to={userName ? "/logout" : "/login"} className="nav-link">
-                {userName ? userName : "Login"}
-              </Link>
-            </li>
             <li className="nav-item">
               <Link to="/portfolio" className="nav-link">
                 Portfolio
@@ -113,6 +108,15 @@ const Navbar = () => {
             <li className="nav-item">
               <Link to="/stockcheck" className="nav-link">
                 StockCheck
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div class="navbar navbar-expand-lg navbar-light bg-light text-right">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link to={userName ? "/logout" : "/login"} className="nav-link">
+                {userName ? userName : "Login"}
               </Link>
             </li>
           </ul>
