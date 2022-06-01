@@ -57,10 +57,11 @@ jobs:
       - run: pwd
       - run: npm install
       - run: CI='' npm run build --if-present
+      - run: ls
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: ./public
+          build_dir: build
         env:
           GITHUB_TOKEN: ${{ secrets.G_REPO_TOKEN }}
