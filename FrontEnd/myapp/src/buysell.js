@@ -240,7 +240,7 @@ class Sell extends React.Component {
           );
         } catch (err) {
           alert(
-            "DO NOT OWN " + this.state.name + ", sell a stock that you own"
+            "DO NOT OWN " + this.state.name + ", Sell a stock that you own"
           );
         }
       }
