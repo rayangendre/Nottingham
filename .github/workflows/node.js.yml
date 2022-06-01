@@ -48,12 +48,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        run: pwd
 
       - name: Install and Build
-        run: npm install && CI='' npm run build
+        run: npm install && CI='' npm run build && pwd && ls
 
       - name: Deploy
+        run: pwd
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
-          folder: build
+          folder: Frontend/myapp/build
