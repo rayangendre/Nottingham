@@ -1,5 +1,4 @@
 import { Component } from "react";
-import App from "./App";
 
 class ApiTest extends Component {
   constructor(props) {

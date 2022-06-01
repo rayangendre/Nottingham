@@ -1,14 +1,10 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import Button from "react-bootstrap/Button"
 import "../App.css";
 import "../Table.js";
 import "../index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-//import '../node_modules/react-vis/dist/style.css';
-//import {XYPlot, LineSeries} from 'react-vis';
 
 import { Buy, Sell } from "../buysell.js";
 
