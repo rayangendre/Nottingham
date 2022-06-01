@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import { useState } from "react";
 import "./login-styles.css";
 
 import Col from "react-bootstrap/esm/Col";
