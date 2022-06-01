@@ -15,7 +15,7 @@ export function currencyFormat(number) {
 
 export function percentChange(number) {
   if (number < 0) {
-    return "-" + number.toFixed(2);
+    return "" + number.toFixed(2);
   } else if (number > 0) {
     return "+" + number.toFixed(2);
   } else {
