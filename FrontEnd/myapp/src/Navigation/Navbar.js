@@ -140,7 +140,14 @@ const Navbar = () => {
         />
         <Route
           path="logout"
-          element={<LogOut userId={userId} userName={userName} />}
+          element={
+            <LogOut
+              userId={userId}
+              setId={setId}
+              setName={setName}
+              setToken={setToken}
+            />
+          }
         />
         <Route
           path="signup"
