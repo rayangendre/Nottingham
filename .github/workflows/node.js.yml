@@ -54,13 +54,13 @@ jobs:
           cache: "npm"
           cache-dependency-path: FrontEnd/myapp/package-lock.json
 
-      # - run: npm install
-      # - run: npm run build --if-present
-      # - name: Deploy
-      #   working-directory: ./FrontEnd/myapp
-      #   uses: crazy-max/ghaction-github-pages@v3
-      #   with:
-      #     target_branch: gh-pages
-      #     build_dir: build
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.G_REPO_TOKEN }}
+      - run: npm install
+      - run: npm run build --if-present
+      - name: Deploy
+        working-directory: ./FrontEnd/myapp
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.G_REPO_TOKEN }}
