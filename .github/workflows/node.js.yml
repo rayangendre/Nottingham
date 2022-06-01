@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./FrontEnd/myapp
+        working-directory: /home/runner/work/Nottingham/Nottingham/FrontEnd/myapp
 
     strategy:
       matrix:
