@@ -54,6 +54,7 @@ jobs:
           cache: "npm"
           cache-dependency-path: FrontEnd/myapp/package-lock.json
 
+      - run: pwd
       - run: npm install
       - run: CI='' npm run build --if-present
       - name: Deploy
