@@ -17,23 +17,10 @@ function LogOut(props) {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  async function handleSubmit(event) {
-    //Prevent page reload
-    event.preventDefault();
-
-    var { uname, pass } = document.forms[0];
-
-    // Find user login info
-    const userData = await axios
-      .post("http://localhost:4000/logout", {
-        name: uname.value,
-      })
-      .catch((error) => {
-        console.log("caught 401 error");
-        return error.response;
-      });
-
-    // Compare user info
+  async function handleLogout(event) {
+    props.setId("");
+    props.setName("");
+    props.setToken("");
   }
 
   // Generate JSX code for error message
@@ -54,7 +41,11 @@ function LogOut(props) {
       <Row></Row>
       <nav>
         <Link to="/">
-          <button type="submit" class="btn btn-primary w-25">
+          <button
+            type="submit"
+            class="btn btn-primary w-25"
+            onClick={handleLogout}
+          >
             Log me out
           </button>
         </Link>
