@@ -52,11 +52,14 @@ jobs:
       - name: Direct1
         run: pwd
 
+      - name: Directc
+        run: pwd && ls /home/runner/work/Nottingham/Nottingham/FrontEnd/myapp
+
       - name: Install and Build
         run: npm install && CI='' npm run build
 
       - name: Direct2
-        run: pwd && ls /home/runner/work/Nottingham/Nottingham
+        run: pwd && ls /home/runner/work/Nottingham/Nottingham/FrontEnd/myapp
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.3
