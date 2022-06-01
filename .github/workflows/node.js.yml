@@ -51,11 +51,25 @@ jobs:
           cache: "npm"
           cache-dependency-path: FrontEnd/myapp/package-lock.json
 
-      - run: npm ci
+      - run: npm install
       - run: npm run build --if-present
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: Deploy
+        uses: crazy-max/ghaction-github-pages@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "nottinghamstocks" #Must be unique on Heroku
-          heroku_email: "cbohley@calpoly.edu" #Must be the one you used on Heroku
-          appdir: "FrontEnd/myapp"
+          target_branch: gh-pages
+          build_dir: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.G_REPO_TOKEN }}
+
+      # # - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      # #   with:
+      # #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      # #     heroku_app_name: "nottinghamstocks" #Must be unique on Heroku
+      # #     heroku_email: "cbohley@calpoly.edu" #Must be the one you used on Heroku
+      # #     appdir: "FrontEnd/myapp"
+      # - name: Netlify Deploy
+      # # uses: jsmrcaga/action-netlify-deploy@v1.7.1
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #   run: netlify deploy --prod
