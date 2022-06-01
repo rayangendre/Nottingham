@@ -37,6 +37,9 @@ jobs:
 
   build-frontend:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./FrontEnd/myapp
 
     strategy:
       matrix:
@@ -45,33 +48,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./FrontEnd/myapp
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           cache-dependency-path: FrontEnd/myapp/package-lock.json
 
-      - run: npm install
-      - run: npm run build --if-present
-      - name: Deploy
-        working-directory: ./FrontEnd/myapp
-        uses: crazy-max/ghaction-github-pages@v3
-        with:
-          target_branch: gh-pages
-          build_dir: build
-        env:
-          GITHUB_TOKEN: ${{ secrets.G_REPO_TOKEN }}
-
-      # # - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      # #   with:
-      # #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-      # #     heroku_app_name: "nottinghamstocks" #Must be unique on Heroku
-      # #     heroku_email: "cbohley@calpoly.edu" #Must be the one you used on Heroku
-      # #     appdir: "FrontEnd/myapp"
-      # - name: Netlify Deploy
-      # # uses: jsmrcaga/action-netlify-deploy@v1.7.1
+      # - run: npm install
+      # - run: npm run build --if-present
+      # - name: Deploy
+      #   working-directory: ./FrontEnd/myapp
+      #   uses: crazy-max/ghaction-github-pages@v3
+      #   with:
+      #     target_branch: gh-pages
+      #     build_dir: build
       #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #   run: netlify deploy --prod
+      #     GITHUB_TOKEN: ${{ secrets.G_REPO_TOKEN }}
