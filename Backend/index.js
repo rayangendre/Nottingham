@@ -20,7 +20,7 @@ function generateAccessToken(username) {
 }
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello World we are connected!");
 });
 
 app.post("/login", async (req, res) => {
