@@ -112,7 +112,7 @@ const Navbar = () => {
           <ul className="navbar-nav">
             <li className="nav-item active">
               <Link to={userName ? "/logout" : "/login"} className="nav-link">
-                {userName ? userName : "Login"}
+                {userName ? userName : "Log in"}
               </Link>
             </li>
           </ul>
