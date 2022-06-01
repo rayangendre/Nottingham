@@ -62,7 +62,7 @@ const Navbar = () => {
     }
   }
 
-  //sets the id of the current user that is logged in
+  //sets the id of the current user that is currently logged in
   function setId(userId) {
     setUserId(userId);
   }
