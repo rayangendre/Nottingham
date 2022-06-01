@@ -57,4 +57,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nottinghamstocks" #Must be unique on Heroku
           heroku_email: "cbohley@calpoly.edu" #Must be the one you used on Heroku
-          appdir: "Frontend/myapp"
+          appdir: "FrontEnd/myapp"
