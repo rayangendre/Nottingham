@@ -245,7 +245,7 @@ class Sell extends React.Component {
         }
       }
     } else {
-      alert("Enter a stock to sell");
+      alert("Enter a stock to sell ");
     }
   }
 
