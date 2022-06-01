@@ -28,7 +28,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action needed
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nottingham-csc309" #Must be unique on Heroku
