@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ../Frontend/myapp
+        working-directory: FrontEnd/myapp
 
     strategy:
       matrix:
