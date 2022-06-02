@@ -50,8 +50,11 @@ const Navbar = () => {
       const config = {
         headers: { Authorization: "Bearer ".concat(cookies.auth_token) },
       };
-
-      const response = await axios.get("http://localhost:4000/users", config);
+      console.log(process.env.REACT_APP_BACKEND_URL);
+      const response = await axios.get(
+        process.env.REACT_APP_BACKEND_URL.concat("users"),
+        config
+      );
       console.log(response);
       console.log(response.data.users_list);
       return response.data.users_list;

@@ -49,17 +49,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Direct1
-        run: pwd
-
-      - name: Directc
-        run: pwd && ls /home/runner/work/Nottingham/Nottingham/FrontEnd/myapp
-
       - name: Install and Build
         run: npm install && CI='' npm run build
-
-      - name: Direct2
-        run: pwd && ls /home/runner/work/Nottingham/Nottingham/FrontEnd/myapp
+        env:
+          REACT_APP_NEWS_API_KEY: ${{secrets.REACT_APP_NEWS_API_KEY}}
+          REACT_APP_FINHUB_API_KEY: ${{secrets.REACT_APP_FINHUB_API_KEY}}
+          REACT_APP_ALPHA_KEY: ${{secrets.REACT_APP_ALPHA_KEY}}
+          REACT_APP_BACKEND_URL: ${{secrets.REACT_APP_BACKEND_URL}}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.3
