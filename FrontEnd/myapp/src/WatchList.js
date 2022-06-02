@@ -24,7 +24,7 @@ function Watchlist(props) {
         return;
       }
       let response = await fetch(
-        "http://localhost:4000/users/".concat(props.userId)
+        process.env.REACT_APP_BACKEND_URL.concat("users/").concat(props.userId)
       ).then((res) => res.json());
       let watchListTable = [];
 
@@ -102,9 +102,14 @@ function Watchlist(props) {
           ...personalWatchlist,
           { name: toBeAdded, price: price },
         ]);
-        await axios.patch("http://localhost:4000/users/".concat(props.userId), {
-          watchListAddition: toBeAdded,
-        });
+        await axios.patch(
+          process.env.REACT_APP_BACKEND_URL.concat("users/").concat(
+            props.userId
+          ),
+          {
+            watchListAddition: toBeAdded,
+          }
+        );
       } else {
         alert("Invalid stock name");
       }
@@ -119,9 +124,12 @@ function Watchlist(props) {
     });
     console.log(newWatchlist);
     setPersonalWatchlist(newWatchlist);
-    await axios.put("http://localhost:4000/users/".concat(props.userId), {
-      watchListSub: e.name,
-    });
+    await axios.put(
+      process.env.REACT_APP_BACKEND_URL.concat("users/").concat(props.userId),
+      {
+        watchListSub: e.name,
+      }
+    );
   }
 
   const [personalWatchlist, setPersonalWatchlist] = useState([]);

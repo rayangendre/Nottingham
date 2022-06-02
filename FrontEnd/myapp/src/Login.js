@@ -23,14 +23,14 @@ function LogIn(props) {
   };
 
   async function handleSubmit(event) {
-    //Prevent page reloaded
+    //Prevent page reloadedd
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
 
     // Find user login info
     const userData = await axios
-      .post("http://localhost:4000/login", {
+      .post(process.env.REACT_APP_BACKEND_URL.concat("login"), {
         name: uname.value,
         pwd: pass.value,
       })

@@ -7,7 +7,7 @@ class ApiTest extends Component {
   }
 
   callAPI() {
-    fetch("http://localhost:4000/users")
+    fetch(process.env.REACT_APP_BACKEND_URL.concat("users"))
       .then((res) => res.text())
       .then((res) => this.setState({ apiResponse: res }));
   }

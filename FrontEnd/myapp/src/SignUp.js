@@ -28,7 +28,7 @@ function SignUp(props) {
 
     // Sign up user
     const userData = await axios
-      .post("http://localhost:4000/signup", {
+      .post(process.env.REACT_APP_BACKEND_URL.concat("signup"), {
         name: uname.value,
         pwd: pass.value,
       })
