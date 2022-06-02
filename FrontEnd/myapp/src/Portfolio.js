@@ -33,7 +33,7 @@ function Portfolio(props) {
         return;
       }
       let response = await fetch(
-        "http://localhost:4000/users/".concat(props.userId)
+        process.env.REACT_APP_BACKEND_URL.concat("users/").concat(props.userId)
       ).then((res) => res.json());
       let portfolList = [];
       for (var i = 0; i < response.users_list.portfolioList.length; i++) {

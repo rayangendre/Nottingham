@@ -78,7 +78,9 @@ class Buy extends React.Component {
         const numPrice = await this.validTicker(this.state.name);
         if (numPrice !== 0) {
           let res = axios.patch(
-            "http://localhost:4000/users/".concat(this.props.userId),
+            process.env.REACT_APP_BACKEND_URL.concat("users/").concat(
+              this.props.userId
+            ),
             {
               portfolioAddition: {
                 name: this.state.name,
@@ -88,7 +90,9 @@ class Buy extends React.Component {
             }
           );
           res = axios.put(
-            "http://localhost:4000/purchase_hist/".concat(this.props.userId),
+            process.env.REACT_APP_BACKEND_URL.concat("purchase_hist/").concat(
+              this.props.userId
+            ),
             {
               purchase: {
                 ticker: this.state.name,
@@ -223,7 +227,9 @@ class Sell extends React.Component {
       ) {
         try {
           let res = await axios.put(
-            "http://localhost:4000/users/".concat(this.props.userId),
+            process.env.REACT_APP_BACKEND_URL.concat("users/").concat(
+              this.props.userId
+            ),
             {
               portfolioSub: {
                 name: this.state.name,
