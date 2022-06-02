@@ -23,7 +23,7 @@ function LogIn(props) {
   };
 
   async function handleSubmit(event) {
-    //Prevent page reloaded
+    //Prevent page reloadedd
     event.preventDefault();
 
     var { uname, pass } = document.forms[0];
