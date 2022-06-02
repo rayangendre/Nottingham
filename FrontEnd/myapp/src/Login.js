@@ -30,7 +30,7 @@ function LogIn(props) {
 
     // Find user login info
     const userData = await axios
-      .post("http://localhost:4000/login", {
+      .post(process.env.REACT_APP_BACKEND_URL.concat("login"), {
         name: uname.value,
         pwd: pass.value,
       })
