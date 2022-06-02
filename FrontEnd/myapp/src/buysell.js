@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import React from "react";
 import axios from "axios";
 
+//handles buy
 class Buy extends React.Component {
   constructor(props) {
     super(props);
