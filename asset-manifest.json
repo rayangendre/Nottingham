@@ -1,7 +1,7 @@
 {
   "main.css": "/Nottingham/static/css/main.56996be3.chunk.css",
-  "main.js": "/Nottingham/static/js/main.fa890d87.chunk.js",
-  "main.js.map": "/Nottingham/static/js/main.fa890d87.chunk.js.map",
+  "main.js": "/Nottingham/static/js/main.264b05e8.chunk.js",
+  "main.js.map": "/Nottingham/static/js/main.264b05e8.chunk.js.map",
   "static/js/1.e94d872e.chunk.js": "/Nottingham/static/js/1.e94d872e.chunk.js",
   "static/js/1.e94d872e.chunk.js.map": "/Nottingham/static/js/1.e94d872e.chunk.js.map",
   "static/css/2.b3390e09.chunk.css": "/Nottingham/static/css/2.b3390e09.chunk.css",
@@ -12,6 +12,6 @@
   "static/css/main.56996be3.chunk.css.map": "/Nottingham/static/css/main.56996be3.chunk.css.map",
   "static/css/2.b3390e09.chunk.css.map": "/Nottingham/static/css/2.b3390e09.chunk.css.map",
   "index.html": "/Nottingham/index.html",
-  "precache-manifest.dfc85885d8e65cd940a581e9d7d2cbbe.js": "/Nottingham/precache-manifest.dfc85885d8e65cd940a581e9d7d2cbbe.js",
+  "precache-manifest.76bffc0f84135a02b6c61083400028dd.js": "/Nottingham/precache-manifest.76bffc0f84135a02b6c61083400028dd.js",
   "service-worker.js": "/Nottingham/service-worker.js"
 }
