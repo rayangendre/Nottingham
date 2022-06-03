@@ -19,7 +19,7 @@ import { Portfolio } from "../Portfolio.js";
 import { useCookies } from "react-cookie";
 import { Dynamic } from "../Dynamic.js";
 import { LogOut } from "../logout.js";
-import { StockChart } from "../StockChart.js";
+import StockChart from "../StockChart.js";
 
 import { useEffect } from "react";
 import axios from "axios";
@@ -192,7 +192,7 @@ function Home() {
       <p>Let us help you reach financial freedom</p>
       <h4>Featured Stock</h4>
       <h2>{ticker}</h2>
-      {/* <StockChart symbol={ticker}></StockChart> */}
+      <StockChart symbol={ticker}></StockChart>
     </div>
   );
 }
