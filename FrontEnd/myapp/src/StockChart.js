@@ -13,6 +13,10 @@ class StockChart extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    this.fetchStock();
+  }
+
   fetchStock() {
     const pointerToThis = this;
     console.log(pointerToThis);
@@ -68,4 +72,4 @@ class StockChart extends React.Component {
   }
 }
 
-export default { StockChart };
+export default StockChart;
