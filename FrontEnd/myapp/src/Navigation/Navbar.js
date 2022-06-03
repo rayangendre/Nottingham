@@ -124,7 +124,10 @@ const Navbar = () => {
         </div>
       </nav>
       <Routes>
-        <Route path="/" />
+        <Route
+          path="/"
+          element={<Home userId={userId} userName={userName} />}
+        />
         <Route path="portfolio" element={<Portfolio userId={userId} />} />
         <Route path="watchlist" element={<Watchlist userId={userId} />} />
         <Route path="stockcheck" element={<StockCheck />} />
@@ -162,5 +165,36 @@ const Navbar = () => {
     </div>
   );
 };
+
+function Home() {
+  const tickers = [
+    "SPY",
+    "AAPL",
+    "TSLA",
+    "GOOGL",
+    "NKE",
+    "AMZN",
+    "QQQ",
+    "CRM",
+    "SHOP",
+    "MSFT",
+    "PYPL",
+    "TTD",
+    "TWLO",
+  ];
+  const ticker = tickers[Math.floor(Math.random() * 6)];
+  return (
+    <div>
+      <h2>WELCOME TO NOTTINGHAM</h2>
+      <p1 class="lower-header">
+        We are the leaders in stock trading here at Nottingham
+      </p1>
+      <p>Let us help you reach financial freedom</p>
+      <h4>Featured Stock</h4>
+      <h2>{ticker}</h2>
+      {/* <StockChart symbol={ticker}></StockChart> */}
+    </div>
+  );
+}
 
 export default Navbar;
