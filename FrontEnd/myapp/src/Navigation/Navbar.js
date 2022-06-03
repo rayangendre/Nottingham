@@ -5,6 +5,7 @@ import "../App.css";
 import "../Table.js";
 import "../index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../StockChart.js";
 
 import { Buy, Sell } from "../buysell.js";
 
@@ -18,6 +19,7 @@ import { Portfolio } from "../Portfolio.js";
 import { useCookies } from "react-cookie";
 import { Dynamic } from "../Dynamic.js";
 import { LogOut } from "../logout.js";
+import { StockChart } from "../StockChart.js";
 
 import { useEffect } from "react";
 import axios from "axios";
