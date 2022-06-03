@@ -4,6 +4,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import "./login-styles.css";
+import { useNavigate } from "react-router-dom";
 
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/Row";
@@ -21,6 +22,8 @@ function LogIn(props) {
     uname: "invalid username",
     pass: "invalid password",
   };
+
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     //Prevent page reloadedd
@@ -49,6 +52,8 @@ function LogIn(props) {
         props.setToken(userData.data.token);
         console.log(userData);
         setIsSubmitted(true);
+
+        navigate("/");
       } else if (userData.status === 401) {
         if (userData.data.error === "Unauthorized Username") {
           setErrorMessages({ name: "uname", message: errors.uname });
