@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "88f793bf644d486f85c9",
-    "url": "/Nottingham/static/css/main.95e9e905.chunk.css"
+    "revision": "49855d4ca4d2ad611149",
+    "url": "/Nottingham/static/css/main.08d5c04e.chunk.css"
   },
   {
-    "revision": "88f793bf644d486f85c9",
-    "url": "/Nottingham/static/js/main.88f793bf.chunk.js"
+    "revision": "49855d4ca4d2ad611149",
+    "url": "/Nottingham/static/js/main.49855d4c.chunk.js"
   },
   {
     "revision": "e94d872e0cc5161a7576",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/Nottingham/static/js/runtime~main.7b8ebb50.js"
   },
   {
-    "revision": "8d304c4bfda29ae63ea2b00da5fcc1ea",
+    "revision": "c5eb73d40697a11a42797778e2c01e3b",
     "url": "/Nottingham/index.html"
   }
 ];
