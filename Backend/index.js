@@ -20,7 +20,7 @@ function generateAccessToken(username) {
 }
 
 app.get("/", (req, res) => {
-  res.send("Hello World we are connected!");
+  res.send("Hello World!");
 });
 
 app.post("/login", async (req, res) => {
@@ -158,7 +158,7 @@ app.get("/users", async (req, res) => {
   console.log(name);
   try {
     const result = await userServices.getUsers(name);
-    res.send({ users_list: result });
+    res.status(201).send({ users_list: result });
   } catch (error) {
     console.log(error);
     res.status(500).send("An error ocurred in the server.");
