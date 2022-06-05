@@ -37,6 +37,7 @@ beforeEach(async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   let result = new userModel(dummyUser);
   await result.save();
@@ -49,6 +50,7 @@ beforeEach(async () => {
       { name: "KO", numShares: "5" },
       { name: "BA", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   result = new userModel(dummyUser);
   await result.save();
@@ -57,6 +59,7 @@ beforeEach(async () => {
     name: "Neymar",
     watchList: ["KO", "AAPL"],
     portfolioList: [{ name: "AAPL", numShares: "100" }],
+    pwd: "TEST",
   };
   result = new userModel(dummyUser);
   await result.save();
@@ -69,6 +72,7 @@ beforeEach(async () => {
       { name: "SPXL", numShares: "10" },
       { name: "MA", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   result = new userModel(dummyUser);
   await result.save();
@@ -110,6 +114,7 @@ test("Fetching by valid id and finding", async () => {
   const dummyUser = {
     name: "Harry Potter",
     job: "Young wizard",
+    pwd: "TEST",
   };
   const result = new userModel(dummyUser);
   const addedUser = await result.save();
@@ -124,6 +129,7 @@ test("Deleting a user by Id -- successful path", async () => {
   const dummyUser = {
     name: "Harry Potter",
     job: "Young wizard",
+    pwd: "TEST",
   };
   const result = new userModel(dummyUser);
   const addedUser = await result.save();
