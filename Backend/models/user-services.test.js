@@ -152,6 +152,7 @@ test("Adding user -- successful path", async () => {
       { name: "DIS", numShares: "5" },
       { name: "TTD", numShares: "20" },
     ],
+    pwd: "TEST",
   };
   const result = await userServices.addUser(dummyUser);
   expect(result).toBeTruthy();
@@ -177,6 +178,7 @@ test("Adding user -- failure path with already taken id", async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   const addedUser = await userServices.addUser(dummyUser);
 
@@ -185,6 +187,7 @@ test("Adding user -- failure path with already taken id", async () => {
     name: "Angel DiMaria",
     watchList: [],
     portfolioList: [],
+    pwd: "TEST",
   };
   const result = await userServices.addUser(anotherDummyUser);
   expect(result).toBeFalsy();
@@ -207,6 +210,7 @@ test("Modifying User -- success adding to the watch list", async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   const addedUser = await userServices.addUser(dummyUser);
 
@@ -230,6 +234,7 @@ test("Modifying User -- success adding to the portfolio list", async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   const addedUser = await userServices.addUser(dummyUser);
 
@@ -253,6 +258,7 @@ test("Modifying User -- fail adding to the portfolio list", async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   const addedUser = await userServices.addUser(dummyUser);
 
@@ -274,6 +280,7 @@ test("Modifying User -- failure adding to the watch list", async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   const addedUser = await userServices.addUser(dummyUser);
 
@@ -295,6 +302,7 @@ test("Modifying User -- success removing from the watch list", async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   const addedUser = await userServices.addUser(dummyUser);
 
@@ -318,6 +326,7 @@ test("Modifying User -- success removing from the portfolio list", async () => {
       { name: "V", numShares: "2" },
       { name: "DIS", numShares: "5" },
     ],
+    pwd: "TEST",
   };
   const addedUser = await userServices.addUser(dummyUser);
 
