@@ -52,7 +52,7 @@ function LogIn(props) {
         props.setToken(userData.data.token);
         console.log(userData);
         setIsSubmitted(true);
-
+        // sleep(1000);
         navigate("/");
       } else if (userData.status === 401) {
         if (userData.data.error === "Unauthorized Username") {
@@ -62,6 +62,14 @@ function LogIn(props) {
         }
       }
     }
+  }
+
+  function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
   }
 
   // Generate JSX code for error message

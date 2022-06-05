@@ -7,6 +7,7 @@ import "./login-styles.css";
 
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/Row";
+import { useNavigate } from "react-router-dom";
 
 function SignUp(props) {
   // React States
@@ -14,6 +15,7 @@ function SignUp(props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // User Login info
+  const navigate = useNavigate();
 
   const errors = {
     fail: "failed to create user",
@@ -45,6 +47,7 @@ function SignUp(props) {
         props.setId(userData.data.id);
         props.setName(userData.data.name);
         setIsSubmitted(true);
+        navigate("/");
       } else if (userData.status === 409) {
         setErrorMessages({ name: "exists", message: errors.exists });
       } else {
