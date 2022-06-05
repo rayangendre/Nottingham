@@ -1,4 +1,4 @@
-#Welcome to Nottingham, the leader in everything stocks!
+# Welcome to Nottingham, the leader in everything stocks!
 
 # 308-project
 
