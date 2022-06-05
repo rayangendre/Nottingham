@@ -341,3 +341,55 @@ test("Modifying User -- success removing from the portfolio list", async () => {
   expect(result.name).toBe(dummyUser.name);
   expect(result.portfolioList[0].name).toBe("V");
 });
+
+test("Adding Purchase -- success adding to list", async () => {
+  const dummyUser = {
+    name: "Kylian Mbappe",
+    watchList: ["V", "M", "PYPL"],
+    portfolioList: [
+      { name: "V", numShares: "2" },
+      { name: "DIS", numShares: "5" },
+    ],
+    pwd: "TEST",
+    purchase_history: [],
+  };
+  const addedUser = await userServices.addUser(dummyUser);
+
+  const id = addedUser.id;
+  const purchase = {
+    ticker: "V",
+    price: 200,
+  };
+
+  const result = await userServices.purchase(id, purchase);
+
+  expect(result).toHaveProperty("_id");
+  expect(result.name).toBe(dummyUser.name);
+  expect(result.purchase_history[0].ticker).toBe("V");
+});
+
+test("Adding Purchase -- non null starting list", async () => {
+  const dummyUser = {
+    name: "Kylian Mbappe",
+    watchList: ["V", "M", "PYPL"],
+    portfolioList: [
+      { name: "V", numShares: "2" },
+      { name: "DIS", numShares: "5" },
+    ],
+    pwd: "TEST",
+    purchase_history: [{ ticker: "V", price: 150 }],
+  };
+  const addedUser = await userServices.addUser(dummyUser);
+
+  const id = addedUser.id;
+  const purchase = {
+    ticker: "V",
+    price: 200,
+  };
+
+  const result = await userServices.purchase(id, purchase);
+
+  expect(result).toHaveProperty("_id");
+  expect(result.name).toBe(dummyUser.name);
+  expect(result.purchase_history[0].ticker).toBe("V");
+});

@@ -1,4 +1,4 @@
-# Welcome to Nottingham, the leader in everything stocks!
+Welcome to Nottingham! We are the leader in faux stock trading.
 
 # 308-project
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand ./models",
+    "test": "jest --coverage --coverageDirectory=output/coverage/jest",
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
@@ -25,5 +25,11 @@
     "lint-staged": "^12.3.7",
     "nodemon": "^2.0.15",
     "prettier": "2.6.2"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ]
   }
 }
