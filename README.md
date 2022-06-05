@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-Welcome to Nottingham! We are the leader in faux stock trading.
-
-=======
-
-> > > > > > > e90decb50d6bfc5d84e141b4e3019221ba2ea0d6
+# Welcome to Nottingham! We are the leader in faux stock trading.
 
 # 308-project
 
