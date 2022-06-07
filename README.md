@@ -20,6 +20,10 @@ Before every commit prettier is automatically run in order to fix formatting iss
 
 npm install needs to be run in the root directory to install the prettier dependencies to do the code linting required
 
+### CI/CD
+
+Our CI CD is built with a combination of github actions, github pages, and heroku. Our github workflow yml file located in the .github/workflows folder details the parrallel builds that happen to deploy the Frontend and the Backend. The Frontend is deployed onto github pages. The Backend is deployed onto heroku and the backend tests are run in the pipeline to ensure that all code is running at the moment. Secrets are included and stored under settings that hold the enviroment variables that are used in the Frontend which are pulled and stored on build. The environment variables for the backend are stored directly in Heroku again under settings
+
 ## External Links
 
 ### Storyboard link: https://www.figma.com/file/rA9JkMK6FzikNOncbG1QAZ/Nottingham?node-id=0%3A1

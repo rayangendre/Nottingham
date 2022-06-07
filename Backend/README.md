@@ -21,4 +21,13 @@ Our database schema has the following, which is detailed in the user.js file
 
 ## Testing
 
-Tests can be run by running npm test. Tests can be found in the user-services.test.js file. These tests are also run every time in our continous integration pipeline and cause the failure of the build if they do not pass
+Tests can be run by running npm test. Tests can be found in the user-services.test.js file. These tests are also run every time in our continous integration pipeline and cause the failure of the build if they do not pass. Code coverage report is automatically built into it
+
+#### Testing-mockingoose
+
+The testing-mockingoose branch of the project containts the mockingoose mock tests
+
+## Environment Variables
+
+MONGODB_URI: the uri to connect to the MongoDB Database
+TOKEN_SECRET: the token secret to access the database
