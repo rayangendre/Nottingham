@@ -12,6 +12,16 @@ The Frontend folder holds all of the files needed to run the frontend of the app
 
 The Backend folder holds all of the files needed to run the Backend of the application. More information on running the Frontend can be found in the Readme of the Frontend section
 
+### Code Linting
+
+Before every commit prettier is automatically run in order to fix formatting issues with the code and abide to coding standards. The precommit commands can be found in the .husky folder
+
+### Home Folder setup
+
+npm install needs to be run in the root directory to install the prettier dependencies to do the code linting required
+
+## External Links
+
 ### Storyboard link: https://www.figma.com/file/rA9JkMK6FzikNOncbG1QAZ/Nottingham?node-id=0%3A1
 
 ### Design Document link: https://docs.google.com/document/d/1EZv8KlK8MhqdjzQw7LLkBuAZQAf5MFiTjIGeAwOhu_s/edit?usp=sharing
