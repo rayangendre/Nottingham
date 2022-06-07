@@ -37,8 +37,6 @@ function Portfolio(props) {
       ).then((res) => res.json());
       let portfolList = [];
       for (var i = 0; i < response.users_list.portfolioList.length; i++) {
-        //this line here is adding the actual name, number of shares, and total price to the table
-        //Make the api call here to alpha advantage
         const price = await getPriceFromTicker(
           response.users_list.portfolioList[i].name
         ); //5 API calls per minute, can be a limiter
@@ -81,15 +79,11 @@ function Portfolio(props) {
         .concat("&token=")
         .concat(process.env.REACT_APP_FINHUB_API_KEY)
     );
-    // return await axios.get("https://api.polygon.io/v2/aggs/ticker/".concat(ticker).concat("/prev?adjusted=true&apiKey=").concat(apiKey))
   }
 
   async function getPriceFromTicker(ticker) {
     const stockPrice = await checkPrice(ticker.toUpperCase());
     console.log(stockPrice);
-    // const timeSeriesObject = stockPrice["data"]["Time Series (1min)"]
-    //extract the first key from the JSON, corresponds to the latest minute of data returned
-    // const firstKey = Object.keys(timeSeriesObject)[0]
 
     return parseFloat(stockPrice["data"]["c"]);
   }

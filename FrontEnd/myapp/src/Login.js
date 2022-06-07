@@ -9,10 +9,6 @@ import { useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/Row";
 
-//fake user
-//username: test3
-//password: hello
-
 function LogIn(props) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});

@@ -15,23 +15,15 @@ function StockCheck() {
     console.log(e.target.ticker.value);
     e.preventDefault();
     const ticker = e.target.ticker.value.toUpperCase();
-    //console.log("Ticker: ", ticker)
+
     //calls the API using the stock ticker
     const stockPrice = await checkPrice(ticker);
-    //console.log("Price: ", stockPrice)
-    //the object that is extracted from the API response, since it is not a list we must do extra processing
-    //const timeSeriesObject = stockPrice["data"]["Time Series (1min)"];
-    //extract the first key from the JSON, corresponds to the latest minute of data returned
-    //const firstKey = Object.keys(timeSeriesObject)[0];
-    //set the price of the stock using the key we extracted and take the closing price
+
     const message = "The value of "
       .concat(ticker)
       .concat(" is ")
       .concat(currencyFormat(stockPrice));
     setMessage(message);
-    //console.log("Message: ", message);
-    // console.log(firstKey)
-    // console.log(stockPrice["data"]["Time Series (1min)"][firstKey]["4. close"])
   }
 
   async function checkPrice(ticker) {

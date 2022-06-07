@@ -94,8 +94,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-/* Using this funcion as a "middleware" function for
-  all the endpoints that need access control protecion */
 function authenticateUser(req, res, next) {
   const authHeader = req.headers["authorization"];
   //Getting the 2nd part of the auth hearder (the token)
@@ -107,16 +105,8 @@ function authenticateUser(req, res, next) {
     console.log("No token received");
     return res.status(401).end();
   } else {
-    // If a callback is supplied, verify() runs async
-    // If a callback isn't supplied, verify() runs synchronously
-    // verify() throws an error if the token is invalid
     try {
-      // verify() returns the decoded obj which includes whatever objs
-      // we use to code/sign the token
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-      // in our case, we used the username to sign the token
-      // console.log(decoded);
-
       return decoded;
     } catch (error) {
       console.log(error);
@@ -129,7 +119,6 @@ app.get("/users", async (req, res) => {
   console.log("Calling getUsers in the API");
 
   const authHeader = req.headers["authorization"];
-  //Getting the 2nd part of the auth hearder (the token)
   const token = authHeader && authHeader.split(" ")[1];
 
   console.log("Calling Authenticate Users");
@@ -139,15 +128,8 @@ app.get("/users", async (req, res) => {
     console.log("No token received");
     return res.status(401).end();
   } else {
-    // If a callback is supplied, verify() runs async
-    // If a callback isn't supplied, verify() runs synchronously
-    // verify() throws an error if the token is invalid
     try {
-      // verify() returns the decoded obj which includes whatever objs
-      // we use to code/sign the token
       decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-      // in our case, we used the username to sign the token
-      // console.log(decoded);
     } catch (error) {
       console.log(error);
       return res.status(401).end();

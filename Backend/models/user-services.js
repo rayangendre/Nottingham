@@ -60,13 +60,10 @@ async function updateUser(values) {
   const userModel = getDbConnection().model("User", UserSchema);
   let user;
   if (values.id) {
-    //console.log("Using ID")
     user = await findUserById(values.id);
     console.log(user);
   } else if (values.name) {
-    //console.log("Using name")
     user = await findUserByName(values.name);
-    // user = await findUserById(user.id);
   } else {
     return false;
   }
@@ -81,14 +78,11 @@ async function updateUser(values) {
   if (values.watchListAddition != "" && values.watchListAddition != null) {
     let newWatchList = [].concat(user.watchList);
     newWatchList.push(values.watchListAddition);
-    //console.log(user.id)
-    //console.log(user._id)
     const update = { watchList: newWatchList };
     const filter = { _id: user.id };
     const opts = { new: true };
 
     let result = await userModel.findOneAndUpdate(filter, update, opts);
-    //console.log(result)
     if (result) {
       return result;
     } else {
@@ -133,13 +127,10 @@ async function removeStock(values) {
   const userModel = getDbConnection().model("User", UserSchema);
   let user;
   if (values.id) {
-    //console.log("Using ID")
     user = await findUserById(values.id);
     console.log(user);
   } else if (values.name) {
-    //console.log("Using name")
     user = await findUserByName(values.name);
-    // user = await findUserById(user.id);
   } else {
     return false;
   }

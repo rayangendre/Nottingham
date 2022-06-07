@@ -6,10 +6,6 @@ import "./login-styles.css";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/Row";
 
-//fake user
-//username: test3
-//password: hello
-
 function LogOut(props) {
   async function handleLogout() {
     props.setId("");

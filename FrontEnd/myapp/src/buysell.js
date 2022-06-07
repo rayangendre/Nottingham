@@ -24,7 +24,6 @@ class Buy extends React.Component {
   handleNumberChange(event) {
     const target = event.target;
     const num = target.value;
-    // this.setState({name: event.target.name});
     this.setState({
       numberOfShares: num,
     });
@@ -33,12 +32,11 @@ class Buy extends React.Component {
   handleNameChange(event) {
     const target = event.target;
 
-    // this.setState({name: event.target.name});
     this.setState({
       name: target.value,
     });
   }
-  //comment
+
   async validTicker(ticker) {
     const stockPrice = await axios.get(
       "https://finnhub.io/api/v1/quote?symbol="
@@ -51,12 +49,6 @@ class Buy extends React.Component {
     console.log("price");
     console.log(numPrice);
     return numPrice;
-    // if (numPrice === 0) {
-    //   console.log("returning false");
-    //   return false;
-    // } else {
-    //   return true;
-    // }
   }
 
   async handleSubmit(event) {
@@ -194,7 +186,7 @@ class Sell extends React.Component {
   handleNumberChange(event) {
     const target = event.target;
     const num = target.value;
-    // this.setState({name: event.target.name});
+
     this.setState({
       numberOfShares: num,
     });
@@ -203,7 +195,6 @@ class Sell extends React.Component {
   handleNameChange(event) {
     const target = event.target;
 
-    // this.setState({name: event.target.name});
     this.setState({
       name: target.value,
     });

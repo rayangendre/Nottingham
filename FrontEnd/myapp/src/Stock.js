@@ -53,7 +53,6 @@ class Stock extends React.Component {
           );
         }
 
-        // console.log(stockChartXValuesFunction);
         pointerToThis.setState({
           stockChartXValues: stockChartXValuesFunction,
           stockChartYValues: stockChartYValuesFunction,
