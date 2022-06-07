@@ -161,6 +161,7 @@ const Navbar = () => {
         <Route path="sell" element={<Sell userId={userId} />} />
         <Route path="/dynamic/:ticker" element={<Dynamic ticker={ticker} />} />
       </Routes>
+
       <div></div>
     </div>
   );
