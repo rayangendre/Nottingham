@@ -66,12 +66,12 @@ describe("API takes an obj and adds it to the DB", () => {
           assert.equal(
             response.body.name,
             user.name,
-            "AND the response object contains the same name and job I passed"
+            "AND the response object contains the same name I passed"
           );
           assert.equal(
             response.body.pwd,
             user.pwd,
-            "AND the response object contains the same name and job I passed"
+            "AND the response object contains the same pwd I passed"
           );
         }
       );
