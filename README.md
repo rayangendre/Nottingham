@@ -25,3 +25,9 @@ npm install needs to be run in the root directory to install the prettier depend
 ### Storyboard link: https://www.figma.com/file/rA9JkMK6FzikNOncbG1QAZ/Nottingham?node-id=0%3A1
 
 ### Design Document link: https://docs.google.com/document/d/1EZv8KlK8MhqdjzQw7LLkBuAZQAf5MFiTjIGeAwOhu_s/edit?usp=sharing
+
+### CD - Frontend Link: https://rayangendre.github.io/Nottingham/
+
+We are experiencing problems on reload as github pages are not meant to handle wesbites as such. If you reload and experience a 404 error, revert back to this link
+
+### CD - Backend https://nottingham-csc309.herokuapp.com/
